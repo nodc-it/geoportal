@@ -479,6 +479,20 @@ export var VOCABS: Vocab[] = [
     measurementUnit: 'm/s',
   },
   {
+    id: 'ASLV',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Observed sea level',
+      },
+      {
+        locale: 'it',
+        name: 'Livello osservato del mare',
+      },
+    ],
+    measurementUnit: 'm',
+  },
+  {
     id: 'RVFL',
     measurementName: [
       {
