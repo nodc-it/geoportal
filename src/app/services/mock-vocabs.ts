@@ -311,6 +311,34 @@ export var VOCABS: Vocab[] = [
     measurementUnit: '' /*!!*/,
   },
   {
+    id: 'PHPH_1',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Ph',
+      },
+      {
+        locale: 'it',
+        name: 'Ph',
+      },
+    ],
+    measurementUnit: '' /*!!*/,
+  },
+  {
+    id: 'PHPH_2',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Ph',
+      },
+      {
+        locale: 'it',
+        name: 'Ph',
+      },
+    ],
+    measurementUnit: '' /*!!*/,
+  },
+  {
     id: 'DOX1',
     measurementName: [
       {
@@ -339,7 +367,77 @@ export var VOCABS: Vocab[] = [
     measurementUnit: 'mmol/m³',
   },
   {
+    id: 'DOXY_1',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Oxygen',
+      },
+      {
+        locale: 'it',
+        name: 'Ossigeno',
+      },
+    ],
+    measurementUnit: 'mmol/m³',
+  },
+  {
+    id: 'DOXY_2',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Oxygen',
+      },
+      {
+        locale: 'it',
+        name: 'Ossigeno',
+      },
+    ],
+    measurementUnit: 'mmol/m³',
+  },
+  {
     id: 'TEMP',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Water temperature',
+      },
+      {
+        locale: 'it',
+        name: "Temperatura dell'acqua",
+      },
+    ],
+    measurementUnit: '°C',
+  },
+  {
+    id: 'TEMP_1',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Water temperature',
+      },
+      {
+        locale: 'it',
+        name: "Temperatura dell'acqua",
+      },
+    ],
+    measurementUnit: '°C',
+  },
+  {
+    id: 'TEMP_2',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Water temperature',
+      },
+      {
+        locale: 'it',
+        name: "Temperatura dell'acqua",
+      },
+    ],
+    measurementUnit: '°C',
+  },
+  {
+    id: 'TEMP_3',
     measurementName: [
       {
         locale: 'en',
@@ -367,7 +465,63 @@ export var VOCABS: Vocab[] = [
     measurementUnit: 'S/m',
   },
   {
+    id: 'CNDC_1',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Electrical conductivity',
+      },
+      {
+        locale: 'it',
+        name: 'Conducibilità elettrica',
+      },
+    ],
+    measurementUnit: 'S/m',
+  },
+  {
+    id: 'CNDC_2',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Electrical conductivity',
+      },
+      {
+        locale: 'it',
+        name: 'Conducibilità elettrica',
+      },
+    ],
+    measurementUnit: 'S/m',
+  },
+  {
     id: 'PRES',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Sea pressure',
+      },
+      {
+        locale: 'it',
+        name: 'Pressione del mare',
+      },
+    ],
+    measurementUnit: 'dbar',
+  },
+  {
+    id: 'PRES_1',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Sea pressure',
+      },
+      {
+        locale: 'it',
+        name: 'Pressione del mare',
+      },
+    ],
+    measurementUnit: 'dbar',
+  },
+  {
+    id: 'PRES_2',
     measurementName: [
       {
         locale: 'en',
@@ -410,6 +564,34 @@ export var VOCABS: Vocab[] = [
   },
   {
     id: 'PSAL',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Salinity',
+      },
+      {
+        locale: 'it',
+        name: 'Salinità',
+      },
+    ],
+    measurementUnit: '' /*!!*/,
+  },
+  {
+    id: 'PSAL_1',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Salinity',
+      },
+      {
+        locale: 'it',
+        name: 'Salinità',
+      },
+    ],
+    measurementUnit: '' /*!!*/,
+  },
+  {
+    id: 'PSAL_2',
     measurementName: [
       {
         locale: 'en',
@@ -505,5 +687,173 @@ export var VOCABS: Vocab[] = [
       },
     ],
     measurementUnit: 'm³/s',
+  },
+  {
+    id: 'VSRW',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'irradiance',
+      },
+      {
+        locale: 'it',
+        name: 'Irradianza',
+      },
+    ],
+    measurementUnit: 'MicroEinsteins per square metre per second'
+  },
+  {
+    id: 'TMES_1',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Temperature of pH',
+      },
+      {
+        locale: 'it',
+        name: 'Temperatura del pH',
+      },
+    ],
+    measurementUnit: 'Degrees Celsius'
+  },
+  {
+    id: 'TMES_2',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Temperature of pH',
+      },
+      {
+        locale: 'it',
+        name: 'Temperatura del pH',
+      },
+    ],
+    measurementUnit: 'Degrees Celsius'
+  },
+  {
+    id: 'CHUM',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Partial pressure of water vapour in the atmosphere',
+      },
+      {
+        locale: 'it',
+        name: 'Pressione parziale del vapore acqueo nella atmosfera',
+      },
+    ],
+    measurementUnit: 'Parts per million'
+  },
+  {
+    id: 'ACO2',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Mole fraction of carbon dioxide in the atmosphere',
+      },
+      {
+        locale: 'it',
+        name: 'Frazione molare di anidride carbonica nell atmosfera',
+      },
+    ],
+    measurementUnit: 'Parts per million'
+  },
+  {
+    id: 'PCOW',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Carbon dioxide in water',
+      },
+      {
+        locale: 'it',
+        name: 'Anidride carbonica nell acqua',
+      },
+    ],
+    measurementUnit: 'Parts per million'
+  },
+  {
+    id: 'CPWC',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Concentration of chlorophyll-a',
+      },
+      {
+        locale: 'it',
+        name: 'Concentrazione di clorofilla-a',
+      },
+    ],
+    measurementUnit: 'Micrograms per litre'
+  },
+  {
+    id: 'SVEL_1',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Sound velocity in the water body',
+      },
+      {
+        locale: 'it',
+        name: 'Velocità del suono nel corpo idrico',
+      },
+    ],
+    measurementUnit: 'Metres per second'
+  },
+  {
+    id: 'SVEL_2',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Sound velocity in the water body',
+      },
+      {
+        locale: 'it',
+        name: 'Velocità del suono nel corpo idrico',
+      },
+    ],
+    measurementUnit: 'Metres per second'
+  },
+  {
+    id: 'ALKY',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'pH',
+      },
+      {
+        locale: 'it',
+        name: 'pH',
+      },
+    ],
+    measurementUnit: 'pH units'
+  },
+  {
+    id: 'EWSB',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Speed of wind in the atmosphere',
+      },
+      {
+        locale: 'it',
+        name: 'Velocità del vento nell atmosfera',
+      },
+    ],
+    measurementUnit: 'Metres per second'
+  },
+  {
+    id: 'HEAD',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Orientation of measurement platform',
+      },
+      {
+        locale: 'it',
+        name: 'Orientamento della piattaforma di misurazione',
+      },
+    ],
+    measurementUnit: 'Degrees'
   },
 ];
