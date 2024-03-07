@@ -9,6 +9,7 @@ import { VocabService } from '../../services/vocab.service';
 import HC_exporting from 'highcharts/modules/exporting';
 import HC_exportdata from 'highcharts/modules/export-data';
 import { DateFunctions } from 'src/app/app.misc';
+import { DeviceParameters } from 'src/app/app.misc';
 HC_exporting(Highcharts);
 HC_exportdata(Highcharts);
 
@@ -167,7 +168,7 @@ export class GraphsComponent implements OnInit {
   }
 
   getTimeSeriesAvailable(dataset: string, timeStart: Date, timeEnd?: Date) {
-    let dialogParam = this.data.get('dialog_par').split(',');
+	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
     dialogParam.map((param: string) => {
       this.loading++;
       this.erdappService
