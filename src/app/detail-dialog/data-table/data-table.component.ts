@@ -8,6 +8,7 @@ import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
 import Geometry from 'ol/geom/Geometry';
 import { DateFunctions } from 'src/app/app.misc';
+import { DeviceParameters } from 'src/app/app.misc';
 
 @Component({
   selector: 'app-data-table',
@@ -28,7 +29,9 @@ export class DataTableComponent implements OnInit {
   displayedColumns: string[] = ['parameter', 'measurement', 'depth', 'timestamp'];
 
   ngOnInit(): void {
-    let dialogParam = this.data.get('dialog_par').split(',');
+	
+	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
+	
     dialogParam.map((param: string, index: number) => {
       this.loading++;
       this.erdappService
