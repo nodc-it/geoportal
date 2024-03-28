@@ -339,6 +339,20 @@ export var VOCABS: Vocab[] = [
     measurementUnit: '' /*!!*/,
   },
   {
+    id: 'PHPH_3',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Ph',
+      },
+      {
+        locale: 'it',
+        name: 'Ph',
+      },
+    ],
+    measurementUnit: '' /*!!*/,
+  },
+  {
     id: 'DOX1',
     measurementName: [
       {
@@ -395,6 +409,20 @@ export var VOCABS: Vocab[] = [
     measurementUnit: 'mmol/m³',
   },
   {
+    id: 'DOXY_3',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Oxygen',
+      },
+      {
+        locale: 'it',
+        name: 'Ossigeno',
+      },
+    ],
+    measurementUnit: 'mmol/m³',
+  },
+  {
     id: 'TEMP',
     measurementName: [
       {
@@ -438,6 +466,20 @@ export var VOCABS: Vocab[] = [
   },
   {
     id: 'TEMP_3',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Water temperature',
+      },
+      {
+        locale: 'it',
+        name: "Temperatura dell'acqua",
+      },
+    ],
+    measurementUnit: '°C',
+  },
+  {
+    id: 'TEMP_4',
     measurementName: [
       {
         locale: 'en',
@@ -592,6 +634,20 @@ export var VOCABS: Vocab[] = [
   },
   {
     id: 'PSAL_2',
+    measurementName: [
+      {
+        locale: 'en',
+        name: 'Salinity',
+      },
+      {
+        locale: 'it',
+        name: 'Salinità',
+      },
+    ],
+    measurementUnit: '' /*!!*/,
+  },
+  {
+    id: 'PSAL_3',
     measurementName: [
       {
         locale: 'en',
