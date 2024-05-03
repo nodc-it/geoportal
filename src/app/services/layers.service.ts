@@ -117,8 +117,8 @@ export class LayersService {
         params: {
           LAYERS: 'ewct:nsct-group',
           TILED: true,
-          STYLES: 'colored_sized_arrows/x-Rainbow',
-          COLORSCALERANGE: '0, 0.4',
+          STYLES: 'vector_arrows/seq-Blues',
+          COLORSCALERANGE: '0, 1.25',
           ABOVEMAXCOLOR: 'extend',
           BELOWMINCOLOR: 'extend',
         },
@@ -174,12 +174,12 @@ export class LayersService {
       'legendUrl',
       (radarArrows.getSource() as TileWMS).getLegendUrl(undefined, {
         COLORBARONLY: true,
-        PALETTE: 'x-Rainbow',
+        PALETTE: 'seq-Blues',
         WIDTH: 25,
         HEIGHT: 150,
       })
     );
-    radar.set('legendRange', [0, 0.4]);
+    radar.set('legendRange', [0, 1.25]);
     radar.set('legendUnit', 'm/s');
     radar.set('name', 'Radar');
     this.layers.push(radar);
