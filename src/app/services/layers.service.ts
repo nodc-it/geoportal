@@ -22,6 +22,7 @@ import { Interaction, defaults, Select } from 'ol/interaction';
 import { DetailDialogComponent } from '../detail-dialog/detail-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DateFunctions } from '../app.misc';
+import Overlay from 'ol/Overlay';
 
 @Injectable({
   providedIn: 'root',
@@ -83,11 +84,11 @@ export class LayersService {
         });
       },
     });
+	
     let argo = new LayerGroup({
       layers: [argoTrajectory, argoPoints],
     });
     argo.set('name', 'Argo');
-    //this.layers.push(argo);
 
     let argoSelect = new Select({
       layers: [argoPoints],
@@ -109,7 +110,6 @@ export class LayersService {
       });
       argoSelect.getFeatures().clear();
     });
-    //this.interactions.push(argoSelect);
 
     let radarArrows = new TileLayer({
       source: new TileWMS({
@@ -117,13 +117,15 @@ export class LayersService {
         params: {
           LAYERS: 'ewct:nsct-group',
           TILED: true,
-          STYLES: 'vector_arrows/seq-Blues',
+		  STYLES: 'vector_arrows/seq-Blues',
           COLORSCALERANGE: '0, 1.25',
           ABOVEMAXCOLOR: 'extend',
           BELOWMINCOLOR: 'extend',
         },
       }),
     });
+	radarArrows.set('name','radarArrows');
+	
     fetch(radarArrows.getSource()!.getUrls()?.[0] + '?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0')
       .then(function (response) {
         return response.text();
@@ -134,12 +136,24 @@ export class LayersService {
           result.Capability.Layer.Layer[0].Layer[3].Layer[0].Dimension[0].values.split(
             ','
           ); /*.find(({Name}:any)=>Name === 'ewct:nsct-group')
+		  
         /*.map((layer: any) => {
           layer.filter((layer2: any)=> {
 
           })
         })    /*.filter((layer: any)=>{ return (typeof layer.Layer === undefined) })/*.Layer[3].Layer[0].Dimension*/
+
         radar.set('times', times);
+
+		// Set low and high time interval limit in object radar attribute
+		let stringInterval = (times[times.length - 1]).substr(0,49);
+		
+		let backSlashPos = stringInterval.indexOf('/');
+		
+		radar.set('timeIntervalLow', stringInterval.substr(0,10));
+		
+		radar.set('timeIntervalHigh', stringInterval.substr(backSlashPos+1,10));
+
         //console.log(times);
       });
     let radarPoints = new VectorLayer({
@@ -167,6 +181,10 @@ export class LayersService {
         }),
       }),
     });
+	
+	radarPoints.set('selectable', true);
+	radarPoints.set('name', 'radarPoints');
+	
     let radar = new LayerGroup({
       layers: [radarArrows, radarPoints],
     });
@@ -174,14 +192,17 @@ export class LayersService {
       'legendUrl',
       (radarArrows.getSource() as TileWMS).getLegendUrl(undefined, {
         COLORBARONLY: true,
-        PALETTE: 'seq-Blues',
+		PALETTE: 'seq-Blues',
         WIDTH: 25,
         HEIGHT: 150,
       })
     );
-    radar.set('legendRange', [0, 1.25]);
+
+	radar.set('defaultLegendRange', [0, 1.25]);
+	radar.set('legendRange', radar.get('defaultLegendRange'));
     radar.set('legendUnit', 'm/s');
     radar.set('name', 'Radar');
+	radar.setVisible(false);
     this.layers.push(radar);
 
     let stations = new VectorLayer({
@@ -216,6 +237,7 @@ export class LayersService {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false;
       dialogConfig.data = e.selected[0];
+	  dialogConfig.maxHeight = 600;
       const modalDialog = this.matDialog.open(DetailDialogComponent, dialogConfig);
       modalDialog.afterClosed().subscribe(() => {
         stationsSelect.getFeatures().clear();
@@ -282,7 +304,6 @@ export class LayersService {
 
   getArgoTrejectory(type: string, id: number): Observable<Feature<Geometry>> {
     let url = 'http://maosapi.ogs.it/v0.1/trajectory?' + 'type=' + type + '&id=' + id;
-
     return this.http.get(url).pipe(
       map((result: any) => {
         let feature = new GeoJSON({ featureProjection: 'EPSG:3857' }).readFeatures(result)[0];

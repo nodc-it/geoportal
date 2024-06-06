@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AttributionsDialogComponent } from '../attributions-dialog/attributions-dialog.component';
 import { easeOut } from 'ol/easing';
 import Layer from 'ol/layer/Layer';
+import TileWMS from 'ol/source/TileWMS';
 
 @Component({
   selector: 'app-ol-map',
@@ -13,7 +14,7 @@ import Layer from 'ol/layer/Layer';
   styleUrls: ['./ol-map.component.scss'],
 })
 export class OlMapComponent implements OnInit {
-  map!: Map;
+	map!: Map;
 
   constructor(public layersService: LayersService, private matDialog: MatDialog){}
 
@@ -64,7 +65,7 @@ export class OlMapComponent implements OnInit {
 			},
 		});
 
-		// If features intersect a pixel (station) on the viewport:
+		// If features intersect a pixel (station or argo) on the viewport:
 		// - retrieve features fields;
 		// - build tooltip text;
 		// - show tooltip at pixel coordinates,
@@ -73,11 +74,21 @@ export class OlMapComponent implements OnInit {
 
 		if (hit)
 		{
-			let stationAtPixel = event.map.getFeaturesAtPixel(event.pixel)[0];
+			let deviceAtPixel = event.map.getFeaturesAtPixel(event.pixel)[0];
 			
-			let tooltipStationText = "&nbsp;".repeat(3) + stationAtPixel.get('name') + " " + stationAtPixel.get('type_name');
+			let tooltipDeviceText = "";
 			
-			tooltipElement.innerHTML = tooltipStationText;
+			tooltipDeviceText = "&nbsp;".repeat(3) + deviceAtPixel.get('name');
+			
+			// Type name added only if setted
+			if (deviceAtPixel.get('type_name') !== undefined)
+				tooltipDeviceText += "&nbsp;" + deviceAtPixel.get('type_name');
+			
+			// High frequency Radar case
+			if (deviceAtPixel.get('name').includes("NAdr"))
+				tooltipDeviceText += "&nbsp;High Frequency Radar";
+			
+			tooltipElement.innerHTML = tooltipDeviceText;
 			
 			tooltipElement.hidden = false;
 		
@@ -127,4 +138,85 @@ export class OlMapComponent implements OnInit {
       }
     }
   }
-}
+  
+  // ---------------------
+  
+	// Function to set speed range in surface sea currents color map
+	// from HF Radar data.
+	// defaultSpeedRange parameter is false by default.
+	// Used in  ol-map.component.html.
+	
+	setSpeedRange (defaultSpeedRange:boolean = false)
+	{
+		// Retrieve user setting from input type
+		// idLowLimit and idHighLimit HTML elements
+		
+		let lowLimit = undefined;
+		
+		let highLimit = undefined;
+		
+		var lowLimitElement = document.getElementById('idLowLimit') as HTMLInputElement;
+		
+		var highLimitElement = document.getElementById('idHighLimit') as HTMLInputElement;
+		
+		lowLimit = lowLimitElement.value;
+		
+		highLimit = highLimitElement.value;
+		
+		// Retrieve pointer layers objects:
+		// - Radar
+		// - radarArrows
+		
+		const layersOnMap = this.layersService.layers;
+		
+		let radarObj = undefined;
+		
+		let radarArrowsObj = undefined;
+
+		for (let conta = 0;conta < layersOnMap.length; conta++)
+		{
+			if (layersOnMap[conta].get('name') == "Radar")
+			{
+				radarObj = layersOnMap[conta];
+				
+				let radarLayers = radarObj.get('layers').getArray();
+				
+				for (let indice = 0;indice < radarLayers.length; indice++)
+				{
+					if (radarLayers[indice].get('name') == "radarArrows")
+						radarArrowsObj = radarLayers[indice];
+					
+					break;
+				}
+				
+			} // end if
+				
+		} // end for
+
+		// Settings by default to defaultLegendRange in
+		// - legendRange attribute in Radar object
+		// - newColorScaleRange parameter in radarArrows object
+
+		radarObj!.set('legendRange', radarObj!.get('defaultLegendRange'));
+		
+		let newColorScaleRange = (radarObj!.get('defaultLegendRange')).toString();
+		
+		// If speed range user setting is different from default
+		// legendRange and newColorScaleRange are setted
+		// at user value.
+
+		if (defaultSpeedRange == false)
+		{
+			radarObj!.set('legendRange', [lowLimit,highLimit]);
+			
+			newColorScaleRange = String(lowLimit) + ','+ String(highLimit);
+		}
+		
+		(radarArrowsObj.getSource() as TileWMS).updateParams(
+		{
+			COLORSCALERANGE: newColorScaleRange,
+		});
+		
+	} // end setSpeed
+  
+} // end class
