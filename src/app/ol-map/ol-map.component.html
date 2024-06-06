@@ -13,7 +13,16 @@
   <ng-container *ngFor="let layer of layersService.layers">
     <ng-container *ngIf="layer.get('legendUrl') != undefined">
       <mat-card class="legend-card" *ngIf="layer.getVisible()">
-        <div class="legend-bar">
+
+		<div class="legend-unit">Time<br>
+			
+			{{ layer.get('timeIntervalHigh')}}
+		
+		</div>
+	  
+		<hr>
+	  
+        <div class="legend-bar" title = "Speed value">
           <div class="legend-image">
             <img [src]="layer.get('legendUrl')" />
           </div>
@@ -32,6 +41,29 @@
           </div>
         </div>
         <div class="legend-unit">{{ layer.get('legendUnit') }}</div>
+		
+				
+		<div id="rangeContainer" class = "range_container">
+		
+			<p align= "center"><br>Range
+			
+				<button (click)="this.setSpeedRange(true)" title = "Restore default range speed value">Default</button>
+			
+			</p>
+
+			<div id="rangeControls">
+			
+				<input class = "range_controls" id = "idLowLimit" name="lowLimit" type="number" min = "0" step = "0.05" value = "{{ layer.get('legendRange')[0] }}">
+		
+				<input class = "range_controls" id = "idHighLimit" name="highLimit" type="number" step = "0.05" value = "{{ layer.get('legendRange')[1] }}">
+				
+				<button title = "Set range speed value" (click)="this.setSpeedRange()">
+				  Set
+				</button>
+				
+			</div>
+		</div>
+
       </mat-card>
     </ng-container>
   </ng-container>
