@@ -175,11 +175,11 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: 'en',
-        name: 'Wind speed',
+        name: 'Avg wind speed',
       },
       {
         locale: 'it',
-        name: 'Velocità del vento',
+        name: 'Velocità del vento media',
       },
     ],
     measurementUnit: 'm/s',
@@ -301,56 +301,56 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: 'en',
-        name: 'Ph',
+        name: 'pH',
       },
       {
         locale: 'it',
-        name: 'Ph',
+        name: 'pH',
       },
     ],
-    measurementUnit: '' /*!!*/,
+    measurementUnit: '',
   },
   {
     id: 'PHPH_1',
     measurementName: [
       {
         locale: 'en',
-        name: 'Ph',
+        name: 'pH',
       },
       {
         locale: 'it',
-        name: 'Ph',
+        name: 'pH',
       },
     ],
-    measurementUnit: '' /*!!*/,
+    measurementUnit: '',
   },
   {
     id: 'PHPH_2',
     measurementName: [
       {
         locale: 'en',
-        name: 'Ph',
+        name: 'pH',
       },
       {
         locale: 'it',
-        name: 'Ph',
+        name: 'pH',
       },
     ],
-    measurementUnit: '' /*!!*/,
+    measurementUnit: '',
   },
   {
     id: 'PHPH_3',
     measurementName: [
       {
         locale: 'en',
-        name: 'Ph',
+        name: 'pH',
       },
       {
         locale: 'it',
-        name: 'Ph',
+        name: 'pH',
       },
     ],
-    measurementUnit: '' /*!!*/,
+    measurementUnit: '',
   },
   {
     id: 'DOX1',
@@ -616,7 +616,7 @@ export var VOCABS: Vocab[] = [
         name: 'Salinità',
       },
     ],
-    measurementUnit: '' /*!!*/,
+    measurementUnit: '',
   },
   {
     id: 'PSAL_1',
@@ -630,7 +630,7 @@ export var VOCABS: Vocab[] = [
         name: 'Salinità',
       },
     ],
-    measurementUnit: '' /*!!*/,
+    measurementUnit: '',
   },
   {
     id: 'PSAL_2',
@@ -644,7 +644,7 @@ export var VOCABS: Vocab[] = [
         name: 'Salinità',
       },
     ],
-    measurementUnit: '' /*!!*/,
+    measurementUnit: '',
   },
   {
     id: 'PSAL_3',
@@ -658,7 +658,7 @@ export var VOCABS: Vocab[] = [
         name: 'Salinità',
       },
     ],
-    measurementUnit: '' /*!!*/,
+    measurementUnit: '',
   },
   {
     id: 'TUR4',
@@ -672,7 +672,7 @@ export var VOCABS: Vocab[] = [
         name: 'Torbidità',
       },
     ],
-    measurementUnit: '' /*!!*/,
+    measurementUnit: 'NTU',
   },
   {
     id: 'VCSP',
@@ -683,7 +683,7 @@ export var VOCABS: Vocab[] = [
       },
       {
         locale: 'it',
-        name: '**' /*!!*/,
+        name: '**',
       },
     ],
     measurementUnit: 'm/s',
@@ -693,7 +693,7 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: 'en',
-        name: 'West-east current component' /*!!*/,
+        name: 'West-east current component',
       },
       {
         locale: 'it',
@@ -707,7 +707,7 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: 'en',
-        name: 'South-north current component' /*!!*/,
+        name: 'South-north current component',
       },
       {
         locale: 'it',
@@ -756,7 +756,7 @@ export var VOCABS: Vocab[] = [
         name: 'Irradianza',
       },
     ],
-    measurementUnit: 'MicroEinsteins per square metre per second'
+    measurementUnit: 'µE/m²s'
   },
   {
     id: 'TMES_1',
@@ -770,7 +770,7 @@ export var VOCABS: Vocab[] = [
         name: 'Temperatura del pH',
       },
     ],
-    measurementUnit: 'Degrees Celsius'
+    measurementUnit: '°C'
   },
   {
     id: 'TMES_2',
@@ -784,7 +784,7 @@ export var VOCABS: Vocab[] = [
         name: 'Temperatura del pH',
       },
     ],
-    measurementUnit: 'Degrees Celsius'
+    measurementUnit: '°C'
   },
   {
     id: 'CHUM',
@@ -798,7 +798,7 @@ export var VOCABS: Vocab[] = [
         name: 'Pressione parziale del vapore acqueo nella atmosfera',
       },
     ],
-    measurementUnit: 'Parts per million'
+    measurementUnit: 'ppm'
   },
   {
     id: 'ACO2',
@@ -812,7 +812,7 @@ export var VOCABS: Vocab[] = [
         name: 'Frazione molare di anidride carbonica nell atmosfera',
       },
     ],
-    measurementUnit: 'Parts per million'
+    measurementUnit: 'ppm'
   },
   {
     id: 'PCOW',
@@ -826,7 +826,7 @@ export var VOCABS: Vocab[] = [
         name: 'Anidride carbonica nell acqua',
       },
     ],
-    measurementUnit: 'Parts per million'
+    measurementUnit: 'ppm'
   },
   {
     id: 'CPWC',
@@ -840,7 +840,7 @@ export var VOCABS: Vocab[] = [
         name: 'Concentrazione di clorofilla-a',
       },
     ],
-    measurementUnit: 'Micrograms per litre'
+    measurementUnit: 'µg/l'
   },
   {
     id: 'SVEL_1',
@@ -854,7 +854,7 @@ export var VOCABS: Vocab[] = [
         name: 'Velocità del suono nel corpo idrico',
       },
     ],
-    measurementUnit: 'Metres per second'
+    measurementUnit: 'm/s'
   },
   {
     id: 'SVEL_2',
@@ -868,7 +868,7 @@ export var VOCABS: Vocab[] = [
         name: 'Velocità del suono nel corpo idrico',
       },
     ],
-    measurementUnit: 'Metres per second'
+    measurementUnit: 'm/s'
   },
   {
     id: 'ALKY',
@@ -882,21 +882,21 @@ export var VOCABS: Vocab[] = [
         name: 'pH',
       },
     ],
-    measurementUnit: 'pH units'
+    measurementUnit: ''
   },
   {
     id: 'EWSB',
     measurementName: [
       {
         locale: 'en',
-        name: 'Speed of wind in the atmosphere',
+        name: 'Vector avg wind speed',
       },
       {
         locale: 'it',
-        name: 'Velocità del vento nell atmosfera',
+        name: 'Velocità media del vento vettoriale',
       },
     ],
-    measurementUnit: 'Metres per second'
+    measurementUnit: 'm/s'
   },
   {
     id: 'HEAD',
@@ -910,6 +910,6 @@ export var VOCABS: Vocab[] = [
         name: 'Orientamento della piattaforma di misurazione',
       },
     ],
-    measurementUnit: 'Degrees'
+    measurementUnit: '°'
   },
 ];
