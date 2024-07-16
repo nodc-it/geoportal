@@ -378,7 +378,7 @@ export var VOCABS: Vocab[] = [
         name: 'Ossigeno',
       },
     ],
-    measurementUnit: 'mmol/m³',
+    measurementUnit: 'ml/l',
   },
   {
     id: 'DOXY_1',
@@ -392,7 +392,7 @@ export var VOCABS: Vocab[] = [
         name: 'Ossigeno',
       },
     ],
-    measurementUnit: 'mmol/m³',
+    measurementUnit: 'ml/l',
   },
   {
     id: 'DOXY_2',
@@ -406,7 +406,7 @@ export var VOCABS: Vocab[] = [
         name: 'Ossigeno',
       },
     ],
-    measurementUnit: 'mmol/m³',
+    measurementUnit: 'ml/l',
   },
   {
     id: 'DOXY_3',
@@ -420,7 +420,7 @@ export var VOCABS: Vocab[] = [
         name: 'Ossigeno',
       },
     ],
-    measurementUnit: 'mmol/m³',
+    measurementUnit: 'ml/l',
   },
   {
     id: 'TEMP',
