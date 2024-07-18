@@ -56,5 +56,34 @@ export abstract class DeviceParameters
 		return myDialogPar;
 		
 	}
+
+	// Member function to retrieve 
+	// station (device) list
+	// from configuration file 'config_stations.json'
+	// in 'configuration' folder.
+	// INPUT PARAMETER: device name (string)
+	// RETURN VALUE: string array.
+
+	
+	static getDeviceList () : string []
+	{
+
+		// Read configuration file from local server.
+		const configStationJsonFile = require('./../assets/config_stations.json');
+
+		let myDeviceList = [];
+
+		// Loop on features array to search
+		// all device .
+		
+		for (let i = 0; i < (configStationJsonFile.features).length; i++)
+		{
+			myDeviceList.push(configStationJsonFile.features[i].properties.name);
+			
+		}
+		
+		return myDeviceList;
+		
+	}
 }
 
