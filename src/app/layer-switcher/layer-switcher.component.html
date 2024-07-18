@@ -12,10 +12,14 @@
     <div *ngFor="let layer of layers; let i = index">
       <ng-container *ngIf="!layer.get('base')">
         <mat-slide-toggle type="checkbox" [checked]="layer.getVisible()" (change)="onChange($event, i)">
-          {{ layer.get('name') }}</mat-slide-toggle
-        >
+          {{ layer.get('name') }}
+		  </mat-slide-toggle>
       </ng-container>
     </div>
+	<div id = "idActiveStationLegend" [hidden] = "!(this.erdappService.erddapStationsStatusList.length != 0)">
+		<img src="../../assets/green_circle.png">active station<br>
+		<img src="../../assets/red_circle.png">inactive station
+	</div>
   </mat-card-content>
   <ng-container *ngIf="layers.filter(isBaseLayer).length > 1">
     <mat-card-subtitle>Base layers</mat-card-subtitle>

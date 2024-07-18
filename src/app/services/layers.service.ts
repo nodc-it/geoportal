@@ -23,6 +23,7 @@ import { DetailDialogComponent } from '../detail-dialog/detail-dialog.component'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DateFunctions } from '../app.misc';
 import Overlay from 'ol/Overlay';
+import { ErddapService } from 'src/app/services/erddap.service';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class LayersService {
   layers: BaseLayer[] = [];
   interactions: Interaction[] = defaults().getArray();
 
-  constructor(private http: HttpClient, private matDialog: MatDialog) {
+  constructor(private http: HttpClient, private matDialog: MatDialog, public erdappService: ErddapService) {
     let osm = new TileLayer({
       source: new OSM(),
     });
@@ -234,38 +235,62 @@ export class LayersService {
       style: this.styleByType,
     });
     stationsSelect.on('select', e => {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = false;
-      dialogConfig.data = e.selected[0];
-	  dialogConfig.maxHeight = 600;
-      const modalDialog = this.matDialog.open(DetailDialogComponent, dialogConfig);
-      modalDialog.afterClosed().subscribe(() => {
-        stationsSelect.getFeatures().clear();
-      });
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.disableClose = false;
+		dialogConfig.data = e.selected[0]; //station features
+		dialogConfig.maxHeight = 600;
+		
+		// If station status is inactive
+		// notify this through user alert,
+		// and ask to the user if he want
+		// to open the dialog in every case.
+		
+		let stationStatus = this.erdappService.getSingleStationStatus(e.selected[0].get('name'));
+		
+		let openDialogWindow = true;
+		
+		if (stationStatus == '0')
+		{
+			let userMessage = e.selected[0].get('name') + " " + e.selected[0].get('type_name') + " is NOT ACTIVE.\n\n";
+			
+			userMessage += "Data in following dialog window could not be available.\n\n";
+			
+			userMessage += "Do you want to open dialog window ?";
+			
+			openDialogWindow = confirm (userMessage);
+
+		}
+
+		// Dialog is open if
+		// - stationStatus is active
+		// - stationStatus is undefined
+		// - stationStatus is inactive but user want to open the dialog window.
+		// In any case is necessary to clear layer features.
+
+		if ((stationStatus == "1") || (stationStatus == undefined) || (openDialogWindow == true))
+		{
+			const modalDialog = this.matDialog.open(DetailDialogComponent, dialogConfig);
+			modalDialog.afterClosed().subscribe(() => {
+			stationsSelect.getFeatures().clear();
+			});
+			
+		}
+		else
+			stationsSelect.getFeatures().clear();
+
     });
     this.interactions.push(stationsSelect);
   }
 
   styleByType: StyleFunction = (feature: FeatureLike, resolution: number) => {
-    switch (feature.get('type')) {
+    switch (feature.get('type')) 
+	{
       case 'buoy':
-        return new Style({
-          image: new Icon({
-            src: 'assets/buoy.png',
-            scale: 1.0,
-          }),
-        });
       case 'current':
-        return new Style({
-          image: new Icon({
-            src: 'assets/sea_level.png',
-            scale: 1.0,
-          }),
-        });
       case 'waverider':
         return new Style({
           image: new Icon({
-            src: 'assets/station.png',
+			src: 'assets/' + this.getSourceIcon(feature.get('type'), feature.get('name')),
             scale: 1.0,
           }),
         });
@@ -300,7 +325,55 @@ export class LayersService {
       default:
         return undefined;
     }
+	
   };
+  
+	// -------------------------------------------------
+
+	// Function to return icon for every station on the map,
+	// only for these categories:
+	// - Meteo marine station (buoy.png icon);
+	// - Datawell waverider (station.png icon);
+	// - River current meter (sea_level.png icon);
+	// If stationStatus is undefined, icons returned
+	// are those descripted, otherwise
+	// icons are the correspondent version "green" or "red" .png file,
+	// to symbolize active or inactive station status.
+  
+	getSourceIcon (stationType:string, stationName:string) : string | undefined
+	{
+		let result = undefined;
+		
+		let stationStatus = this.erdappService.getSingleStationStatus(stationName);
+
+		switch (stationType)
+		{
+			case 'buoy':
+				result = (stationStatus != undefined) ? ((stationStatus == '1') ? "buoy_green.png" : "buoy_red.png") : "buoy.png";
+				
+				break;
+
+			
+			case 'current':
+				result = (stationStatus != undefined) ? ((stationStatus == '1') ? "sea_level_green.png" : "sea_level_red.png") : "sea_level.png";
+				
+				break;
+
+			
+			case 'waverider':
+				result = (stationStatus != undefined) ? ((stationStatus == '1') ? "station_green.png" : "station_red.png") : "station.png";
+			
+				break;
+		  
+			default:
+				break;
+		}
+
+		return result;
+		
+	} // end function
+	
+	// -------------------------------------------------
 
   getArgoTrejectory(type: string, id: number): Observable<Feature<Geometry>> {
     let url = 'http://maosapi.ogs.it/v0.1/trajectory?' + 'type=' + type + '&id=' + id;

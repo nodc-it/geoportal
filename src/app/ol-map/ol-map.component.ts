@@ -1,4 +1,5 @@
 import { LayersService } from '../services/layers.service';
+import { rowStation, ErddapService } from 'src/app/services/erddap.service';
 import { Component, OnInit } from '@angular/core';
 import { View, Map } from 'ol';
 import Overlay from 'ol/Overlay';
@@ -16,7 +17,7 @@ import TileWMS from 'ol/source/TileWMS';
 export class OlMapComponent implements OnInit {
 	map!: Map;
 
-  constructor(public layersService: LayersService, private matDialog: MatDialog){}
+  constructor(public erdappService: ErddapService, public layersService: LayersService, private matDialog: MatDialog){}
 
   openAttributionsDialog() {
     this.matDialog.open(AttributionsDialogComponent);
@@ -38,6 +39,11 @@ export class OlMapComponent implements OnInit {
 	// HTML element which serves as tooltip
 	
 	var tooltipElement = document.getElementById('tooltipOvl') as HTMLElement;
+	
+	// Get all stations status from erddap service.
+	// Can be an empty list if erddap server does not reply.
+	
+	var stationsStatusList = this.erdappService.getAllStationStatus();
 
 	// Overlay object instantiation.
 	// stopEvent option setted to false to avoid
@@ -80,9 +86,16 @@ export class OlMapComponent implements OnInit {
 			
 			tooltipDeviceText = "&nbsp;".repeat(3) + deviceAtPixel.get('name');
 			
-			// Type name added only if setted
+			// Type name added only if setted (stations case)
+			// Add green/red circle to show station status
+			// only if stationsStatusList is not empty.
+			
 			if (deviceAtPixel.get('type_name') !== undefined)
-				tooltipDeviceText += "&nbsp;" + deviceAtPixel.get('type_name');
+			{
+				let addStatus = (stationsStatusList.length != 0) ? this.getStatusCircle(stationsStatusList, deviceAtPixel.get('name')) : "";
+				
+				tooltipDeviceText += "&nbsp;" + deviceAtPixel.get('type_name') + addStatus;
+			}
 			
 			// High frequency Radar case
 			if (deviceAtPixel.get('name').includes("NAdr"))
@@ -139,7 +152,7 @@ export class OlMapComponent implements OnInit {
     }
   }
   
-  // ---------------------
+	// ---------------------
   
 	// Function to set speed range in surface sea currents color map
 	// from HF Radar data.
@@ -218,5 +231,21 @@ export class OlMapComponent implements OnInit {
 		});
 		
 	} // end setSpeed
+	
+	// -------------------------------------------------------
+	
+	// Function to get green/red circle showing status
+	// of a single station (device) to search in stations list (statusList).
+	// Return green/red circle character.
+	
+	getStatusCircle(statusList:rowStation[], device:string):string
+	{
+		let myStatus = (statusList.find(({ name }) => name === device))!.status;
+		
+		let result = (myStatus == '1') ? " <a style = \"color:green;\">&#9673;</a>" : " <a style = \"color:red;\">&#9673;</a>";
+	  
+		return result;
+	}
+	
   
 } // end class

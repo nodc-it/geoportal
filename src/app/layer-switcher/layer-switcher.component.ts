@@ -3,6 +3,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import BaseLayer from 'ol/layer/Base';
 import { LayersService } from '../services/layers.service';
+import { ErddapService } from 'src/app/services/erddap.service';
 
 @Component({
   selector: 'app-layer-switcher',
@@ -13,12 +14,18 @@ export class LayerSwitcherComponent {
   layers: BaseLayer[];
   isCollapsed: boolean = false;
 
-  constructor(service: LayersService) {
+  constructor(service: LayersService, public erdappService: ErddapService) {
     this.layers = service.layers;
+	//alert("layer-switcher.component.ts - Sono nel costruttore di LayerSwitcherComponent");
   }
 
   onChange(event: MatSlideToggleChange, index: number): void {
     this.layers[index].setVisible(event.checked);
+	if (this.layers[index].get('name') == "Stations")
+	{
+		var divCircle = document.getElementById('idActiveStationLegend') as HTMLElement;
+		divCircle.hidden = !event.checked;
+	}
   }
 
   onChangeBaseLayer(event: MatRadioChange): void {

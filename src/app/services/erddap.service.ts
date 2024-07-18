@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map, mergeMap } from 'rxjs/operators';
+import { DeviceParameters } from 'src/app/app.misc'; //
 
 export interface Parameter {
   name: string;
@@ -28,11 +29,28 @@ export interface Measurement {
   timestamp: Date;
 }
 
+export interface activeStation {
+  colNames: string[];
+  colTypes: string[];
+  colUnits: string[];
+  rowsStatus: number[][];
+} 
+
+export interface rowStation {
+  name: string;
+  status: string;
+}
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class ErddapService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+	  this.erddapStationsStatusList = [];
+  }
+  
+  erddapStationsStatusList:rowStation[];
 
   getMeasurements(
     dataset: string,
@@ -89,6 +107,7 @@ export class ErddapService {
     timeStart: Date,
     timeEnd?: Date
   ): Observable<Measurement[]> {
+
     return this.getAxisParameterName(dataset, parameter.type, Axis.Z).pipe(
       mergeMap(axisResult => {
         let url =
@@ -225,4 +244,119 @@ export class ErddapService {
       })
     );
   }
-}
+
+	//----------------------------------------------
+
+	// Function to get Station Status from Erddap server
+	// Return an Observable structured like an activeStation interface.
+	// Example:
+	// {
+	//	colNames: ["MAMBO1", "MAMBO2", "MAMBO3", "MAMBO4", "DWRG1", "DWRG2", "DWRG3", 'E2M3A', 'CURRISO', 'PIEZTAG'],
+	//	colTypes: ['','','','','','','','','',''],
+	//	colUnits: ['','','','','','','','','',''],
+	//	rowsStatus: [[1,0,0,0,1,1,1,0,0,0]],
+	//  } as activeStation;
+
+	getHttpStationStatus (): Observable<activeStation>
+	{
+		// get station list from assets config file
+		// and build string to compose url request
+		
+		let stationList = (DeviceParameters.getDeviceList()).join("%2C");
+
+		// get json response
+		let url = environment.erddapUrl + "tabledap/ACTIVE_STATIONS.json?" + stationList;
+
+		return this.http.get(url).pipe(
+		  map((result: any) => {
+
+			return {
+				colNames: result.table.columnNames,
+				colTypes: result.table.columnTypes,
+				colUnits: result.table.columnUnits,
+				rowsStatus: result.table.rows,
+			  } as activeStation;
+			
+		  })
+		);
+	  
+	} // end function
+
+
+	//----------------------------------------------
+
+
+	// Function to convert station status obtained from
+	// call to erddap server, in a rowStation array object
+	// structured like rowStation interface.
+	// Example :
+	/*
+	[
+		{ name: 'MAMBO1', status: '1' },
+		{ name: 'MAMBO2', status: '0' },
+		{ name: 'MAMBO3', status: '0' },
+		{ name: 'MAMBO4', status: '0' },
+		{ name: 'DWRG1', status: '1' },
+		{ name: 'DWRG2', status: '1' },
+		{ name: 'DWRG3', status: '1' },
+		{ name: 'E2M3A', status: '0'},
+		{ name: 'CURRISO', status: '0' },
+		{ name: 'PIEZTAG', status: '0'}
+	];
+	*/
+	// Set the erddapStationsStatusList class attribute
+	// to store all station status and return that as response.
+	// If no response from erddap server, function error ()
+	// will handle with user message.
+  
+	getAllStationStatus ():rowStation[]
+	{
+
+		this.getHttpStationStatus()!.subscribe
+		((data: activeStation) =>{
+
+			for (let index = 0;index < data!.colNames.length; index++)
+			{
+				// Set the erddapStationsStatusList class attribute
+				
+				this.erddapStationsStatusList.push(
+					{
+						name: data!.colNames[index],
+						status: String(data!.rowsStatus[0][index]),
+						
+					} as rowStation
+				);
+
+			}
+
+		},
+          (error: any) => {
+			
+			//alert("Station status color not available in this moment.");
+          }
+			
+		); // end subscribe
+
+		return this.erddapStationsStatusList;
+
+	} // end function
+	
+	//----------------------------------------------
+
+	// Function to get single station(device) status
+	// obtained scanning erddapStationsStatusList class attribute
+	// only if erddapStationsStatusList is not empty.
+	// Called by layer.service stationsSelect.
+
+	getSingleStationStatus (device:string):string | undefined
+	{
+		let myStatus = undefined;
+		
+		if (this.erddapStationsStatusList.length != 0)
+			myStatus = (this.erddapStationsStatusList.find(({ name }) => name === device))!.status;
+
+		return myStatus;
+	}
+
+  
+} // end class
