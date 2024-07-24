@@ -17,8 +17,8 @@
       </ng-container>
     </div>
 	<div id = "idActiveStationLegend" [hidden] = "!(this.erdappService.erddapStationsStatusList.length != 0)">
-		<img src="../../assets/green_circle.png">active station<br>
-		<img src="../../assets/red_circle.png">inactive station
+		<img src="assets/green_circle.png">active station<br>
+		<img src="assets/red_circle.png">inactive station
 	</div>
   </mat-card-content>
   <ng-container *ngIf="layers.filter(isBaseLayer).length > 1">
