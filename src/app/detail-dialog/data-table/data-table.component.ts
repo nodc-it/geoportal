@@ -29,6 +29,9 @@ export class DataTableComponent implements OnInit {
   displayedColumns: string[] = ['parameter', 'measurement', 'depth', 'timestamp'];
 
   ngOnInit(): void {
+	  //alert("data-table.component.ts - ngOnInit - letto dialog_par");
+	  
+    //let dialogParam = this.data.get('dialog_par').split(',');
 	
 	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
 	
@@ -63,7 +66,7 @@ export class DataTableComponent implements OnInit {
     this.cardsMeasurement.sortingDataAccessor = (item, property) => {
       switch (property) {
         case 'parameter':
-          return this.vocabService.getMeasurementName((item as Measurement).parameter.name);
+          return this.vocabService.getMeasurementName(this.data.get('name'), (item as Measurement).parameter.name);
         default:
           return (item as any)[property];
       }
