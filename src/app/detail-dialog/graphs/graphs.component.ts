@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+//import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core'; //
 import * as Highcharts from 'highcharts/highstock';
 import { DataType, ErddapService, Parameter, Measurement } from 'src/app/services/erddap.service';
 import { Options } from 'highcharts';
 import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
 import Geometry from 'ol/geom/Geometry';
+import { MatPaginator } from '@angular/material/paginator'; //
 import { VocabService } from '../../services/vocab.service';
 import HC_exporting from 'highcharts/modules/exporting';
 import HC_exportdata from 'highcharts/modules/export-data';
@@ -27,6 +29,9 @@ interface TimeSeries {
   styleUrls: ['./graphs.component.scss'],
 })
 export class GraphsComponent implements OnInit {
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;//
+	
   Highcharts: typeof Highcharts = Highcharts;
   updateFlag = false;
   loading = 0;
@@ -40,7 +45,7 @@ export class GraphsComponent implements OnInit {
   allSelected(timeseries: TimeSeries) {
     return timeseries.series != null && timeseries.series.every(s => s.selected);
   }
-  someSelected(timeseries: TimeSeries): boolean {
+  someSelected(timeseries: TimeSeries): boolean { 
     return timeseries.series != null && timeseries.series.some(s => s.selected) && !this.allSelected(timeseries);
   }
   selectAll(selected: boolean, timeseries: TimeSeries) {
@@ -168,6 +173,8 @@ export class GraphsComponent implements OnInit {
   }
 
   getTimeSeriesAvailable(dataset: string, timeStart: Date, timeEnd?: Date) {
+    //let dialogParam = this.data.get('dialog_par').split(',');
+	//alert("graphs.component.ts - getTimeSeriesAvailable");//
 	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
     dialogParam.map((param: string) => {
       this.loading++;
@@ -201,6 +208,7 @@ export class GraphsComponent implements OnInit {
   }
 
   addSeries(dataset: string, parameter: Parameter, depth: number | undefined, timeStart: Date, timeEnd?: Date) {
+	  
     let dataArray: number[][] = [];
     this.loading++;
     this.erdappService.getMeasurements(dataset, parameter, depth, timeStart, timeEnd).subscribe(
@@ -208,7 +216,7 @@ export class GraphsComponent implements OnInit {
         dataArray = response.map((measure: Measurement) => {
           return [new Date(measure.timestamp).getTime(), measure.measurement];
         });
-        let measurementUnit = this.vocabService.getMeasurementUnit(parameter.name);
+        let measurementUnit = this.vocabService.getMeasurementUnit(this.data.get('name'), parameter.name);
 
         if (measurementUnit !== undefined && !this.chartRef.get(measurementUnit))
           this.chartRef.addAxis({
@@ -227,7 +235,7 @@ export class GraphsComponent implements OnInit {
           // per evitare bug con selezioni multiple veloci
           this.chartRef.addSeries({
             id: parameter.name + depth,
-            name: this.vocabService.getMeasurementName(parameter.name),
+            name: this.vocabService.getMeasurementName(this.data.get('name'), parameter.name),
             type: 'line',
             yAxis: measurementUnit,
             data: dataArray,

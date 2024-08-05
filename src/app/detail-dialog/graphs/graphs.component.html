@@ -21,7 +21,7 @@
           [indeterminate]="someSelected(timeseries)"
           (change)="selectAll($event.checked, timeseries); updateChart()"
         >
-          {{ this.vocabService.getMeasurementName(timeseries.parameter.name) }}
+          {{ this.vocabService.getMeasurementName(this.data.get('name'), timeseries.parameter.name) }}
         </mat-checkbox>
         <ng-container
           *ngIf="
@@ -40,3 +40,4 @@
     </section>
   </mat-card-content>
 </mat-card>
+

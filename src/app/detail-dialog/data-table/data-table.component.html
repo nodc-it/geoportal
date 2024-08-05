@@ -4,13 +4,13 @@
 <table mat-table [dataSource]="cardsMeasurement" class="mat-elevation-z8 demo-table" matSort>
   <ng-container matColumnDef="parameter">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-    <td mat-cell *matCellDef="let element">{{ this.vocabService.getMeasurementName(element.parameter.name) }}</td>
+    <td mat-cell *matCellDef="let element">{{this.vocabService.getMeasurementName(this.data.get('name'), element.parameter.name) }}</td>
   </ng-container>
 
   <ng-container matColumnDef="measurement">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Measure</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.measurement + ' ' + this.vocabService.getMeasurementUnit(element.parameter.name) }}
+      {{ element.measurement + ' ' + this.vocabService.getMeasurementUnit(this.data.get('name'), element.parameter.name)}}
     </td>
   </ng-container>
 
