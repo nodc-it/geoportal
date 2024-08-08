@@ -2,2165 +2,2223 @@ import { Vocab } from './vocab.service';
 
 export var VOCABS: Vocab[] = [
   {
-    id: 'VZMX',
-	device: 'DWRG1',
+    id: "VZMX",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Maximum zero-crossing wave height',
+        locale: "en",
+        name: "Maximum zero-crossing wave height"
       },
       {
-        locale: 'it',
-        name: "Massimo zero-crossing dell'altezza delle onde",
-      },
+        locale: "it",
+        name: "Massimo zero-crossing dell'altezza delle onde"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "m"
   },
   {
-    id: 'VZMX',
-	device: 'DWRG2',
+    id: "VTMX",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Maximum zero-crossing wave height',
+        locale: "en",
+        name: "Maximum wave period"
       },
       {
-        locale: 'it',
-        name: "Massimo zero-crossing dell'altezza delle onde",
-      },
+        locale: "it",
+        name: "Massimo periodo d'onda"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "s"
   },
   {
-    id: 'VZMX',
-	device: 'DWRG3',
+    id: "VH110",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Maximum zero-crossing wave height',
+        locale: "en",
+        name: "Average height highest wave(1/10)"
       },
       {
-        locale: 'it',
-        name: "Massimo zero-crossing dell'altezza delle onde",
-      },
+        locale: "it",
+        name: "Altezza media dell'onda più alta(1/10)"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "m"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'VTMX',
-	device: 'DWRG1',
+    id: "VT110",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Maximum wave period',
+        locale: "en",
+        name: "Average period highest wave (T1/10)"
       },
       {
-        locale: 'it',
-        name: "Massimo periodo d'onda",
-      },
+        locale: "it",
+        name: "Periodo medio dell'onda più alta (T1/10)"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "s"
   },
-
   {
-    id: 'VTMX',
-	device: 'DWRG2',
+    id: "VAVH",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Maximum wave period',
+        locale: "en",
+        name: "Average height highest 1/3 wave (H1/3)"
       },
       {
-        locale: 'it',
-        name: "Massimo periodo d'onda",
-      },
+        locale: "it",
+        name: "Altezza media dell'onda più alta(H1/3)"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "m"
   },
-
   {
-    id: 'VTMX',
-	device: 'DWRG3',
+    id: "VAVT",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Maximum wave period',
+        locale: "en",
+        name: "Average period highest 1/3 wave"
       },
       {
-        locale: 'it',
-        name: "Massimo periodo d'onda",
-      },
+        locale: "it",
+        name: "Periodo medio dell'onda più alta(1/3)"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "s"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'VH110',
-	device: 'DWRG1',
+    id: "VTPK",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average height highest wave(1/10)',
+        locale: "en",
+        name: "Wave period at spectral peak / peak period"
       },
       {
-        locale: 'it',
-        name: "Altezza media dell'onda più alta(1/10)",
-      },
+        locale: "it",
+        name: "Periodo dell'onda alla cima spettrale"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "s"
   },
   {
-    id: 'VH110',
-	device: 'DWRG2',
+    id: "VPED",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average height highest wave(1/10)',
+        locale: "en",
+        name: "Wave principal direction at spectral peak"
       },
       {
-        locale: 'it',
-        name: "Altezza media dell'onda più alta(1/10)",
-      },
+        locale: "it",
+        name: "Direzione dell'onda alla cima spettrale"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "°"
   },
   {
-    id: 'VH110',
-	device: 'DWRG3',
+    id: "VPSP",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average height highest wave(1/10)',
+        locale: "en",
+        name: "Wave directional spreading at spectral peak"
       },
       {
-        locale: 'it',
-        name: "Altezza media dell'onda più alta(1/10)",
-      },
+        locale: "it",
+        name: "Spreading direzionale dell'onda alla cima"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "°"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'VT110',
-	device: 'DWRG1',
+    id: "VTZA",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average period highest wave (T1/10)',
+        locale: "en",
+        name: "Average zero crossing wave period"
       },
       {
-        locale: 'it',
-        name: "Periodo medio dell'onda più alta (T1/10)",
-      },
+        locale: "it",
+        name: "Periodo medio di zero-crossing delle onde"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "s"
   },
   {
-    id: 'VT110',
-	device: 'DWRG2',
+    id: "VHM0",
+    device: "DWRG1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average period highest wave (T1/10)',
+        locale: "en",
+        name: "Spectral significant wave height (Hm0)"
       },
       {
-        locale: 'it',
-        name: "Periodo medio dell'onda più alta (T1/10)",
-      },
+        locale: "it",
+        name: "Altezza spettrale significante dell'onda"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "m"
   },
   {
-    id: 'VT110',
-	device: 'DWRG3',
+    id: "VZMX",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average period highest wave (T1/10)',
+        locale: "en",
+        name: "Maximum zero-crossing wave height"
       },
       {
-        locale: 'it',
-        name: "Periodo medio dell'onda più alta (T1/10)",
-      },
+        locale: "it",
+        name: "Massimo zero-crossing dell'altezza delle onde"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "m"
   },
-  
-  
-  // ----------------------------------
-  
-  
   {
-    id: 'VAVH',
-	device: 'DWRG1',
+    id: "VTMX",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average height highest 1/3 wave (H1/3)',
+        locale: "en",
+        name: "Maximum wave period"
       },
       {
-        locale: 'it',
-        name: "Altezza media dell'onda più alta(H1/3)",
-      },
+        locale: "it",
+        name: "Massimo periodo d'onda"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "s"
   },
   {
-    id: 'VAVH',
-	device: 'DWRG2',
+    id: "VH110",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average height highest 1/3 wave (H1/3)',
+        locale: "en",
+        name: "Average height highest wave(1/10)"
       },
       {
-        locale: 'it',
-        name: "Altezza media dell'onda più alta(H1/3)",
-      },
+        locale: "it",
+        name: "Altezza media dell'onda più alta(1/10)"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "m"
   },
   {
-    id: 'DWRG3',
-	device: '',
+    id: "VT110",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average height highest 1/3 wave (H1/3)',
+        locale: "en",
+        name: "Average period highest wave (T1/10)"
       },
       {
-        locale: 'it',
-        name: "Altezza media dell'onda più alta(H1/3)",
-      },
+        locale: "it",
+        name: "Periodo medio dell'onda più alta (T1/10)"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "s"
   },
-  
-  // ----------------------------------
-
   {
-    id: 'VAVT',
-	device: 'DWRG1',
+    id: "VAVH",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average period highest 1/3 wave',
+        locale: "en",
+        name: "Average height highest 1/3 wave (H1/3)"
       },
       {
-        locale: 'it',
-        name: "Periodo medio dell'onda più alta(1/3)",
-      },
+        locale: "it",
+        name: "Altezza media dell'onda più alta(H1/3)"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "m"
   },
   {
-    id: 'VAVT',
-	device: 'DWRG2',
+    id: "VAVT",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average period highest 1/3 wave',
+        locale: "en",
+        name: "Average period highest 1/3 wave"
       },
       {
-        locale: 'it',
-        name: "Periodo medio dell'onda più alta(1/3)",
-      },
+        locale: "it",
+        name: "Periodo medio dell'onda più alta(1/3)"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "s"
   },
   {
-    id: 'VAVT',
-	device: 'DWRG3',
+    id: "VTPK",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average period highest 1/3 wave',
+        locale: "en",
+        name: "Wave period at spectral peak / peak period"
       },
       {
-        locale: 'it',
-        name: "Periodo medio dell'onda più alta(1/3)",
-      },
+        locale: "it",
+        name: "Periodo dell'onda alla cima spettrale"
+      }
     ],
-    measurementUnit: 's',
-  },  
-  
-  
-  // ----------------------------------
-  
+    measurementUnit: "s"
+  },
   {
-    id: 'VTPK',
-	device: 'DWRG1',
+    id: "VPED",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wave period at spectral peak / peak period',
+        locale: "en",
+        name: "Wave principal direction at spectral peak"
       },
       {
-        locale: 'it',
-        name: "Periodo dell'onda alla cima spettrale",
-      },
+        locale: "it",
+        name: "Direzione dell'onda alla cima spettrale"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "°"
   },
-    {
-    id: 'VTPK',
-	device: 'DWRG2',
+  {
+    id: "VPSP",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wave period at spectral peak / peak period',
+        locale: "en",
+        name: "Wave directional spreading at spectral peak"
       },
       {
-        locale: 'it',
-        name: "Periodo dell'onda alla cima spettrale",
-      },
+        locale: "it",
+        name: "Spreading direzionale dell'onda alla cima"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "°"
   },
   {
-    id: 'VTPK',
-	device: 'DWRG3',
+    id: "VTZA",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wave period at spectral peak / peak period',
+        locale: "en",
+        name: "Average zero crossing wave period"
       },
       {
-        locale: 'it',
-        name: "Periodo dell'onda alla cima spettrale",
-      },
+        locale: "it",
+        name: "Periodo medio di zero-crossing delle onde"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "s"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'VPED',
-	device: 'DWRG1',
+    id: "VHM0",
+    device: "DWRG2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wave principal direction at spectral peak',
+        locale: "en",
+        name: "Spectral significant wave height (Hm0)"
       },
       {
-        locale: 'it',
-        name: "Direzione dell'onda alla cima spettrale",
-      },
+        locale: "it",
+        name: "Altezza spettrale significante dell'onda"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "m"
   },
   {
-    id: 'VPED',
-	device: 'DWRG2',
+    id: "VZMX",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wave principal direction at spectral peak',
+        locale: "en",
+        name: "Maximum zero-crossing wave height"
       },
       {
-        locale: 'it',
-        name: "Direzione dell'onda alla cima spettrale",
-      },
+        locale: "it",
+        name: "Massimo zero-crossing dell'altezza delle onde"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "m"
   },
   {
-    id: 'VPED',
-	device: 'DWRG3',
+    id: "VTMX",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wave principal direction at spectral peak',
+        locale: "en",
+        name: "Maximum wave period"
       },
       {
-        locale: 'it',
-        name: "Direzione dell'onda alla cima spettrale",
-      },
+        locale: "it",
+        name: "Massimo periodo d'onda"
+      }
     ],
-    measurementUnit: '°',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: "s"
+  },
   {
-    id: 'VPSP',
-	device: 'DWRG1',
+    id: "VH110",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wave directional spreading at spectral peak',
+        locale: "en",
+        name: "Average height highest wave(1/10)"
       },
       {
-        locale: 'it',
-        name: "Spreading direzionale dell'onda alla cima",
-      },
+        locale: "it",
+        name: "Altezza media dell'onda più alta(1/10)"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "m"
   },
   {
-    id: 'VPSP',
-	device: 'DWRG2',
+    id: "VT110",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wave directional spreading at spectral peak',
+        locale: "en",
+        name: "Average period highest wave (T1/10)"
       },
       {
-        locale: 'it',
-        name: "Spreading direzionale dell'onda alla cima",
-      },
+        locale: "it",
+        name: "Periodo medio dell'onda più alta (T1/10)"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "s"
   },
   {
-    id: 'VPSP',
-	device: 'DWRG3',
+    id: "VAVT",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wave directional spreading at spectral peak',
+        locale: "en",
+        name: "Average period highest 1/3 wave"
       },
       {
-        locale: 'it',
-        name: "Spreading direzionale dell'onda alla cima",
-      },
+        locale: "it",
+        name: "Periodo medio dell'onda più alta(1/3)"
+      }
     ],
-    measurementUnit: '°',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: "s"
+  },
   {
-    id: 'VTZA',
-	device: 'DWRG1',
+    id: "VTPK",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average zero crossing wave period',
+        locale: "en",
+        name: "Wave period at spectral peak / peak period"
       },
       {
-        locale: 'it',
-        name: 'Periodo medio di zero-crossing delle onde',
-      },
+        locale: "it",
+        name: "Periodo dell'onda alla cima spettrale"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "s"
   },
   {
-    id: 'VTZA',
-	device: 'DWRG2',
+    id: "VPED",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average zero crossing wave period',
+        locale: "en",
+        name: "Wave principal direction at spectral peak"
       },
       {
-        locale: 'it',
-        name: 'Periodo medio di zero-crossing delle onde',
-      },
+        locale: "it",
+        name: "Direzione dell'onda alla cima spettrale"
+      }
     ],
-    measurementUnit: 's',
+    measurementUnit: "°"
   },
   {
-    id: 'VTZA',
-	device: 'DWRG3',
+    id: "VPSP",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Average zero crossing wave period',
+        locale: "en",
+        name: "Wave directional spreading at spectral peak"
       },
       {
-        locale: 'it',
-        name: 'Periodo medio di zero-crossing delle onde',
-      },
+        locale: "it",
+        name: "Spreading direzionale dell'onda alla cima"
+      }
     ],
-    measurementUnit: 's',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: "°"
+  },
   {
-    id: 'VHM0',
-	device: 'DWRG1',
+    id: "VTZA",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Spectral significant wave height (Hm0)',
+        locale: "en",
+        name: "Average zero crossing wave period"
       },
       {
-        locale: 'it',
-        name: "Altezza spettrale significante dell'onda",
-      },
+        locale: "it",
+        name: "Periodo medio di zero-crossing delle onde"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "s"
   },
   {
-    id: 'VHM0',
-	device: 'DWRG2',
+    id: "VHM0",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Spectral significant wave height (Hm0)',
+        locale: "en",
+        name: "Spectral significant wave height (Hm0)"
       },
       {
-        locale: 'it',
-        name: "Altezza spettrale significante dell'onda",
-      },
+        locale: "it",
+        name: "Altezza spettrale significante dell'onda"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "m"
   },
   {
-    id: 'VHM0',
-	device: 'DWRG3',
+    id: "VAVH",
+    device: "DWRG3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Spectral significant wave height (Hm0)',
+        locale: "en",
+        name: ""
       },
       {
-        locale: 'it',
-        name: "Altezza spettrale significante dell'onda",
-      },
+        locale: "it",
+        name: ""
+      }
     ],
-    measurementUnit: 'm',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: ""
+  },
   {
-    id: 'WDIR',
-	device: 'E2M3A',
+    id: "DWRG3",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wind direction',
+        locale: "en",
+        name: "Average height highest 1/3 wave (H1/3)"
       },
       {
-        locale: 'it',
-        name: 'Direzione del vento',
-      },
+        locale: "it",
+        name: "Altezza media dell'onda più alta(H1/3)"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "m"
   },
   {
-    id: 'WDIR',
-	device: 'MAMBO1',
+    id: "WSPD",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wind direction',
+        locale: "en",
+        name: "Avg wind speed"
       },
       {
-        locale: 'it',
-        name: 'Direzione del vento',
-      },
+        locale: "it",
+        name: "Velocità del vento media"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "m/s"
   },
   {
-    id: 'WDIR',
-	device: 'MAMBO2',
+    id: "E2M3A",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wind direction',
+        locale: "en",
+        name: "Humidity"
       },
       {
-        locale: 'it',
-        name: 'Direzione del vento',
-      },
+        locale: "it",
+        name: "Umidità"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "%"
   },
   {
-    id: 'WDIR',
-	device: 'MAMBO3',
+    id: "MAMBO1",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wind direction',
+        locale: "en",
+        name: "Humidity"
       },
       {
-        locale: 'it',
-        name: 'Direzione del vento',
-      },
+        locale: "it",
+        name: "Umidità"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "%"
   },
   {
-    id: 'WDIR',
-	device: 'MAMBO4',
+    id: "MAMBO2",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Wind direction',
+        locale: "en",
+        name: "Humidity"
       },
       {
-        locale: 'it',
-        name: 'Direzione del vento',
-      },
+        locale: "it",
+        name: "Umidità"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "%"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'WSPD',
-	device: '',
+    id: "MAMBO3",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Avg wind speed',
+        locale: "en",
+        name: "Humidity"
       },
       {
-        locale: 'it',
-        name: 'Velocità del vento media',
-      },
+        locale: "it",
+        name: "Umidità"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: "%"
   },
   {
-    id: 'WSPD',
-	device: 'E2M3A',
+    id: "MAMBO4",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Avg wind speed',
+        locale: "en",
+        name: "Humidity"
       },
       {
-        locale: 'it',
-        name: 'Velocità del vento media',
-      },
+        locale: "it",
+        name: "Umidità"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: "%"
   },
   {
-    id: 'WSPD',
-	device: 'MAMBO1',
+    id: "PHPH_2",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Avg wind speed',
+        locale: "en",
+        name: "pH"
       },
       {
-        locale: 'it',
-        name: 'Velocità del vento media',
-      },
+        locale: "it",
+        name: "pH"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: ""
   },
   {
-    id: 'WSPD',
-	device: 'MAMBO2',
+    id: "TEMP_2",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Avg wind speed',
+        locale: "en",
+        name: "Water temperature"
       },
       {
-        locale: 'it',
-        name: 'Velocità del vento media',
-      },
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: "°C"
   },
   {
-    id: 'WSPD',
-	device: 'MAMBO3',
+    id: "CNDC",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Avg wind speed',
+        locale: "en",
+        name: "Electrical conductivity"
       },
       {
-        locale: 'it',
-        name: 'Velocità del vento media',
-      },
+        locale: "it",
+        name: "Conducibilità elettrica"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: "S/m"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'DRYT',
-	device: 'E2M3A',
+    id: "CNDC_1",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Air temperature',
+        locale: "en",
+        name: "Electrical conductivity"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'aria",
-      },
+        locale: "it",
+        name: "Conducibilità elettrica"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "S/m"
   },
   {
-    id: 'DRYT',
-	device: 'MAMBO1',
+    id: "CNDC_2",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Air temperature',
+        locale: "en",
+        name: "Electrical conductivity"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'aria",
-      },
+        locale: "it",
+        name: "Conducibilità elettrica"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "S/m"
   },
   {
-    id: 'DRYT',
-	device: 'MAMBO2',
+    id: "PRES",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Air temperature',
+        locale: "en",
+        name: "Sea pressure"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'aria",
-      },
+        locale: "it",
+        name: "Pressione del mare"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "dbar"
   },
   {
-    id: 'DRYT',
-	device: 'MAMBO3',
+    id: "PRES_1",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Air temperature',
+        locale: "en",
+        name: "Sea pressure"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'aria",
-      },
+        locale: "it",
+        name: "Pressione del mare"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "dbar"
   },
   {
-    id: 'DRYT',
-	device: 'MAMBO4',
+    id: "PRES_2",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Air temperature',
+        locale: "en",
+        name: "Sea pressure"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'aria",
-      },
+        locale: "it",
+        name: "Pressione del mare"
+      }
     ],
-    measurementUnit: '°C',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: "dbar"
+  },
   {
-    id: 'ATMS',
-	device: 'E2M3A',
+    id: "LGHT",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Atmospheric pressure',
+        locale: "en",
+        name: "Incoming photosynthetic radiation"
       },
       {
-        locale: 'it',
-        name: 'Pressione atmosferica',
-      },
+        locale: "it",
+        name: "Radiazione attiva fotosintetica in entrata immersa"
+      }
     ],
-    measurementUnit: 'hPa',
+    measurementUnit: "µmol/m²s"
   },
   {
-    id: 'ATMS',
-	device: 'MAMBO1',
+    id: "CPHL",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Atmospheric pressure',
+        locale: "en",
+        name: "Chlorophyll-a"
       },
       {
-        locale: 'it',
-        name: 'Pressione atmosferica',
-      },
+        locale: "it",
+        name: "Clorofilla-a"
+      }
     ],
-    measurementUnit: 'hPa',
+    measurementUnit: "mg/m³"
   },
   {
-    id: 'ATMS',
-	device: 'MAMBO2',
+    id: "VCSP",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Atmospheric pressure',
+        locale: "en",
+        name: "Bottom-top current component"
       },
       {
-        locale: 'it',
-        name: 'Pressione atmosferica',
-      },
+        locale: "it",
+        name: "**"
+      }
     ],
-    measurementUnit: 'hPa',
+    measurementUnit: "m/s"
   },
   {
-    id: 'ATMS',
-	device: 'MAMBO3',
+    id: "EWCT",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Atmospheric pressure',
+        locale: "en",
+        name: "West-east current component"
       },
       {
-        locale: 'it',
-        name: 'Pressione atmosferica',
-      },
+        locale: "it",
+        name: "**"
+      }
     ],
-    measurementUnit: 'hPa',
+    measurementUnit: "m/s"
   },
   {
-    id: 'ATMS',
-	device: 'MAMBO4',
+    id: "NSCT",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Atmospheric pressure',
+        locale: "en",
+        name: "South-north current component"
       },
       {
-        locale: 'it',
-        name: 'Pressione atmosferica',
-      },
+        locale: "it",
+        name: "**"
+      }
     ],
-    measurementUnit: 'hPa',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: "m/s"
+  },
   {
-    id: 'E2M3A',
-	device: '',
+    id: "TMES_1",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Humidity',
+        locale: "en",
+        name: "Temperature of pH"
       },
       {
-        locale: 'it',
-        name: 'Umidità',
-      },
+        locale: "it",
+        name: "Temperatura del pH"
+      }
     ],
-    measurementUnit: '%',
+    measurementUnit: "°C"
   },
   {
-    id: 'MAMBO1',
-	device: '',
+    id: "TMES_2",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Humidity',
+        locale: "en",
+        name: "Temperature of pH"
       },
       {
-        locale: 'it',
-        name: 'Umidità',
-      },
+        locale: "it",
+        name: "Temperatura del pH"
+      }
     ],
-    measurementUnit: '%',
+    measurementUnit: "°C"
   },
   {
-    id: 'MAMBO2',
-	device: '',
+    id: "CHUM",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Humidity',
+        locale: "en",
+        name: "Partial pressure of water vapour in the atmosphere"
       },
       {
-        locale: 'it',
-        name: 'Umidità',
-      },
+        locale: "it",
+        name: "Pressione parziale del vapore acqueo nella atmosfera"
+      }
     ],
-    measurementUnit: '%',
+    measurementUnit: "ppm"
   },
   {
-    id: 'MAMBO3',
-	device: '',
+    id: "SVEL_1",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Humidity',
+        locale: "en",
+        name: "Sound velocity in the water body"
       },
       {
-        locale: 'it',
-        name: 'Umidità',
-      },
+        locale: "it",
+        name: "Velocità del suono nel corpo idrico"
+      }
     ],
-    measurementUnit: '%',
+    measurementUnit: "m/s"
   },
   {
-    id: 'MAMBO4',
-	device: '',
+    id: "SVEL_2",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Humidity',
+        locale: "en",
+        name: "Sound velocity in the water body"
       },
       {
-        locale: 'it',
-        name: 'Umidità',
-      },
+        locale: "it",
+        name: "Velocità del suono nel corpo idrico"
+      }
     ],
-    measurementUnit: '%',
+    measurementUnit: "m/s"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'GSPD',
-	device: 'E2M3A',
+    id: "ALKY",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind speed',
+        locale: "en",
+        name: "pH"
       },
       {
-        locale: 'it',
-        name: 'Velocità della raffica di vento',
-      },
+        locale: "it",
+        name: "pH"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: ""
   },
   {
-    id: 'GSPD',
-	device: 'MAMBO1',
+    id: "EWSB",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind speed',
+        locale: "en",
+        name: "Vector avg wind speed"
       },
       {
-        locale: 'it',
-        name: 'Velocità della raffica di vento',
-      },
+        locale: "it",
+        name: "Velocità media del vento vettoriale"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: "m/s"
   },
   {
-    id: 'GSPD',
-	device: 'MAMBO2',
+    id: "HEAD",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind speed',
+        locale: "en",
+        name: "Orientation of measurement platform"
       },
       {
-        locale: 'it',
-        name: 'Velocità della raffica di vento',
-      },
+        locale: "it",
+        name: "Orientamento della piattaforma di misurazione"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: "°"
   },
   {
-    id: 'GSPD',
-	device: 'MAMBO3',
+    id: "LINC",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind speed',
+        locale: "en",
+        name: "Longwave incoming radiation"
       },
       {
-        locale: 'it',
-        name: 'Velocità della raffica di vento',
-      },
+        locale: "it",
+        name: "**"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: "W/m²"
   },
   {
-    id: 'GSPD',
-	device: 'MAMBO4',
+    id: "PCO2",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind speed',
+        locale: "en",
+        name: "CO₂ partial pressure"
       },
       {
-        locale: 'it',
-        name: 'Velocità della raffica di vento',
-      },
+        locale: "it",
+        name: "Pressione parziale della CO₂"
+      }
     ],
-    measurementUnit: 'm/s',
-  },  
-    
-  // ----------------------------------
-  
+    measurementUnit: "µatm"
+  },
   {
-    id: 'GDIR',
-	device: 'E2M3A',
+    id: "SINC",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind direction',
+        locale: "en",
+        name: "Shortwave incoming radiation"
       },
       {
-        locale: 'it',
-        name: 'Direzione della raffica di vento',
-      },
+        locale: "it",
+        name: "Radiozioni"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "W/m²"
   },
   {
-    id: 'GDIR',
-	device: 'MAMBO1',
+    id: "TEMP",
+    device: "",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind direction',
+        locale: "en",
+        name: "Water temperature"
       },
       {
-        locale: 'it',
-        name: 'Direzione della raffica di vento',
-      },
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "°C"
   },
   {
-    id: 'GDIR',
-	device: 'MAMBO2',
+    id: "WDIR",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind direction',
+        locale: "en",
+        name: "Wind direction"
       },
       {
-        locale: 'it',
-        name: 'Direzione della raffica di vento',
-      },
+        locale: "it",
+        name: "Direzione del vento"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "°"
   },
   {
-    id: 'GDIR',
-	device: 'MAMBO3',
+    id: "WSPD",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind direction',
+        locale: "en",
+        name: "Wind speed"
       },
       {
-        locale: 'it',
-        name: 'Direzione della raffica di vento',
-      },
+        locale: "it",
+        name: "Velocità del vento media"
+      }
     ],
-    measurementUnit: '°',
+    measurementUnit: "m/s"
   },
   {
-    id: 'GDIR',
-	device: 'MAMBO4',
+    id: "DRYT",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Gust wind direction',
+        locale: "en",
+        name: "Air temperature"
       },
       {
-        locale: 'it',
-        name: 'Direzione della raffica di vento',
-      },
+        locale: "it",
+        name: "Temperatura dell'aria"
+      }
     ],
-    measurementUnit: '°',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: "°C"
+  },
   {
-    id: 'SINC',
-	device: 'E2M3A',
+    id: "ATMS",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Shortwave incoming radiation',
+        locale: "en",
+        name: "Atmospheric pressure"
       },
       {
-        locale: 'it',
-        name: 'Radiozioni',
-      },
+        locale: "it",
+        name: "Pressione atmosferica"
+      }
     ],
-    measurementUnit: 'W/m²',
+    measurementUnit: "hPa"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'LINC',
-	device: 'E2M3A',
+    id: "GSPD",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Longwave incoming radiation',
+        locale: "en",
+        name: "Gust wind speed"
       },
       {
-        locale: 'it',
-        name: '**',
-      },
+        locale: "it",
+        name: "Velocità della raffica di vento"
+      }
     ],
-    measurementUnit: 'W/m²',
+    measurementUnit: "m/s"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PCO2',
-	device: 'E2M3A',
+    id: "GDIR",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'CO₂ partial pressure',
+        locale: "en",
+        name: "Gust wind direction"
       },
       {
-        locale: 'it',
-        name: 'Pressione parziale della CO₂',
-      },
+        locale: "it",
+        name: "Direzione della raffica di vento"
+      }
     ],
-    measurementUnit: 'µatm',
+    measurementUnit: "°"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PHPH',
-	device: 'E2M3A',
+    id: "PHPH",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'pH',
+        locale: "en",
+        name: "pH (total scale)"
       },
       {
-        locale: 'it',
-        name: 'pH',
-      },
+        locale: "it",
+        name: "pH"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: ""
   },
   {
-    id: 'PHPH',
-	device: 'MAMBO2',
+    id: "DOX1_1",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'pH',
+        locale: "en",
+        name: "Oxygen"
       },
       {
-        locale: 'it',
-        name: 'pH',
-      },
+        locale: "it",
+        name: "Ossigeno"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: "ml/l"
   },
   {
-    id: 'PHPH',
-	device: 'MAMBO3',
+    id: "DOX1_2",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'pH',
+        locale: "en",
+        name: "Oxygen"
       },
       {
-        locale: 'it',
-        name: 'pH',
-      },
+        locale: "it",
+        name: "Ossigeno"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: "ml/l"
   },
   {
-    id: 'PHPH',
-	device: 'MAMBO4',
+    id: "PSAL_2",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'pH',
+        locale: "en",
+        name: "Salinity"
       },
       {
-        locale: 'it',
-        name: 'pH',
-      },
+        locale: "it",
+        name: "Salinità"
+      }
     ],
-    measurementUnit: '',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: ""
+  },
   {
-    id: 'PHPH_1',
-	device: 'MAMBO1',
+    id: "PSAL_3",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'pH',
+        locale: "en",
+        name: "Salinity"
       },
       {
-        locale: 'it',
-        name: 'pH',
-      },
+        locale: "it",
+        name: "Salinità"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: ""
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PHPH_2', // non c'è nel config_station.json
-	device: '',
+    id: "RELH",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'pH',
+        locale: "en",
+        name: "Humidity"
       },
       {
-        locale: 'it',
-        name: 'pH',
-      },
+        locale: "it",
+        name: "Umidità relativa media"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: "%"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PHPH_3',
-	device: 'MAMBO1',
+    id: "CSLR",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'pH',
+        locale: "en",
+        name: "Atmospheric irradiance"
       },
       {
-        locale: 'it',
-        name: 'pH',
-      },
+        locale: "it",
+        name: "Irradianza solare"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: "W/m²"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'DOX1',
-	device: 'E2M3A',
+    id: "LWRD",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Oxygen',
+        locale: "en",
+        name: "Atmospheric Infrared irradiance"
       },
       {
-        locale: 'it',
-        name: 'Ossigeno',
-      },
+        locale: "it",
+        name: "Irradianza solare corretta"
+      }
     ],
-    measurementUnit: 'ml/l',
+    measurementUnit: "W/m²"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'DOXY',
-	device: 'MAMBO2',
+    id: "PCO2_1",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Oxygen',
+        locale: "en",
+        name: "Sea water CO2"
       },
       {
-        locale: 'it',
-        name: 'Ossigeno',
-      },
+        locale: "it",
+        name: "Anidride carbonica nell'acqua"
+      }
     ],
-    measurementUnit: 'ml/l',
+    measurementUnit: "ppm"
   },
   {
-    id: 'DOXY',
-	device: 'MAMBO3',
+    id: "PCO2_2",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Oxygen',
+        locale: "en",
+        name: "Atmospheric CO2"
       },
       {
-        locale: 'it',
-        name: 'Ossigeno',
-      },
+        locale: "it",
+        name: "Anidride carbonica in aria"
+      }
     ],
-    measurementUnit: 'ml/l',
+    measurementUnit: "ppm"
   },
   {
-    id: 'DOXY',
-	device: 'MAMBO4',
+    id: "CPWC",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Oxygen',
+        locale: "en",
+        name: "Clorofilla-a"
       },
       {
-        locale: 'it',
-        name: 'Ossigeno',
-      },
+        locale: "it",
+        name: "Concentrazione di clorofilla-a"
+      }
     ],
-    measurementUnit: 'ml/l',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: "mg/m³"
+  },
   {
-    id: 'DOXY_1',
-	device: 'MAMBO1',
+    id: "TUR4",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Oxygen',
+        locale: "en",
+        name: "Turbidity"
       },
       {
-        locale: 'it',
-        name: 'Ossigeno',
-      },
+        locale: "it",
+        name: "Torbidità"
+      }
     ],
-    measurementUnit: 'ml/l',
+    measurementUnit: "NTU"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'DOXY_2',
-	device: 'MAMBO1',
+    id: "CDOM",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Oxygen',
+        locale: "en",
+        name: "CDOM"
       },
       {
-        locale: 'it',
-        name: 'Ossigeno',
-      },
+        locale: "it",
+        name: "Sostanza organica disciolta colorata"
+      }
     ],
-    measurementUnit: 'ml/l',
+    measurementUnit: "ppb"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'DOXY_3',
-	device: 'MAMBO1',
+    id: "TEMP_1",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Oxygen',
+        locale: "en",
+        name: "Water temperature"
       },
       {
-        locale: 'it',
-        name: 'Ossigeno',
-      },
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: 'ml/l',
+    measurementUnit: "°C"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'TEMP',
-	device: 'E2M3A',
+    id: "TEMP_3",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "Water temperature"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "°C"
   },
   {
-    id: 'TEMP',
-	device: 'MAMBO2',
+    id: "TEMP_4",
+    device: "E2M3A",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "Water temperature"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "°C"
   },
   {
-    id: 'TEMP',
-	device: 'MAMBO3',
+    id: "WDIR",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "Wind direction"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "Direzione del vento"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "°"
   },
   {
-    id: 'TEMP',
-	device: 'MAMBO4',
+    id: "WSPD",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "Wind speed"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "Velocità del vento media"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "m/s"
   },
   {
-    id: 'TEMP',
-	device: 'CURRISO',
+    id: "DRYT",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "Air temperature"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "Temperatura dell'aria"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "°C"
   },
   {
-    id: 'TEMP',
-	device: 'PIEZTAG',
+    id: "ATMS",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "Atmospheric pressure"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "Pressione atmosferica"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "hPa"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'TEMP_1',
-	device: 'MAMBO1',
+    id: "GSPD",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "Gust wind speed"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "Velocità della raffica di vento"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "m/s"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'TEMP_2', // non c'è nel config_station.json
-	device: '',
+    id: "GDIR",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "Gust wind direction"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "Direzione della raffica di vento"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: "°"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'TEMP_3',
-	device: 'MAMBO1',
+    id: "PHPH_1",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "pH (total scale)"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "pH"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: ""
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'TEMP_4',
-	device: 'MAMBO1',
+    id: "PHPH_3",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Water temperature',
+        locale: "en",
+        name: "pH (NBS scale)"
       },
       {
-        locale: 'it',
-        name: "Temperatura dell'acqua",
-      },
+        locale: "it",
+        name: "pH"
+      }
     ],
-    measurementUnit: '°C',
+    measurementUnit: ""
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'CNDC',  // non c'è nel config_station.json
-	device: '',
+    id: "DOXY_1",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Electrical conductivity',
+        locale: "en",
+        name: "Oxygen"
       },
       {
-        locale: 'it',
-        name: 'Conducibilità elettrica',
-      },
+        locale: "it",
+        name: "Ossigeno"
+      }
     ],
-    measurementUnit: 'S/m',
+    measurementUnit: "ml/l"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'CNDC_1',  // non c'è nel config_station.json
-	device: '',
+    id: "DOXY_2",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Electrical conductivity',
+        locale: "en",
+        name: "Oxygen"
       },
       {
-        locale: 'it',
-        name: 'Conducibilità elettrica',
-      },
+        locale: "it",
+        name: "Ossigeno"
+      }
     ],
-    measurementUnit: 'S/m',
+    measurementUnit: "ml/l"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'CNDC_2',  // non c'è nel config_station.json
-	device: '',
+    id: "DOXY_3",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Electrical conductivity',
+        locale: "en",
+        name: "Oxygen"
       },
       {
-        locale: 'it',
-        name: 'Conducibilità elettrica',
-      },
+        locale: "it",
+        name: "Ossigeno"
+      }
     ],
-    measurementUnit: 'S/m',
+    measurementUnit: "ml/l"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PRES', // non c'è nel config_station.json
-	device: '',
+    id: "TEMP_1",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Sea pressure',
+        locale: "en",
+        name: "Water temperature"
       },
       {
-        locale: 'it',
-        name: 'Pressione del mare',
-      },
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: 'dbar',
+    measurementUnit: "°C"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PRES_1', // non c'è nel config_station.json
-	device: '',
+    id: "TEMP_3",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Sea pressure',
+        locale: "en",
+        name: "Water temperature"
       },
       {
-        locale: 'it',
-        name: 'Pressione del mare',
-      },
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: 'dbar',
+    measurementUnit: "°C"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PRES_2', // non c'è nel config_station.json
-	device: '',
+    id: "TEMP_4",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Sea pressure',
+        locale: "en",
+        name: "Water temperature"
       },
       {
-        locale: 'it',
-        name: 'Pressione del mare',
-      },
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: 'dbar',
+    measurementUnit: "°C"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'LGHT', // non c'è nel config_station.json
-	device: '',
+    id: "PSAL_1",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Incoming photosynthetic radiation',
+        locale: "en",
+        name: "Salinity"
       },
       {
-        locale: 'it',
-        name: 'Radiazione attiva fotosintetica in entrata immersa',
-      },
+        locale: "it",
+        name: "Salinità"
+      }
     ],
-    measurementUnit: 'µmol/m²s',
+    measurementUnit: ""
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'CPHL', // non c'è nel config_station.json
-	device: '',
+    id: "PSAL_2",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Chlorophyll-a',
+        locale: "en",
+        name: "Salinity"
       },
       {
-        locale: 'it',
-        name: 'Clorofilla-a',
-      },
+        locale: "it",
+        name: "Salinità"
+      }
     ],
-    measurementUnit: 'mg/m³',
+    measurementUnit: ""
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PSAL',
-	device: 'E2M3A',
+    id: "PSAL_3",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Salinity',
+        locale: "en",
+        name: "Salinity"
       },
       {
-        locale: 'it',
-        name: 'Salinità',
-      },
+        locale: "it",
+        name: "Salinità"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: ""
   },
   {
-    id: 'PSAL',
-	device: 'MAMBO2',
+    id: "TUR4",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Salinity',
+        locale: "en",
+        name: "Turbidity"
       },
       {
-        locale: 'it',
-        name: 'Salinità',
-      },
+        locale: "it",
+        name: "Torbidità"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: "NTU"
   },
   {
-    id: 'PSAL',
-	device: 'MAMBO3',
+    id: "VSRW",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Salinity',
+        locale: "en",
+        name: "Sea water irradiance"
       },
       {
-        locale: 'it',
-        name: 'Salinità',
-      },
+        locale: "it",
+        name: "Irradianza"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: "µE/m²s"
   },
   {
-    id: 'PSAL',
-	device: 'MAMBO4',
+    id: "ACO2",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Salinity',
+        locale: "en",
+        name: "Atmospheric CO₂"
       },
       {
-        locale: 'it',
-        name: 'Salinità',
-      },
+        locale: "it",
+        name: "Frazione molare di anidride carbonica nell atmosfera"
+      }
     ],
-    measurementUnit: '',
-  },  
-  
-  // ----------------------------------
-  
+    measurementUnit: "ppm"
+  },
   {
-    id: 'PSAL_1',
-	device: 'MAMBO1',
+    id: "PCO2",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Salinity',
+        locale: "en",
+        name: "Sea water CO₂"
       },
       {
-        locale: 'it',
-        name: 'Salinità',
-      },
+        locale: "it",
+        name: "Anidride carbonica nell'acqua"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: "ppm"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PSAL_2',
-	device: 'MAMBO1',
+    id: "CPWC",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Salinity',
+        locale: "en",
+        name: "Chlorophyll-a"
       },
       {
-        locale: 'it',
-        name: 'Salinità',
-      },
+        locale: "it",
+        name: "Concentrazione di clorofilla-a"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: "µg/l"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PSAL_3',
-	device: 'MAMBO1',
+    id: "RELH",
+    device: "MAMBO1",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Salinity',
+        locale: "en",
+        name: "Humidity"
       },
       {
-        locale: 'it',
-        name: 'Salinità',
-      },
+        locale: "it",
+        name: "Umidità relativa media"
+      }
     ],
-    measurementUnit: '',
+    measurementUnit: "%"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'TUR4',
-	device: 'MAMBO1',
+    id: "WDIR",
+    device: "MAMBO2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Turbidity',
+        locale: "en",
+        name: "Wind direction"
       },
       {
-        locale: 'it',
-        name: 'Torbidità',
-      },
+        locale: "it",
+        name: "Direzione del vento"
+      }
     ],
-    measurementUnit: 'NTU',
+    measurementUnit: "°"
   },
   {
-    id: 'TUR4',
-	device: 'MAMBO2',
+    id: "WSPD",
+    device: "MAMBO2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Turbidity',
+        locale: "en",
+        name: "Wind speed"
       },
       {
-        locale: 'it',
-        name: 'Torbidità',
-      },
+        locale: "it",
+        name: "Velocità del vento media"
+      }
     ],
-    measurementUnit: 'NTU',
+    measurementUnit: "m/s"
   },
   {
-    id: 'TUR4',
-	device: 'MAMBO3',
+    id: "DRYT",
+    device: "MAMBO2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Turbidity',
+        locale: "en",
+        name: "Air temperature"
       },
       {
-        locale: 'it',
-        name: 'Torbidità',
-      },
+        locale: "it",
+        name: "Temperatura dell'aria"
+      }
     ],
-    measurementUnit: 'NTU',
+    measurementUnit: "°C"
   },
   {
-    id: 'TUR4',
-	device: 'MAMBO4',
+    id: "ATMS",
+    device: "MAMBO2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Turbidity',
+        locale: "en",
+        name: "Atmospheric pressure"
       },
       {
-        locale: 'it',
-        name: 'Torbidità',
-      },
+        locale: "it",
+        name: "Pressione atmosferica"
+      }
     ],
-    measurementUnit: 'NTU',
+    measurementUnit: "hPa"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'VCSP', // non c'è nel config_station.json
-	device: '',
+    id: "GSPD",
+    device: "MAMBO2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Bottom-top current component',
+        locale: "en",
+        name: "Gust wind speed"
       },
       {
-        locale: 'it',
-        name: '**',
-      },
+        locale: "it",
+        name: "Velocità della raffica di vento"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: "m/s"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'EWCT', // non c'è nel config_station.json
-	device: '',
+    id: "GDIR",
+    device: "MAMBO2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'West-east current component',
+        locale: "en",
+        name: "Gust wind direction"
       },
+      {
+        locale: "it",
+        name: "Direzione della raffica di vento"
+      }
+    ],
+    measurementUnit: "°"
+  },
+  {
+    id: "PHPH",
+    device: "MAMBO2",
+    measurementName: [
       {
-        locale: 'it',
-        name: '**',
+        locale: "en",
+        name: "pH"
       },
+      {
+        locale: "it",
+        name: "pH"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: ""
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'NSCT', // non c'è nel config_station.json
-	device: '',
+    id: "DOXY",
+    device: "MAMBO2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'South-north current component',
+        locale: "en",
+        name: "Oxygen"
       },
+      {
+        locale: "it",
+        name: "Ossigeno"
+      }
+    ],
+    measurementUnit: "ml/l"
+  },
+  {
+    id: "TEMP",
+    device: "MAMBO2",
+    measurementName: [
       {
-        locale: 'it',
-        name: '**',
+        locale: "en",
+        name: "Water temperature"
       },
+      {
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: 'm/s',
+    measurementUnit: "°C"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'ASLV',
-	device: 'PIEZTAG',
+    id: "PSAL",
+    device: "MAMBO2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Observed sea level',
+        locale: "en",
+        name: "Salinity"
       },
+      {
+        locale: "it",
+        name: "Salinità"
+      }
+    ],
+    measurementUnit: ""
+  },
+  {
+    id: "TUR4",
+    device: "MAMBO2",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Livello osservato del mare',
+        locale: "en",
+        name: "Turbidity"
       },
+      {
+        locale: "it",
+        name: "Torbidità"
+      }
     ],
-    measurementUnit: 'm',
+    measurementUnit: "NTU"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'RVFL',
-	device: 'CURRISO',
+    id: "RELH",
+    device: "MAMBO2",
     measurementName: [
       {
-        locale: 'en',
-        name: 'River flow rate',
+        locale: "en",
+        name: "Humidity"
       },
+      {
+        locale: "it",
+        name: ""
+      }
+    ],
+    measurementUnit: "%"
+  },
+  {
+    id: "WDIR",
+    device: "MAMBO3",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Portata del fiume',
+        locale: "en",
+        name: "Wind direction"
       },
+      {
+        locale: "it",
+        name: "Direzione del vento"
+      }
     ],
-    measurementUnit: 'm³/s',
+    measurementUnit: "°"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'VSRW',
-	device: 'MAMBO1',
+    id: "WSPD",
+    device: "MAMBO3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'irradiance',
+        locale: "en",
+        name: "Wind speed"
       },
+      {
+        locale: "it",
+        name: "Velocità del vento media"
+      }
+    ],
+    measurementUnit: "m/s"
+  },
+  {
+    id: "DRYT",
+    device: "MAMBO3",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Irradianza',
+        locale: "en",
+        name: "Air temperature"
       },
+      {
+        locale: "it",
+        name: "Temperatura dell'aria"
+      }
     ],
-    measurementUnit: 'µE/m²s'
+    measurementUnit: "°C"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'TMES_1', // non c'è nel config_station.json
-	device: '',
+    id: "ATMS",
+    device: "MAMBO3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Temperature of pH',
+        locale: "en",
+        name: "Atmospheric pressure"
       },
+      {
+        locale: "it",
+        name: "Pressione atmosferica"
+      }
+    ],
+    measurementUnit: "hPa"
+  },
+  {
+    id: "GSPD",
+    device: "MAMBO3",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Temperatura del pH',
+        locale: "en",
+        name: "Gust wind speed"
       },
+      {
+        locale: "it",
+        name: "Velocità della raffica di vento"
+      }
     ],
-    measurementUnit: '°C'
+    measurementUnit: "m/s"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'TMES_2', // non c'è nel config_station.json
-	device: '',
+    id: "GDIR",
+    device: "MAMBO3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Temperature of pH',
+        locale: "en",
+        name: "Gust wind direction"
       },
       {
-        locale: 'it',
-        name: 'Temperatura del pH',
+        locale: "it",
+        name: "Direzione della raffica di vento"
+      }
+    ],
+    measurementUnit: "°"
+  },
+  {
+    id: "PHPH",
+    device: "MAMBO3",
+    measurementName: [
+      {
+        locale: "en",
+        name: "pH"
       },
+      {
+        locale: "it",
+        name: "pH"
+      }
     ],
-    measurementUnit: '°C'
+    measurementUnit: ""
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'CHUM', // non c'è nel config_station.json
-	device: '',
+    id: "DOXY",
+    device: "MAMBO3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Partial pressure of water vapour in the atmosphere',
+        locale: "en",
+        name: "Oxygen"
       },
+      {
+        locale: "it",
+        name: "Ossigeno"
+      }
+    ],
+    measurementUnit: "ml/l"
+  },
+  {
+    id: "TEMP",
+    device: "MAMBO3",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Pressione parziale del vapore acqueo nella atmosfera',
+        locale: "en",
+        name: "Water temperature"
       },
+      {
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: 'ppm'
+    measurementUnit: "°C"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'ACO2',
-	device: 'MAMBO1',
+    id: "PSAL",
+    device: "MAMBO3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Mole fraction of carbon dioxide in the atmosphere',
+        locale: "en",
+        name: "Salinity"
       },
+      {
+        locale: "it",
+        name: "Salinità"
+      }
+    ],
+    measurementUnit: ""
+  },
+  {
+    id: "TUR4",
+    device: "MAMBO3",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Frazione molare di anidride carbonica nell atmosfera',
+        locale: "en",
+        name: "Turbidity"
       },
+      {
+        locale: "it",
+        name: "Torbidità"
+      }
     ],
-    measurementUnit: 'ppm'
+    measurementUnit: "NTU"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'PCOW',
-	device: 'MAMBO1',
+    id: "RELH",
+    device: "MAMBO3",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Carbon dioxide in water',
+        locale: "en",
+        name: "Humidity"
       },
+      {
+        locale: "it",
+        name: ""
+      }
+    ],
+    measurementUnit: "%"
+  },
+  {
+    id: "WDIR",
+    device: "MAMBO4",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Anidride carbonica nell acqua',
+        locale: "en",
+        name: "Wind direction"
       },
+      {
+        locale: "it",
+        name: "Direzione del vento"
+      }
     ],
-    measurementUnit: 'ppm'
+    measurementUnit: "°"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'CPWC',
-	device: 'MAMBO1',
+    id: "WSPD",
+    device: "MAMBO4",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Concentration of chlorophyll-a',
+        locale: "en",
+        name: "Wind speed"
       },
+      {
+        locale: "it",
+        name: "Velocità del vento media"
+      }
+    ],
+    measurementUnit: "m/s"
+  },
+  {
+    id: "DRYT",
+    device: "MAMBO4",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Concentrazione di clorofilla-a',
+        locale: "en",
+        name: "Air temperature"
       },
+      {
+        locale: "it",
+        name: "Temperatura dell'aria"
+      }
     ],
-    measurementUnit: 'µg/l'
+    measurementUnit: "°C"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'SVEL_1', // non c'è nel config_station.json
-	device: '',
+    id: "ATMS",
+    device: "MAMBO4",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Sound velocity in the water body',
+        locale: "en",
+        name: "Atmospheric pressure"
       },
+      {
+        locale: "it",
+        name: "Pressione atmosferica"
+      }
+    ],
+    measurementUnit: "hPa"
+  },
+  {
+    id: "RELH",
+    device: "MAMBO4",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Velocità del suono nel corpo idrico',
+        locale: "en",
+        name: "Humidity"
       },
+      {
+        locale: "it",
+        name: "Umidità relativa media"
+      }
     ],
-    measurementUnit: 'm/s'
+    measurementUnit: "%"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'SVEL_2', // non c'è nel config_station.json
-	device: '',
+    id: "GSPD",
+    device: "MAMBO4",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Sound velocity in the water body',
+        locale: "en",
+        name: "Gust wind speed"
       },
+      {
+        locale: "it",
+        name: "Velocità della raffica di vento"
+      }
+    ],
+    measurementUnit: "m/s"
+  },
+  {
+    id: "GDIR",
+    device: "MAMBO4",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Velocità del suono nel corpo idrico',
+        locale: "en",
+        name: "Gust wind direction"
       },
+      {
+        locale: "it",
+        name: "Direzione della raffica di vento"
+      }
     ],
-    measurementUnit: 'm/s'
+    measurementUnit: "°"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'ALKY', // non c'è nel config_station.json
-	device: '',
+    id: "SVEL",
+    device: "MAMBO4",
     measurementName: [
       {
-        locale: 'en',
-        name: 'pH',
+        locale: "en",
+        name: "Sea water Sound velocity"
       },
+      {
+        locale: "it",
+        name: "Velocità del suono nell'acqua"
+      }
+    ],
+    measurementUnit: "m/s"
+  },
+  {
+    id: "PRES",
+    device: "MAMBO4",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'pH',
+        locale: "en",
+        name: "Sea water pressure"
       },
+      {
+        locale: "it",
+        name: "Pressione del mare"
+      }
     ],
-    measurementUnit: ''
+    measurementUnit: "dbar"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'EWSB', // non c'è nel config_station.json
-	device: '',
+    id: "TEMP",
+    device: "MAMBO4",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Vector avg wind speed',
+        locale: "en",
+        name: "Water temperature"
       },
+      {
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
+    ],
+    measurementUnit: "°C"
+  },
+  {
+    id: "TEMP",
+    device: "CURRISO",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Velocità media del vento vettoriale',
+        locale: "en",
+        name: "Water temperature"
       },
+      {
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: 'm/s'
+    measurementUnit: "°C"
   },
-  
-  // ----------------------------------
-  
   {
-    id: 'HEAD', // non c'è nel config_station.json
-	device: '',
+    id: "RVFL",
+    device: "CURRISO",
     measurementName: [
       {
-        locale: 'en',
-        name: 'Orientation of measurement platform',
+        locale: "en",
+        name: "River flow rate"
       },
+      {
+        locale: "it",
+        name: "Portata del fiume"
+      }
+    ],
+    measurementUnit: "m³/s"
+  },
+  {
+    id: "TEMP",
+    device: "PIEZTAG",
+    measurementName: [
       {
-        locale: 'it',
-        name: 'Orientamento della piattaforma di misurazione',
+        locale: "en",
+        name: "Water temperature"
       },
+      {
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
     ],
-    measurementUnit: '°'
+    measurementUnit: "°C"
   },
+  {
+    id: "ASLV",
+    device: "PIEZTAG",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Observed sea level"
+      },
+      {
+        locale: "it",
+        name: "Livello osservato del mare"
+      }
+    ],
+    measurementUnit: "m"
+  }
 ];
