@@ -245,7 +245,8 @@ export class GraphsComponent implements OnInit {
             },
             tooltip: {
               valueDecimals: 2,
-              valueSuffix: ' ' + measurementUnit,
+			  // depth added on tooltip only if is different from undefined and > 0
+              valueSuffix: ' ' + measurementUnit + (((depth != undefined) && (depth > 0)) ? (' depth ' + depth + ' m') : ''),
             },
           });
         else (this.chartRef.get(parameter.name + depth) as Highcharts.Series).show(); // stessa cosa di sopra
