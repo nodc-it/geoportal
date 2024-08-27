@@ -16,7 +16,6 @@ export class LayerSwitcherComponent {
 
   constructor(service: LayersService, public erdappService: ErddapService) {
     this.layers = service.layers;
-	//alert("layer-switcher.component.ts - Sono nel costruttore di LayerSwitcherComponent");
   }
 
   onChange(event: MatSlideToggleChange, index: number): void {

@@ -173,8 +173,6 @@ export class GraphsComponent implements OnInit {
   }
 
   getTimeSeriesAvailable(dataset: string, timeStart: Date, timeEnd?: Date) {
-    //let dialogParam = this.data.get('dialog_par').split(',');
-	//alert("graphs.component.ts - getTimeSeriesAvailable");//
 	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
     dialogParam.map((param: string) => {
       this.loading++;
@@ -245,7 +243,6 @@ export class GraphsComponent implements OnInit {
             },
             tooltip: {
               valueDecimals: 2,
-			  // depth added on tooltip only if is different from undefined and > 0
               valueSuffix: ' ' + measurementUnit + (((depth != undefined) && (depth > 0)) ? (' depth ' + depth + ' m') : ''),
             },
           });

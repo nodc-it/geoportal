@@ -234,15 +234,15 @@ export class OlMapComponent implements OnInit {
 	
 	// -------------------------------------------------------
 	
-	// Function to get green/red circle showing status
+	// Function to get green circle/ red triangle showing status
 	// of a single station (device) to search in stations list (statusList).
-	// Return green/red circle character.
+	// Return green circle/red triangle character.
 	
 	getStatusCircle(statusList:rowStation[], device:string):string
 	{
 		let myStatus = (statusList.find(({ name }) => name === device))!.status;
 		
-		let result = (myStatus == '1') ? " <a style = \"color:green;\">&#9673;</a>" : " <a style = \"color:red;\">&#9673;</a>";
+		let result = (myStatus == '1') ? " <a style = \"color:#005000;font-size:200%;\">&#9679;</a>" : " <a style = \"color:red;font-size:150%;\">&#9650;</a>";
 	  
 		return result;
 	}
