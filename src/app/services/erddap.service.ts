@@ -51,6 +51,7 @@ export class ErddapService {
   }
   
   erddapStationsStatusList:rowStation[];
+  
 
   getMeasurements(
     dataset: string,
@@ -244,7 +245,27 @@ export class ErddapService {
       })
     );
   }
+	
+	
+	//----------------------------------------------
+	
+	// Function to get portion of Erddap table info
+	// of 'myStation' device,
+	// where row1 column value is "NC_GLOBAL".
+	getNcGlobalInfoStation(myStation: string): Observable<string[][]>
+	{
+		let url = environment.erddapUrl + 'info/' + myStation + '_TS/index.json';
 
+		return this.http.get(url).pipe(
+			map((result: any) => {
+				return (result.table.rows as string[][])
+				  .filter((row: string[]) => row[1] == "NC_GLOBAL")
+				})
+		);
+		
+	} // end getNcGlobalInfoStation
+
+	
 	//----------------------------------------------
 
 	// Function to get Station Status from Erddap server
@@ -332,7 +353,7 @@ export class ErddapService {
 		},
           (error: any) => {
 			
-			//alert("Station status color not available in this moment.");
+			//alert("Station status not available in this moment.");
           }
 			
 		); // end subscribe

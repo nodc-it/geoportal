@@ -1,0 +1,23 @@
+<div [hidden]="!loading">
+	<table class="tg"><thead>
+	  <tr>
+		<th class="tg-8xgw">{{ this.arrayInfoStation[0] }}</th>
+		<th class="tg-de2y">{{ this.arrayInfoStation[1] }}</th>
+	  </tr></thead>
+	<tbody>
+	  <tr>
+		<td class="tg-8xgw">{{ this.arrayInfoStation[2] }}</td>
+		<td class="tg-de2y">{{ this.arrayInfoStation[3] }}</td>
+	  </tr>
+	  <tr>
+		<td class="tg-8xgw">{{ this.arrayInfoStation[4] }}</td>
+		<td class="tg-de2y">{{ this.arrayInfoStation[5] }}</td>
+	  </tr>
+	  <tr>
+		<td class="tg-8xgw">{{ this.arrayInfoStation[6] }}</td>
+		<!-- edmo code clickable to open correspondent seadatanet project page -->
+		<td class="tg-de2y"><a href = "https://edmo.seadatanet.org/report/{{ this.arrayInfoStation[7] }}" target = "_blank">{{ this.arrayInfoStation[7] }}</a></td>
+	  </tr>
+	</tbody>
+	</table>
+</div>
