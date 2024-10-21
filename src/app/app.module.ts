@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { CacheInterceptor } from './interceptors/cache.interceptor';
 import { CacheService } from './services/cache.service';
 import { DataTableComponent } from './detail-dialog/data-table/data-table.component';
+import { InfoComponent } from './detail-dialog/info/info.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DataTableComponent } from './detail-dialog/data-table/data-table.compon
     AttributionsDialogComponent,
     GraphsComponent,
     DataTableComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,9 +12,7 @@
   <mat-tab label="Graphs">
     <app-graphs *ngIf="data" [data]="data"></app-graphs>
   </mat-tab>
-  <!--
-  <mat-tab label="Description" *ngIf="this.data.get('descriptio'); instanceof: string">
-    <div [innerHTML]="this.data.get('descriptio')"></div>
+  <mat-tab label="Info">
+	<app-info *ngIf="data" [data]="data"></app-info>
   </mat-tab>
-  -->
 </mat-tab-group>
