@@ -1,4 +1,9 @@
+<div [hidden]="loading">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
 <div [hidden]="!loading">
+	
 	<table class="tg"><thead>
 	  <tr>
 		<th class="tg-8xgw">{{ this.arrayInfoStation[0] }}</th>
