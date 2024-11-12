@@ -5,3 +5,33 @@
 .mat-cell {
   padding: 8px 8px 8px 0;
 }
+
+.position_message
+{
+	position: relative;
+	top: -38px;
+	left: 60px;
+}
+
+.style_message
+{
+	font-size: 110%;
+}
+
+.style_message_data_availability
+{
+	position: relative;
+	left: 45px;
+	font-size: 110%;
+}
+
+.center
+{
+  margin: auto;
+  text-align: center;
+}
+
+.table_centered
+{
+	margin: 0 auto;
+}

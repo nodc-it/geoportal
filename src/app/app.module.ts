@@ -23,6 +23,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { CacheInterceptor } from './interceptors/cache.interceptor';
@@ -60,6 +61,7 @@ import { InfoComponent } from './detail-dialog/info/info.component';
     MatSortModule,
     MatPaginatorModule,
     MatProgressBarModule,
+	MatProgressSpinnerModule,
     MatCheckboxModule,
     FormsModule,
   ],
