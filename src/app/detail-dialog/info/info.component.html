@@ -1,8 +1,6 @@
 <div [hidden]="loading">
-	<mat-progress-spinner [diameter]="50" mode="indeterminate"></mat-progress-spinner>
-	<div class = "position_message">
-		<a class = "style_message" mat-dialog-title>Loading data, please wait...</a>
-	</div>
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	<a class = "style_message" mat-dialog-title>Loading data, please wait...</a>
 </div>
 
 <div [hidden]="!loading">
