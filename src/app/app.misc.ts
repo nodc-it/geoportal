@@ -15,9 +15,30 @@ export abstract class DateFunctions {
     date.setDate(date.getDate() - days);
     return date;
   }
+
 }
 
-// Class to implement device parameters management
+// Interface describing data stored
+// in config_map_view.json local file,
+// used to set map view in ol-map.component.ts.
+// Every dataset describe:
+// - coordinate center of the map view, in EPSG format;
+// - flag to show/hide stations layers on the map;
+// - flag to show/hide radar layers on the map;
+// - zoom desired for the map.
+// See config_map_view.json for further information.
+
+export interface urlInfoInterface {
+  coordinateCenter: number[];
+  stationsYN: number;
+  radarYN: number;
+  zoomLevel: number;
+}
+
+// Class to implement local file access
+// to retrieve:
+// - device parameters management from config_stations.json;
+// - UrlInfo from config_map_view.json.
 
 export abstract class DeviceParameters
 {
@@ -36,24 +57,13 @@ export abstract class DeviceParameters
 		// Read configuration file from local server.
 		const configStationJsonFile = require('./../assets/config_stations.json');
 
-		let myDialogPar = [];
-
-		// Loop on features array to search
+		// Return device name dialog parameters 
+		// after a loop on features array to search
 		// device name input parameter.
 		// Exit when correspondent dialog parameters
-		// are founded.
+		// are founded and takes corresponding properties dialog parameters.
 		
-		for (let i = 0; i < (configStationJsonFile.features).length; i++)
-		{
-			if (configStationJsonFile.features[i].properties.name == deviceName)
-			{
-				myDialogPar = (configStationJsonFile.features[i].properties.dialog_par);
-				
-				break;
-			}
-		}
-		
-		return myDialogPar;
+		return configStationJsonFile.features.find((item:any)=>item.properties.name == deviceName).properties.dialog_par;
 		
 	}
 
@@ -83,6 +93,30 @@ export abstract class DeviceParameters
 		}
 		
 		return myDeviceList;
+		
+	}
+	
+	// Function to return UrlInfo from local file config_map_view.json
+	// where are stored information about set map view.
+	// Takes in input 'msv', an URL parameter,
+	// load local configuration map file
+	// and return an object 'urlInfoInterface'
+	// setted with required fields.
+	// If mscCode is not in configuration file,
+	// return undefined.
+	// Function used in OlMapComponent ngOnInit.
+	
+	static getUrlInfo (msvCode:string):urlInfoInterface | any
+	{
+		// Read configuration map file from local server.
+		const configMapJsonFile = require('./../assets/config_map_view.json');
+		
+		return {
+			coordinateCenter: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.coordCenter,
+			radarYN: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.radarYesNo,
+			stationsYN: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.stationsYesNo,
+			zoomLevel: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.zoom,
+		  } as urlInfoInterface;
 		
 	}
 }

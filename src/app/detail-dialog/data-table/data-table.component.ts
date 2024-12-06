@@ -58,7 +58,10 @@ export class DataTableComponent implements OnInit {
             this.loading--;
             console.log(error);
           },
-          () => this.loading--
+          () => 
+		  {
+			  this.loading--;
+		  }
         );
     });
   }
@@ -95,12 +98,7 @@ export class DataTableComponent implements OnInit {
 		if (divCmDataAvailability && (this.loading == 0))
 		{
 			if (this.cardsMeasurement.data.length > 0)
-			{
 				divCmDataAvailability.innerHTML = this.displayedMsgAvailability[0];
-				
-				if (iMessageBelow)
-					iMessageBelow.hidden = true;
-			}
 			else
 			{
 				divCmDataAvailability.innerHTML = this.displayedMsgAvailability[1];
@@ -111,9 +109,10 @@ export class DataTableComponent implements OnInit {
 				if (matPaginatorElem)
 					matPaginatorElem.hidden = true;
 				
-				if (iMessageBelow)
-					iMessageBelow.hidden = true;
 			}
+
+			if (iMessageBelow)
+				iMessageBelow.hidden = true;
 			
 			divCmDataAvailability.hidden = false;
 		}

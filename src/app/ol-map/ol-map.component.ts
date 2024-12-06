@@ -8,6 +8,9 @@ import { AttributionsDialogComponent } from '../attributions-dialog/attributions
 import { easeOut } from 'ol/easing';
 import Layer from 'ol/layer/Layer';
 import TileWMS from 'ol/source/TileWMS';
+import { ActivatedRoute } from '@angular/router';
+import { urlInfoInterface, DeviceParameters } from 'src/app/app.misc'; //
+
 
 @Component({
   selector: 'app-ol-map',
@@ -17,13 +20,39 @@ import TileWMS from 'ol/source/TileWMS';
 export class OlMapComponent implements OnInit {
 	map!: Map;
 
-  constructor(public erdappService: ErddapService, public layersService: LayersService, private matDialog: MatDialog){}
+  constructor(public erdappService: ErddapService, public layersService: LayersService, 
+				private matDialog: MatDialog, private route: ActivatedRoute){}
 
   openAttributionsDialog() {
     this.matDialog.open(AttributionsDialogComponent);
   }
+  
+  
+  // Pointers to some layers defined in layer.service
+  // - Pointer to layer named "Radar"
+  radarObjPtr = this.layersService.layers.find (item=>item.get('name') == "Radar");
+  
+  // - Pointer to layer named "Stations"
+  stationsObjPtr = this.layersService.layers.find (item=>item.get('name') == "Stations");
+  
+  // - Pointer to layer named "RadarArrows"
+  radarArrowsObjPtr = (this.radarObjPtr!.get('layers').getArray()).find ((item:any)=>item.get('name') == "radarArrows");
 
   ngOnInit(): void {
+
+	// Function to verify presence of eventual url parameter trough "route" object.
+	// From observable eventually returned, we check:
+	// - "msv" url parameter presence;
+	// - UrlInfo object presence eventually returned by getUrlInfo function
+	// If both conditions are true, we set map parameters to obtain desired view.
+	
+	this.route.queryParamMap
+		.subscribe((parameters:any) => {
+			if ((parameters['params'].msv) && (DeviceParameters.getUrlInfo(parameters['params'].msv)))
+					this.SetMapView(DeviceParameters.getUrlInfo(parameters['params'].msv));
+
+		});	  
+	  
     this.map = new Map({
       target: 'map',
       layers: this.layersService.layers,
@@ -175,44 +204,14 @@ export class OlMapComponent implements OnInit {
 		lowLimit = lowLimitElement.value;
 		
 		highLimit = highLimitElement.value;
-		
-		// Retrieve pointer layers objects:
-		// - Radar
-		// - radarArrows
-		
-		const layersOnMap = this.layersService.layers;
-		
-		let radarObj = undefined;
-		
-		let radarArrowsObj = undefined;
-
-		for (let conta = 0;conta < layersOnMap.length; conta++)
-		{
-			if (layersOnMap[conta].get('name') == "Radar")
-			{
-				radarObj = layersOnMap[conta];
-				
-				let radarLayers = radarObj.get('layers').getArray();
-				
-				for (let indice = 0;indice < radarLayers.length; indice++)
-				{
-					if (radarLayers[indice].get('name') == "radarArrows")
-						radarArrowsObj = radarLayers[indice];
-					
-					break;
-				}
-				
-			} // end if
-				
-		} // end for
 
 		// Settings by default to defaultLegendRange in
 		// - legendRange attribute in Radar object
 		// - newColorScaleRange parameter in radarArrows object
 
-		radarObj!.set('legendRange', radarObj!.get('defaultLegendRange'));
+		this.radarObjPtr!.set('legendRange', this.radarObjPtr!.get('defaultLegendRange'));
 		
-		let newColorScaleRange = (radarObj!.get('defaultLegendRange')).toString();
+		let newColorScaleRange = (this.radarObjPtr!.get('defaultLegendRange')).toString();
 		
 		// If speed range user setting is different from default
 		// legendRange and newColorScaleRange are setted
@@ -220,12 +219,12 @@ export class OlMapComponent implements OnInit {
 
 		if (defaultSpeedRange == false)
 		{
-			radarObj!.set('legendRange', [lowLimit,highLimit]);
+			this.radarObjPtr!.set('legendRange', [lowLimit,highLimit]);
 			
 			newColorScaleRange = String(lowLimit) + ','+ String(highLimit);
 		}
 		
-		(radarArrowsObj.getSource() as TileWMS).updateParams(
+		(this.radarArrowsObjPtr.getSource() as TileWMS).updateParams(
 		{
 			COLORSCALERANGE: newColorScaleRange,
 		});
@@ -246,6 +245,39 @@ export class OlMapComponent implements OnInit {
 	  
 		return result;
 	}
+
+	// ------------------------------------
 	
+	
+	// Function to set map view based on parameters
+	// defined in file config_map_view.json.
+	// Takes in input an urlInfoInterface object:
+	// - set map center coordinates
+	// - set desired zoom
+	// - set stations visibility
+	// - set radar visibility
+	
+	SetMapView (inputViewSetting:urlInfoInterface)
+	{
+		
+		if (this.map.getView())
+		{
+			this.map.getView().setCenter(inputViewSetting.coordinateCenter);
+			
+			this.map.getView().setZoom(inputViewSetting.zoomLevel);
+			
+			if (inputViewSetting.stationsYN == 1)
+				this.stationsObjPtr!.setVisible(true);
+			else
+				this.stationsObjPtr!.setVisible(false);
+
+			if (inputViewSetting.radarYN == 1)
+				this.radarObjPtr!.setVisible(true);
+			else
+				this.radarObjPtr!.setVisible(false);
+			
+		}
+		
+	} // end SetMapView	
   
 } // end class

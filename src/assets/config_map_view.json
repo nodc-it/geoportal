@@ -1,0 +1,46 @@
+{
+	"urlInfoList":[
+		{
+		  "urlInfo": {
+			"coordCenter": [
+
+				1504074.7428942008,
+				5723349.669626052
+
+			],
+			"stationsYesNo": 1,
+			"radarYesNo": 0,
+			"zoom": 10,
+			"_comment": "Trieste Gulf center coordinates (MAMBO3), yes stations view, no radar view, zoom setted to 10"
+		  }
+		},
+		{
+		  "urlInfo": {
+			"coordCenter": [
+
+				1504074.7428942008,
+				5723349.669626052
+
+			],
+			"stationsYesNo": 0,
+			"radarYesNo": 1,
+			"zoom": 10,
+			"_comment": "Trieste Gulf center coordinates (MAMBO3), no stations view, yes radar view, zoom setted to 10"
+		  }
+		},
+		{
+		  "urlInfo": {
+			"coordCenter": [
+
+				2012925.4193557864,
+				5090491.662642164
+
+			],
+			"stationsYesNo": 1,
+			"radarYesNo": 0,
+			"zoom": 7,
+			"_comment": "E2M3A coordinates, yes stations view, no radar view, zoom setted to 7"
+		  }
+		}	  
+	]
+}
