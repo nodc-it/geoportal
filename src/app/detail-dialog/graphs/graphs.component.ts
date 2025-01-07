@@ -31,7 +31,7 @@ interface TimeSeries {
 export class GraphsComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;//
-	
+
   Highcharts: typeof Highcharts = Highcharts;
   updateFlag = false;
   loading = 0;
@@ -45,7 +45,7 @@ export class GraphsComponent implements OnInit {
   allSelected(timeseries: TimeSeries) {
     return timeseries.series != null && timeseries.series.every(s => s.selected);
   }
-  someSelected(timeseries: TimeSeries): boolean { 
+  someSelected(timeseries: TimeSeries): boolean {
     return timeseries.series != null && timeseries.series.some(s => s.selected) && !this.allSelected(timeseries);
   }
   selectAll(selected: boolean, timeseries: TimeSeries) {
@@ -173,7 +173,7 @@ export class GraphsComponent implements OnInit {
   }
 
   getTimeSeriesAvailable(dataset: string, timeStart: Date, timeEnd?: Date) {
-	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
+    let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
     dialogParam.map((param: string) => {
       this.loading++;
       this.erdappService
@@ -185,8 +185,8 @@ export class GraphsComponent implements OnInit {
               series:
                 response !== undefined
                   ? response.map(depth => {
-                      return { depth: depth, selected: false };
-                    })
+                    return { depth: depth, selected: false };
+                  })
                   : [{ depth: undefined, selected: false }],
             });
             this.timeseries.sort(
@@ -206,7 +206,7 @@ export class GraphsComponent implements OnInit {
   }
 
   addSeries(dataset: string, parameter: Parameter, depth: number | undefined, timeStart: Date, timeEnd?: Date) {
-	  
+
     let dataArray: number[][] = [];
     this.loading++;
     this.erdappService.getMeasurements(dataset, parameter, depth, timeStart, timeEnd).subscribe(
@@ -239,7 +239,7 @@ export class GraphsComponent implements OnInit {
             data: dataArray,
             showInNavigator: true,
             dataGrouping: {
-              enabled: true,
+              enabled: false,
             },
             tooltip: {
               valueDecimals: 2,
