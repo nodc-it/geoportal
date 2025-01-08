@@ -34,7 +34,7 @@ export class InfoComponent implements OnInit {
 		this.erdappService.getNcGlobalInfoStation(this.data.get('name'))!.subscribe
 		((nc_global_rows: string[][]) =>{
 			
-			let displayedRows: string[] = ['Latitude', 'Longitude', 'Institution', 'Institution EMDO code'];
+			let displayedRows: string[] = ['Latitude', 'Longitude', 'Institution', 'Institution EDMO code'];
 			
 			let displayedRowsCounter = 0;
 
