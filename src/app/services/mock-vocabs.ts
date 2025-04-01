@@ -1427,6 +1427,21 @@ export var VOCABS: Vocab[] = [
     measurementUnit: ""
   },
   {
+    id: "PHPH_4",
+    device: "MAMBO1",
+    measurementName: [
+      {
+        locale: "en",
+        name: "pH (NBS scale)"
+      },
+      {
+        locale: "it",
+        name: "pH"
+      }
+    ],
+    measurementUnit: ""
+  },  
+  {
     id: "DOXY_1",
     device: "MAMBO1",
     measurementName: [
