@@ -175,12 +175,7 @@ export class LayersService {
         strategy: bboxStrategy,
         format: new GeoJSON(),
       }),
-      style: new Style({
-        image: new Icon({
-          src: 'assets/radar.png',
-          scale: 1.0,
-        }),
-      }),
+      style: this.styleByType,
     });
 	
 	radarPoints.set('selectable', true);
@@ -226,7 +221,7 @@ export class LayersService {
       }),
       style: this.styleByType,
     });
-    stations.set('name', 'Stations');
+    stations.set('name', 'Real Time Stations');
     stations.set('selectable', true);
     this.layers.push(stations);
 
@@ -319,7 +314,7 @@ export class LayersService {
         return new Style({
           image: new Icon({
             src: 'assets/radar.png',
-            scale: 0.5,
+            scale: 1.0,
           }),
         });
       default:

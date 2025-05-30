@@ -33,7 +33,7 @@ export class OlMapComponent implements OnInit {
   radarObjPtr = this.layersService.layers.find (item=>item.get('name') == "Radar");
   
   // - Pointer to layer named "Stations"
-  stationsObjPtr = this.layersService.layers.find (item=>item.get('name') == "Stations");
+  stationsObjPtr = this.layersService.layers.find (item=>item.get('name') == "Real Time Stations");
   
   // - Pointer to layer named "RadarArrows"
   radarArrowsObjPtr = (this.radarObjPtr!.get('layers').getArray()).find ((item:any)=>item.get('name') == "radarArrows");
@@ -115,20 +115,16 @@ export class OlMapComponent implements OnInit {
 			
 			tooltipDeviceText = "&nbsp;".repeat(3) + deviceAtPixel.get('name');
 			
-			// Type name added only if setted (stations case)
-			// Add green/red circle to show station status
+			// Add green/red circle to show real time station status
 			// only if stationsStatusList is not empty.
+			// In other cases (radar, ecc...) status is an empty string.
 			
-			if (deviceAtPixel.get('type_name') !== undefined)
-			{
-				let addStatus = (stationsStatusList.length != 0) ? this.getStatusCircle(stationsStatusList, deviceAtPixel.get('name')) : "";
-				
-				tooltipDeviceText += "&nbsp;" + deviceAtPixel.get('type_name') + addStatus;
-			}
+			let addStatus = "";
 			
-			// High frequency Radar case
-			if (deviceAtPixel.get('name').includes("NAdr"))
-				tooltipDeviceText += "&nbsp;High Frequency Radar";
+			if (deviceAtPixel.get('type') !== "radar") // real time station case
+				addStatus = (stationsStatusList.length != 0) ? this.getStatusCircle(stationsStatusList, deviceAtPixel.get('name')) : "";
+			
+			tooltipDeviceText += "&nbsp;" + deviceAtPixel.get('type_name') + addStatus;
 			
 			tooltipElement.innerHTML = tooltipDeviceText;
 			

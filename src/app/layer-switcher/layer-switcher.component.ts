@@ -20,7 +20,7 @@ export class LayerSwitcherComponent {
 
   onChange(event: MatSlideToggleChange, index: number): void {
     this.layers[index].setVisible(event.checked);
-	if (this.layers[index].get('name') == "Stations")
+	if (this.layers[index].get('name') == "Real Time Stations")
 	{
 		var divCircle = document.getElementById('idActiveStationLegend') as HTMLElement;
 		divCircle.hidden = !event.checked;
