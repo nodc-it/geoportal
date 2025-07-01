@@ -32,11 +32,15 @@ export class OlMapComponent implements OnInit {
   // - Pointer to layer named "Radar"
   radarObjPtr = this.layersService.layers.find (item=>item.get('name') == "Radar");
   
-  // - Pointer to layer named "Stations"
+  // - Pointer to layer named "Real Time Stations"
   stationsObjPtr = this.layersService.layers.find (item=>item.get('name') == "Real Time Stations");
   
   // - Pointer to layer named "RadarArrows"
   radarArrowsObjPtr = (this.radarObjPtr!.get('layers').getArray()).find ((item:any)=>item.get('name') == "radarArrows");
+  
+  // - Pointer to layer named "Sampling Stations"
+  samplingObjPtr = this.layersService.layers.find (item=>item.get('name') == "Sampling Stations");
+  
 
   ngOnInit(): void {
 
@@ -113,16 +117,32 @@ export class OlMapComponent implements OnInit {
 			
 			let tooltipDeviceText = "";
 			
-			tooltipDeviceText = "&nbsp;".repeat(3) + deviceAtPixel.get('name');
-			
 			// Add green/red circle to show real time station status
 			// only if stationsStatusList is not empty.
-			// In other cases (radar, ecc...) status is an empty string.
+			// In other cases (radar, emodnet station, ecc...) status is an empty string (default).
 			
 			let addStatus = "";
-			
-			if (deviceAtPixel.get('type') !== "radar") // real time station case
-				addStatus = (stationsStatusList.length != 0) ? this.getStatusCircle(stationsStatusList, deviceAtPixel.get('name')) : "";
+
+			switch (deviceAtPixel.get('type'))
+			{
+				case 'buoy':
+				case 'waverider':
+				case 'current':
+					tooltipDeviceText = "&nbsp;".repeat(3) + deviceAtPixel.get('name');
+					addStatus = (stationsStatusList.length != 0) ? this.getStatusCircle(stationsStatusList, deviceAtPixel.get('name')) : "";
+					
+					break;
+				
+				case 'station':
+					// in this case the tooltip does not show the specific name of a station,
+					// but only if there is only one station or more than one at the specific point ("Single" or "Multiple")
+					tooltipDeviceText = "&nbsp;".repeat(3) + (((this.layersService.getEmodnetPtsSameCoord(deviceAtPixel.get('latitude'), deviceAtPixel.get('longitude'))).length > 1) ? "Multiple" : "Single");
+					break;
+				
+				default:
+					tooltipDeviceText = "&nbsp;".repeat(3) + deviceAtPixel.get('name');
+					break;
+			}
 			
 			tooltipDeviceText += "&nbsp;" + deviceAtPixel.get('type_name') + addStatus;
 			
@@ -141,6 +161,22 @@ export class OlMapComponent implements OnInit {
 		event.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
 		
 	}); // end map.on pointermove
+	
+	// ------------------------------
+	
+	// On map render complete event:
+	// - it will be verified that:
+	//		a) Sampling Stations are visible and 
+	//		b) this is the first time that the user has done so.
+	// In this case the attribute will be set to false so that
+	// any subsequent views in the same session will not show the loading user message (view HTML file).
+	
+	this.map.on("rendercomplete", () =>
+	{
+		if (this.samplingObjPtr!.get('selectableFirstTime') && this.samplingObjPtr!.getVisible())
+			this.samplingObjPtr!.set('selectableFirstTime', false);
+		
+	})
 	
   } // end ngOnInit
 

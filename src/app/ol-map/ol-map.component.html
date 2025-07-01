@@ -8,7 +8,26 @@
       <mat-icon>zoom_out</mat-icon>
     </button>
   </div>
+  
 </div>
+
+
+<div class="sampling_message_block">
+	<ng-container *ngFor="let layer of layersService.layers">
+		
+		<ng-container *ngIf="layer.get('name') == 'Sampling Stations'">
+
+		<mat-card *ngIf="(layer.getVisible() && layer.get('selectableFirstTime'))">
+			<p>Loading Sampling Stations,<br>please wait...</p>
+		</mat-card>
+		
+		</ng-container>
+		
+	</ng-container>
+</div>
+
+
+
 <div class="bottom-block">
   <ng-container *ngFor="let layer of layersService.layers">
     <ng-container *ngIf="layer.get('legendUrl') != undefined">

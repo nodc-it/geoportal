@@ -1,0 +1,33 @@
+<div>
+
+<mat-card>
+	<mat-card-content>
+	<table *ngFor="let item of this.arrayEmodnetInfoStation" class="tg table_centered">
+	<tbody>
+	  <tr>
+		<td class="tg-de2y">{{ this.displayedRows[0] }}</td>
+		<td class="tg-de2y">{{ item[0] }}</td>
+	  </tr>
+	  <tr>
+		<td class="tg-de2y">{{ this.displayedRows[1] }}</td>
+		<td class="tg-de2y">{{ item[1] }}</td>
+	  </tr>
+	  <tr>
+		<td class="tg-de2y">{{ this.displayedRows[2] }}</td>
+		<td class="tg-de2y">{{ item[2] }}</td>
+	  </tr>
+	  <tr>
+		<td class="tg-de2y">{{ this.displayedRows[3] }}</td>
+		<td class="tg-de2y"><a href = "{{ item[3] }}" target = "_blank">{{ item[3] }}</a></td>
+	  </tr>
+	</tbody>
+	</table>
+	</mat-card-content>
+	
+	<i id = "idMessageBelow">This resource was generated in the framework of EMODnet Chemistry, <br>
+		under the support of DG MARE Call for Tender EASME/EMFF/2020/3.1.11/European Marine Observation<br>and Data Network (EMODnet) - Lot 5 - Chemistry.
+	</i>
+	
+</mat-card>
+	
+</div>

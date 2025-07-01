@@ -30,6 +30,8 @@ import { CacheInterceptor } from './interceptors/cache.interceptor';
 import { CacheService } from './services/cache.service';
 import { DataTableComponent } from './detail-dialog/data-table/data-table.component';
 import { InfoComponent } from './detail-dialog/info/info.component';
+import { EmodnetDialogComponent } from './emodnet-dialog/emodnet-dialog.component';
+import { EmodnetInfoComponent } from './emodnet-dialog/emodnet-info/emodnet-info.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { InfoComponent } from './detail-dialog/info/info.component';
     GraphsComponent,
     DataTableComponent,
     InfoComponent,
+    EmodnetDialogComponent,
+    EmodnetInfoComponent,
   ],
   imports: [
     BrowserModule,
