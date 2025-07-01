@@ -1,0 +1,15 @@
+<button mat-icon-button mat-dialog-close class="close-button">
+  <mat-icon>close</mat-icon>
+</button>
+<div matDialogTitle>
+  {{ this.dialogHeader }}
+  <i>{{ this.data.get('type_name') }}</i>
+</div>
+
+<mat-tab-group dynamicHeight>
+
+	<mat-tab label="Station data">
+		<app-emodnet-info *ngIf="data" [data]="data"></app-emodnet-info>
+	</mat-tab>
+
+</mat-tab-group>
