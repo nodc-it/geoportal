@@ -40,7 +40,7 @@
 {
 	border-color:#333333;
 	text-align:left;
-	vertical-align:top
+	vertical-align:top;
 }
 
 .position_message
@@ -62,5 +62,6 @@
 
 .mat-card-content {
   max-height: 370px;
+  max-width: 850px;
   overflow-y: auto;
  }
