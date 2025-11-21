@@ -45,13 +45,13 @@
           "VTMX",
           "VH110",
           "VT110",
+		  "VAVH",
           "VAVT",
           "VTPK",
           "VPED",
           "VPSP",
           "VTZA",
-          "VHM0",
-          "VAVH"
+          "VHM0"
         ]
       }
     },
