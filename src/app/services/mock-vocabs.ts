@@ -376,6 +376,7 @@ export var VOCABS: Vocab[] = [
     ],
     measurementUnit: "m"
   },
+
   {
     id: "VT110",
     device: "DWRG3",
@@ -391,6 +392,22 @@ export var VOCABS: Vocab[] = [
     ],
     measurementUnit: "s"
   },
+  {
+    id: "VAVH",
+    device: "DWRG3",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Average height highest 1/3 wave (H1/3)"
+      },
+      {
+        locale: "it",
+        name: "Altezza media dell'onda più alta(H1/3)"
+      }
+    ],
+    measurementUnit: "m"
+  },    
+  
   {
     id: "VAVT",
     device: "DWRG3",
@@ -481,36 +498,7 @@ export var VOCABS: Vocab[] = [
     ],
     measurementUnit: "m"
   },
-  {
-    id: "VAVH",
-    device: "DWRG3",
-    measurementName: [
-      {
-        locale: "en",
-        name: ""
-      },
-      {
-        locale: "it",
-        name: ""
-      }
-    ],
-    measurementUnit: ""
-  },
-  {
-    id: "DWRG3",
-    device: "",
-    measurementName: [
-      {
-        locale: "en",
-        name: "Average height highest 1/3 wave (H1/3)"
-      },
-      {
-        locale: "it",
-        name: "Altezza media dell'onda più alta(H1/3)"
-      }
-    ],
-    measurementUnit: "m"
-  },
+  
   {
     id: "WSPD",
     device: "",
