@@ -1,8 +1,19 @@
 .chart {
   float: left;
 }
-.series-card {
+
+.series_card_desktop {
+  max-height: 400px;
+  overflow-y: auto;
+  width: 400px;
   float: right;
+}
+
+.series_card_mobile {
+  max-height: 400px;
+  overflow-y: auto;
+  width: 400px;
+  float: left;
 }
 
 .param-section {
@@ -18,8 +29,13 @@ ul {
   margin-top: 4px;
 }
 
-.mat-card-content {
-  max-height: 400px;
-  overflow-y: auto;
-  width: 400px;
+
+.desktop_font_size{
+
+	font-size:1vw;
+}
+
+.mobile_font_size{
+
+	font-size:2.5vw;
 }
