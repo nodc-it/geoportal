@@ -1,5 +1,4 @@
-//import { Component, Input, OnInit } from '@angular/core';
-import { Component, Input, OnInit, ViewChild } from '@angular/core'; //
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import * as Highcharts from 'highcharts/highstock';
 import { DataType, ErddapService, Parameter, Measurement } from 'src/app/services/erddap.service';
 import { Options } from 'highcharts';
@@ -12,6 +11,7 @@ import HC_exporting from 'highcharts/modules/exporting';
 import HC_exportdata from 'highcharts/modules/export-data';
 import { DateFunctions } from 'src/app/app.misc';
 import { DeviceParameters } from 'src/app/app.misc';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 HC_exporting(Highcharts);
 HC_exportdata(Highcharts);
 
@@ -29,7 +29,7 @@ interface TimeSeries {
   styleUrls: ['./graphs.component.scss'],
 })
 export class GraphsComponent implements OnInit {
-  @ViewChild(MatPaginator)
+  @ViewChild(MatPaginator, { static: true })
   paginator!: MatPaginator;//
 	
   Highcharts: typeof Highcharts = Highcharts;
@@ -72,8 +72,13 @@ export class GraphsComponent implements OnInit {
   }
 
   @Input() data!: Collection<Feature<Geometry>>;
+  
+  // input field from detail-dialog.component to track device type used by user
+  // and css to set. See detail-dialog.component.ts for detalis.
+  @Input() userDevice!: string[];
+  
   chartOptions: Options;
-  constructor(private erdappService: ErddapService, public vocabService: VocabService) {
+  constructor(private erdappService: ErddapService, public vocabService: VocabService, private breakpointObserver: BreakpointObserver) {
     this.chartOptions = {
       title: { text: undefined },
       chart: {
@@ -170,7 +175,34 @@ export class GraphsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTimeSeriesAvailable(this.data.get('name'), DateFunctions.daysAgoMidnightUTC(120));
+
   }
+  
+  
+	// Function to resize graph based on user device (desktop or mobile)
+	
+	resizeGraph()
+	{
+		let chartSize:number[] = [600,400];
+
+		if(this.userDevice[2] == "d")
+		{
+			// desktop view case
+			if (this.chartRef)
+				chartSize = [600,400];
+		}
+		else 
+		{
+			// handset tablet view case
+			if (this.chartRef)
+				chartSize = [300,400];
+		}
+			
+		if (this.chartRef)
+			this.chartRef.setSize(chartSize[0],chartSize[1]);
+		
+	} // end resizeGraph
+
 
   getTimeSeriesAvailable(dataset: string, timeStart: Date, timeEnd?: Date) {
 	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));

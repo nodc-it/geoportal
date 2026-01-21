@@ -1,8 +1,10 @@
+<div hidden>{{ userDevice }}</div>
+
 <div [hidden]="!loading">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 <div class="chart">
-  <highcharts-chart
+  <highcharts-chart 
     [Highcharts]="Highcharts"
     [options]="chartOptions"
     [(update)]="updateFlag"
@@ -11,8 +13,8 @@
   >
   </highcharts-chart>
 </div>
-<mat-card class="series-card" *ngIf="timeseriesLoaded | async">
-  <mat-card-content>
+<mat-card [class]="userDevice[0]" *ngIf="timeseriesLoaded | async">
+  <mat-card-content [class]="userDevice[1]">
     <section class="param-section" *ngFor="let timeseries of timeseries; let i = index">
       <span>
         <mat-checkbox
