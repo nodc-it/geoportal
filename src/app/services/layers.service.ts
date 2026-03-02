@@ -21,7 +21,7 @@ import Stroke from 'ol/style/Stroke';
 import { Interaction, defaults, Select } from 'ol/interaction';
 import { DetailDialogComponent } from '../detail-dialog/detail-dialog.component';
 import { EmodnetDialogComponent } from '../emodnet-dialog/emodnet-dialog.component'; //
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { DateFunctions } from '../app.misc';
 import Overlay from 'ol/Overlay';
 import { ErddapService } from 'src/app/services/erddap.service';
