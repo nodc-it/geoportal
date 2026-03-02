@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MatRadioChange } from '@angular/material/radio';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatLegacyRadioChange as MatRadioChange } from '@angular/material/legacy-radio';
+import { MatLegacySlideToggleChange as MatSlideToggleChange } from '@angular/material/legacy-slide-toggle';
 import BaseLayer from 'ol/layer/Base';
 import { LayersService } from '../services/layers.service';
 import { ErddapService } from 'src/app/services/erddap.service';
