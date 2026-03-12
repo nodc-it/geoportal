@@ -19,5 +19,5 @@ We recommend to update to latest incremental release as soon as possible to addr
 
 If you encounter a security vulnerability in Geoportal please take care to report in a responsible fashion:
 
-- Keep exploit details out of mailing list and issue tracker (send details to the NODC support team via nodc-tech@inogs.it)
+- Keep exploit details out of mailing list and issue tracker (send details to the NODC support team via nodc-tech@ogs.it)
 - Be prepared to work with NODC team on a solution
