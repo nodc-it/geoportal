@@ -1,6 +1,10 @@
 # Geoportal
 
 <p align="center">
+  <img src="./src/assets/20201221_OGS_logo_RGB_W_B.png" alt="OGS Logo" width="120" height="120" style="vertical-align:middle">
+</p>
+
+<p align="center">
   <img src="./docs/images/geoportal-screenshot.jpg" alt="Geoportal Screenshot" width="800">
 </p>
 
