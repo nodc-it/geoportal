@@ -20,6 +20,7 @@
   margin: 12px 0;
 }
 
+
 .param-margin {
   margin: 0 12px;
 }
@@ -39,3 +40,35 @@ ul {
 
 	font-size:2.5vw;
 }
+
+table {
+  border-collapse: collapse; /* Unisce i bordi delle celle */
+  table-layout: fixed;
+  width: 100%;
+  text-align: left;
+ }
+
+/* Trasforma thead e tbody in elementi a blocchi */
+table thead, table tbody {
+    display: block;
+}
+
+table th {
+	border: none; /* nessun bordo */
+	font-weight: normal;
+	padding-bottom: 12px;
+	font-family: "Roboto Mono", monospace;
+	font-size: 82%;    
+	table-layout: fixed;
+ }
+ 
+table td{
+  border: 1px solid black; /* Bordo nero sottile solido */
+ }
+ 
+ table tbody {
+    height: 300px; /* Altezza fissa desiderata */
+    overflow-y: auto; /* Attiva lo scroll verticale */
+ }
+ 
+ 

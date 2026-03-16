@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild} from '@angular/core';
 import { DataType, ErddapService, Measurement } from 'src/app/services/erddap.service';
 import { VocabService } from 'src/app/services/vocab.service';
 import { MatSort } from '@angular/material/sort';
@@ -9,6 +9,7 @@ import Feature from 'ol/Feature';
 import Geometry from 'ol/geom/Geometry';
 import { DateFunctions } from 'src/app/app.misc';
 import { DeviceParameters } from 'src/app/app.misc';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-data-table',
@@ -16,7 +17,7 @@ import { DeviceParameters } from 'src/app/app.misc';
   styleUrls: ['./data-table.component.scss'],
 })
 export class DataTableComponent implements OnInit {
-  constructor(private erdappService: ErddapService, public vocabService: VocabService) {}
+  constructor(private erdappService: ErddapService, public vocabService: VocabService, private breakpointObserver: BreakpointObserver) {}
   @Input() data!: Collection<Feature<Geometry>>;
 
   @ViewChild(MatSort)
@@ -26,7 +27,10 @@ export class DataTableComponent implements OnInit {
 
   cardsMeasurement = new MatTableDataSource();
   loading = 0;
-  displayedColumns: string[] = ['parameter', 'measurement', 'depth', 'timestamp'];
+  
+  dinamycRowsNumber = 6;
+  
+  displayedColumns: string[] = ['parameter', 'type', 'measurement', 'depth', 'timestamp'];
   
   // User message to signal data availability / not availability
   displayedMsgAvailability: string[] = [
@@ -36,6 +40,18 @@ export class DataTableComponent implements OnInit {
 
   ngOnInit(): void {
 
+	// ONLY FOR DESKTOP DEVICE
+	// Number of rows in data table based on screen height resolution settings.
+	// Default is 6.
+	
+	this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).subscribe(result =>
+	{
+		if(!result.matches)
+			// desktop view case
+			this.dinamycRowsNumber = (window.screen.height > 1080) ? 10 : (window.screen.height > 768) ? 8 : this.dinamycRowsNumber;
+			
+	});
+	  
 	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
 	
     dialogParam.map((param: string, index: number) => {
@@ -56,7 +72,7 @@ export class DataTableComponent implements OnInit {
           },
           (error: any) => {
             this.loading--;
-            console.log(error);
+            //console.log(error);
           },
           () => 
 		  {

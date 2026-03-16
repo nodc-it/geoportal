@@ -5,13 +5,12 @@ import { Options } from 'highcharts';
 import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
 import Geometry from 'ol/geom/Geometry';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator'; //
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { VocabService } from '../../services/vocab.service';
 import HC_exporting from 'highcharts/modules/exporting';
 import HC_exportdata from 'highcharts/modules/export-data';
 import { DateFunctions } from 'src/app/app.misc';
 import { DeviceParameters } from 'src/app/app.misc';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 HC_exporting(Highcharts);
 HC_exportdata(Highcharts);
 
@@ -31,7 +30,7 @@ interface TimeSeries {
 export class GraphsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true })
   paginator!: MatPaginator;//
-	
+
   Highcharts: typeof Highcharts = Highcharts;
   updateFlag = false;
   loading = 0;
@@ -51,6 +50,14 @@ export class GraphsComponent implements OnInit {
   selectAll(selected: boolean, timeseries: TimeSeries) {
     if (timeseries.series == null) return;
     timeseries.series.forEach(s => (s.selected = selected));
+  }
+  
+  getToolTipText (seriesType:string | undefined) : string
+  {
+	  let result = (seriesType == "M") ? "METEOROLOGICAL" : "OCEANOGRAFIC";
+	  
+	  return result;
+	  
   }
 
   updateChart() {
@@ -78,7 +85,7 @@ export class GraphsComponent implements OnInit {
   @Input() userDevice!: string[];
   
   chartOptions: Options;
-  constructor(private erdappService: ErddapService, public vocabService: VocabService, private breakpointObserver: BreakpointObserver) {
+  constructor(private erdappService: ErddapService, public vocabService: VocabService) {
     this.chartOptions = {
       title: { text: undefined },
       chart: {

@@ -6,6 +6,7 @@ export interface Vocab {
   device: string;
   measurementName: { locale: string; name: string }[];
   measurementUnit: string;
+  measurementType: string;
 }
 
 @Injectable({
@@ -26,4 +27,9 @@ export class VocabService {
   getMeasurementUnit(m_device: string, id: string): string | undefined {
     return VOCABS.find(x => ((x.id == id) && (x.device == m_device)))?.measurementUnit;
   }
+  
+  getMeasurementType(m_device: string, id: string): string | undefined {
+    return VOCABS.find(x => ((x.id == id) && (x.device == m_device)))?.measurementType;
+  }
+  
 }

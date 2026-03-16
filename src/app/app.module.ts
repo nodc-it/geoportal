@@ -32,6 +32,7 @@ import { DataTableComponent } from './detail-dialog/data-table/data-table.compon
 import { InfoComponent } from './detail-dialog/info/info.component';
 import { EmodnetDialogComponent } from './emodnet-dialog/emodnet-dialog.component';
 import { EmodnetInfoComponent } from './emodnet-dialog/emodnet-info/emodnet-info.component';
+import { MatLegacyTooltipModule } from '@angular/material/legacy-tooltip';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { EmodnetInfoComponent } from './emodnet-dialog/emodnet-info/emodnet-info
 	MatProgressSpinnerModule,
     MatCheckboxModule,
     FormsModule,
+	MatTooltipModule,
   ],
   providers: [CacheService, { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }],
   bootstrap: [AppComponent],
