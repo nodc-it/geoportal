@@ -7,14 +7,15 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Maximum zero-crossing wave height"
+        name: "Maximum wave height (Hmax)"
       },
       {
         locale: "it",
         name: "Massimo zero-crossing dell'altezza delle onde"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   {
     id: "VTMX",
@@ -29,7 +30,8 @@ export var VOCABS: Vocab[] = [
         name: "Massimo periodo d'onda"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VH110",
@@ -44,7 +46,8 @@ export var VOCABS: Vocab[] = [
         name: "Altezza media dell'onda più alta(1/10)"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   {
     id: "VT110",
@@ -59,7 +62,8 @@ export var VOCABS: Vocab[] = [
         name: "Periodo medio dell'onda più alta (T1/10)"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VAVH",
@@ -67,14 +71,15 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Average height highest 1/3 wave (H1/3)"
+        name: "Significant wave height (Hs)"
       },
       {
         locale: "it",
-        name: "Altezza media dell'onda più alta(H1/3)"
+        name: "Altezza onda significativa (Hs)"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   {
     id: "VAVT",
@@ -82,14 +87,15 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Average period highest 1/3 wave"
+        name: "Significant wave period (Ts)"
       },
       {
         locale: "it",
-        name: "Periodo medio dell'onda più alta(1/3)"
+        name: "Periodo onda significativo (Ts)"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VTPK",
@@ -104,7 +110,8 @@ export var VOCABS: Vocab[] = [
         name: "Periodo dell'onda alla cima spettrale"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VPED",
@@ -119,7 +126,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione dell'onda alla cima spettrale"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "O"
   },
   {
     id: "VPSP",
@@ -134,7 +142,8 @@ export var VOCABS: Vocab[] = [
         name: "Spreading direzionale dell'onda alla cima"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "O"
   },
   {
     id: "VTZA",
@@ -149,7 +158,8 @@ export var VOCABS: Vocab[] = [
         name: "Periodo medio di zero-crossing delle onde"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VHM0",
@@ -164,7 +174,8 @@ export var VOCABS: Vocab[] = [
         name: "Altezza spettrale significante dell'onda"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   {
     id: "VZMX",
@@ -172,14 +183,15 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Maximum zero-crossing wave height"
+        name: "Maximum wave height (Hmax)"
       },
       {
         locale: "it",
         name: "Massimo zero-crossing dell'altezza delle onde"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   {
     id: "VTMX",
@@ -194,7 +206,8 @@ export var VOCABS: Vocab[] = [
         name: "Massimo periodo d'onda"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VH110",
@@ -209,7 +222,8 @@ export var VOCABS: Vocab[] = [
         name: "Altezza media dell'onda più alta(1/10)"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   {
     id: "VT110",
@@ -224,7 +238,8 @@ export var VOCABS: Vocab[] = [
         name: "Periodo medio dell'onda più alta (T1/10)"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VAVH",
@@ -232,14 +247,15 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Average height highest 1/3 wave (H1/3)"
+        name: "Significant wave height (Hs)"
       },
       {
         locale: "it",
-        name: "Altezza media dell'onda più alta(H1/3)"
+        name: "Altezza onda significativa (Hs)"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   {
     id: "VAVT",
@@ -247,14 +263,15 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Average period highest 1/3 wave"
+        name: "Significant wave period (Ts)"
       },
       {
         locale: "it",
-        name: "Periodo medio dell'onda più alta(1/3)"
+        name: "Periodo onda significativo (Ts)"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VTPK",
@@ -269,7 +286,8 @@ export var VOCABS: Vocab[] = [
         name: "Periodo dell'onda alla cima spettrale"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VPED",
@@ -284,7 +302,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione dell'onda alla cima spettrale"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "O"
   },
   {
     id: "VPSP",
@@ -299,7 +318,8 @@ export var VOCABS: Vocab[] = [
         name: "Spreading direzionale dell'onda alla cima"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "O"
   },
   {
     id: "VTZA",
@@ -314,7 +334,8 @@ export var VOCABS: Vocab[] = [
         name: "Periodo medio di zero-crossing delle onde"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VHM0",
@@ -329,7 +350,8 @@ export var VOCABS: Vocab[] = [
         name: "Altezza spettrale significante dell'onda"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   {
     id: "VZMX",
@@ -337,14 +359,15 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Maximum zero-crossing wave height"
+        name: "Maximum wave height (Hmax)"
       },
       {
         locale: "it",
         name: "Massimo zero-crossing dell'altezza delle onde"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   {
     id: "VTMX",
@@ -359,7 +382,8 @@ export var VOCABS: Vocab[] = [
         name: "Massimo periodo d'onda"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VH110",
@@ -374,7 +398,8 @@ export var VOCABS: Vocab[] = [
         name: "Altezza media dell'onda più alta(1/10)"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
 
   {
@@ -390,7 +415,8 @@ export var VOCABS: Vocab[] = [
         name: "Periodo medio dell'onda più alta (T1/10)"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VAVH",
@@ -398,14 +424,15 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Average height highest 1/3 wave (H1/3)"
+        name: "Significant wave height (Hs)"
       },
       {
         locale: "it",
-        name: "Altezza media dell'onda più alta(H1/3)"
+        name: "Altezza onda significativa (Hs)"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },    
   
   {
@@ -414,14 +441,15 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Average period highest 1/3 wave"
+        name: "Significant wave period (Ts)"
       },
       {
         locale: "it",
-        name: "Periodo medio dell'onda più alta(1/3)"
+        name: "Periodo onda significativo (Ts)"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VTPK",
@@ -436,7 +464,8 @@ export var VOCABS: Vocab[] = [
         name: "Periodo dell'onda alla cima spettrale"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VPED",
@@ -451,7 +480,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione dell'onda alla cima spettrale"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "O"
   },
   {
     id: "VPSP",
@@ -466,7 +496,8 @@ export var VOCABS: Vocab[] = [
         name: "Spreading direzionale dell'onda alla cima"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "O"
   },
   {
     id: "VTZA",
@@ -481,7 +512,8 @@ export var VOCABS: Vocab[] = [
         name: "Periodo medio di zero-crossing delle onde"
       }
     ],
-    measurementUnit: "s"
+    measurementUnit: "s",
+	measurementType: "O"
   },
   {
     id: "VHM0",
@@ -496,7 +528,8 @@ export var VOCABS: Vocab[] = [
         name: "Altezza spettrale significante dell'onda"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   },
   
   {
@@ -512,7 +545,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità del vento media"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "E2M3A",
@@ -527,7 +561,8 @@ export var VOCABS: Vocab[] = [
         name: "Umidità"
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "M"
   },
   {
     id: "MAMBO1",
@@ -542,7 +577,8 @@ export var VOCABS: Vocab[] = [
         name: "Umidità"
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "M"
   },
   {
     id: "MAMBO2",
@@ -557,7 +593,8 @@ export var VOCABS: Vocab[] = [
         name: "Umidità"
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "M"
   },
   {
     id: "MAMBO3",
@@ -572,7 +609,8 @@ export var VOCABS: Vocab[] = [
         name: "Umidità"
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "M"
   },
   {
     id: "MAMBO4",
@@ -587,7 +625,8 @@ export var VOCABS: Vocab[] = [
         name: "Umidità"
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "M"
   },
   {
     id: "PHPH_2",
@@ -602,7 +641,8 @@ export var VOCABS: Vocab[] = [
         name: "pH"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "TEMP_2",
@@ -617,7 +657,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "CNDC",
@@ -632,7 +673,8 @@ export var VOCABS: Vocab[] = [
         name: "Conducibilità elettrica"
       }
     ],
-    measurementUnit: "S/m"
+    measurementUnit: "S/m",
+	measurementType: "O"
   },
   {
     id: "CNDC_1",
@@ -647,7 +689,8 @@ export var VOCABS: Vocab[] = [
         name: "Conducibilità elettrica"
       }
     ],
-    measurementUnit: "S/m"
+    measurementUnit: "S/m",
+	measurementType: "O"
   },
   {
     id: "CNDC_2",
@@ -662,7 +705,8 @@ export var VOCABS: Vocab[] = [
         name: "Conducibilità elettrica"
       }
     ],
-    measurementUnit: "S/m"
+    measurementUnit: "S/m",
+	measurementType: "O"
   },
   {
     id: "PRES",
@@ -677,7 +721,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione del mare"
       }
     ],
-    measurementUnit: "dbar"
+    measurementUnit: "dbar",
+	measurementType: "O"
   },
   {
     id: "PRES_1",
@@ -692,7 +737,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione del mare"
       }
     ],
-    measurementUnit: "dbar"
+    measurementUnit: "dbar",
+	measurementType: "O"
   },
   {
     id: "PRES_2",
@@ -707,7 +753,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione del mare"
       }
     ],
-    measurementUnit: "dbar"
+    measurementUnit: "dbar",
+	measurementType: "O"
   },
   {
     id: "LGHT",
@@ -722,7 +769,8 @@ export var VOCABS: Vocab[] = [
         name: "Radiazione attiva fotosintetica in entrata immersa"
       }
     ],
-    measurementUnit: "µmol/m²s"
+    measurementUnit: "µmol/m²s",
+	measurementType: "O"
   },
   {
     id: "CPHL",
@@ -737,7 +785,8 @@ export var VOCABS: Vocab[] = [
         name: "Clorofilla-a"
       }
     ],
-    measurementUnit: "mg/m³"
+    measurementUnit: "mg/m³",
+	measurementType: "O"
   },
   {
     id: "VCSP",
@@ -752,7 +801,8 @@ export var VOCABS: Vocab[] = [
         name: "**"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "O"
   },
   {
     id: "EWCT",
@@ -767,7 +817,8 @@ export var VOCABS: Vocab[] = [
         name: "**"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "O"
   },
   {
     id: "NSCT",
@@ -782,7 +833,8 @@ export var VOCABS: Vocab[] = [
         name: "**"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "O"
   },
   {
     id: "TMES_1",
@@ -797,7 +849,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura del pH"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "TMES_2",
@@ -812,7 +865,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura del pH"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "CHUM",
@@ -827,7 +881,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione parziale del vapore acqueo nella atmosfera"
       }
     ],
-    measurementUnit: "ppm"
+    measurementUnit: "ppm",
+	measurementType: "M"
   },
   {
     id: "SVEL_1",
@@ -842,7 +897,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità del suono nel corpo idrico"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "O"
   },
   {
     id: "SVEL_2",
@@ -857,7 +913,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità del suono nel corpo idrico"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "O"
   },
   {
     id: "ALKY",
@@ -872,7 +929,8 @@ export var VOCABS: Vocab[] = [
         name: "pH"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "EWSB",
@@ -887,7 +945,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità media del vento vettoriale"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "HEAD",
@@ -902,7 +961,8 @@ export var VOCABS: Vocab[] = [
         name: "Orientamento della piattaforma di misurazione"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "O"
   },
   {
     id: "LINC",
@@ -917,7 +977,8 @@ export var VOCABS: Vocab[] = [
         name: "**"
       }
     ],
-    measurementUnit: "W/m²"
+    measurementUnit: "W/m²",
+	measurementType: "O"
   },
   {
     id: "PCO2",
@@ -932,7 +993,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione parziale della CO₂"
       }
     ],
-    measurementUnit: "µatm"
+    measurementUnit: "µatm",
+	measurementType: "M"
   },
   {
     id: "SINC",
@@ -944,10 +1006,11 @@ export var VOCABS: Vocab[] = [
       },
       {
         locale: "it",
-        name: "Radiozioni"
+        name: "Radiazioni"
       }
     ],
-    measurementUnit: "W/m²"
+    measurementUnit: "W/m²",
+	measurementType: "O"
   },
   {
     id: "TEMP",
@@ -962,7 +1025,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "WDIR",
@@ -977,7 +1041,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione del vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "WSPD",
@@ -992,7 +1057,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità del vento media"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "DRYT",
@@ -1007,7 +1073,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'aria"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "M"
   },
   {
     id: "ATMS",
@@ -1022,7 +1089,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione atmosferica"
       }
     ],
-    measurementUnit: "hPa"
+    measurementUnit: "hPa",
+	measurementType: "M"
   },
   {
     id: "GSPD",
@@ -1037,7 +1105,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità della raffica di vento"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "GDIR",
@@ -1052,7 +1121,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione della raffica di vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "PHPH",
@@ -1067,7 +1137,8 @@ export var VOCABS: Vocab[] = [
         name: "pH"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "DOX1_1",
@@ -1082,7 +1153,8 @@ export var VOCABS: Vocab[] = [
         name: "Ossigeno"
       }
     ],
-    measurementUnit: "ml/l"
+    measurementUnit: "ml/l",
+	measurementType: "O"
   },
   {
     id: "DOX1_2",
@@ -1097,7 +1169,8 @@ export var VOCABS: Vocab[] = [
         name: "Ossigeno"
       }
     ],
-    measurementUnit: "ml/l"
+    measurementUnit: "ml/l",
+	measurementType: "O"
   },
   {
     id: "PSAL_2",
@@ -1112,7 +1185,8 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "PSAL_3",
@@ -1127,7 +1201,8 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "RELH",
@@ -1142,7 +1217,8 @@ export var VOCABS: Vocab[] = [
         name: "Umidità relativa media"
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "M"
   },
   {
     id: "CSLR",
@@ -1157,7 +1233,8 @@ export var VOCABS: Vocab[] = [
         name: "Irradianza solare"
       }
     ],
-    measurementUnit: "W/m²"
+    measurementUnit: "W/m²",
+	measurementType: "M"
   },
   {
     id: "LWRD",
@@ -1172,7 +1249,8 @@ export var VOCABS: Vocab[] = [
         name: "Irradianza solare corretta"
       }
     ],
-    measurementUnit: "W/m²"
+    measurementUnit: "W/m²",
+	measurementType: "M"
   },
   {
     id: "PCO2_1",
@@ -1187,7 +1265,8 @@ export var VOCABS: Vocab[] = [
         name: "Anidride carbonica nell'acqua"
       }
     ],
-    measurementUnit: "ppm"
+    measurementUnit: "ppm",
+	measurementType: "O"
   },
   {
     id: "PCO2_2",
@@ -1202,7 +1281,8 @@ export var VOCABS: Vocab[] = [
         name: "Anidride carbonica in aria"
       }
     ],
-    measurementUnit: "ppm"
+    measurementUnit: "ppm",
+	measurementType: "M"
   },
   {
     id: "CPWC",
@@ -1217,7 +1297,8 @@ export var VOCABS: Vocab[] = [
         name: "Concentrazione di clorofilla-a"
       }
     ],
-    measurementUnit: "mg/m³"
+    measurementUnit: "mg/m³",
+	measurementType: "O"
   },
   {
     id: "TUR4",
@@ -1232,7 +1313,8 @@ export var VOCABS: Vocab[] = [
         name: "Torbidità"
       }
     ],
-    measurementUnit: "NTU"
+    measurementUnit: "NTU",
+	measurementType: "O"
   },
   {
     id: "CDOM",
@@ -1247,7 +1329,8 @@ export var VOCABS: Vocab[] = [
         name: "Sostanza organica disciolta colorata"
       }
     ],
-    measurementUnit: "ppb"
+    measurementUnit: "ppb",
+	measurementType: "O"
   },
   {
     id: "TEMP_1",
@@ -1262,7 +1345,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "TEMP_3",
@@ -1277,7 +1361,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "TEMP_4",
@@ -1292,7 +1377,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "WDIR",
@@ -1307,7 +1393,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione del vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "WSPD",
@@ -1322,7 +1409,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità del vento media"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "DRYT",
@@ -1337,7 +1425,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'aria"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "M"
   },
   {
     id: "ATMS",
@@ -1352,7 +1441,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione atmosferica"
       }
     ],
-    measurementUnit: "hPa"
+    measurementUnit: "hPa",
+	measurementType: "M"
   },
   {
     id: "GSPD",
@@ -1367,7 +1457,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità della raffica di vento"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "GDIR",
@@ -1382,7 +1473,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione della raffica di vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "PHPH_1",
@@ -1397,7 +1489,8 @@ export var VOCABS: Vocab[] = [
         name: "pH"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "PHPH_3",
@@ -1412,7 +1505,8 @@ export var VOCABS: Vocab[] = [
         name: "pH"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "PHPH_4",
@@ -1427,7 +1521,8 @@ export var VOCABS: Vocab[] = [
         name: "pH"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },  
   {
     id: "PHPH_5",
@@ -1442,7 +1537,8 @@ export var VOCABS: Vocab[] = [
         name: "pH (scala totale)"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },    
   {
     id: "DOXY_1",
@@ -1457,7 +1553,8 @@ export var VOCABS: Vocab[] = [
         name: "Ossigeno"
       }
     ],
-    measurementUnit: "ml/l"
+    measurementUnit: "ml/l",
+	measurementType: "O"
   },
   {
     id: "DOXY_2",
@@ -1472,7 +1569,8 @@ export var VOCABS: Vocab[] = [
         name: "Ossigeno"
       }
     ],
-    measurementUnit: "ml/l"
+    measurementUnit: "ml/l",
+	measurementType: "O"
   },
   {
     id: "DOXY_3",
@@ -1487,7 +1585,8 @@ export var VOCABS: Vocab[] = [
         name: "Ossigeno"
       }
     ],
-    measurementUnit: "ml/l"
+    measurementUnit: "ml/l",
+	measurementType: "O"
   },
   {
     id: "TEMP_1",
@@ -1502,7 +1601,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "TEMP_3",
@@ -1517,7 +1617,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "TEMP_4",
@@ -1532,7 +1633,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "PSAL_1",
@@ -1547,7 +1649,8 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "PSAL_2",
@@ -1562,7 +1665,8 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "PSAL_3",
@@ -1577,7 +1681,8 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "TUR4",
@@ -1592,7 +1697,8 @@ export var VOCABS: Vocab[] = [
         name: "Torbidità"
       }
     ],
-    measurementUnit: "NTU"
+    measurementUnit: "NTU",
+	measurementType: "O"
   },
   {
     id: "VSRW",
@@ -1607,7 +1713,8 @@ export var VOCABS: Vocab[] = [
         name: "Irradianza"
       }
     ],
-    measurementUnit: "µE/m²s"
+    measurementUnit: "µE/m²s",
+	measurementType: "O"
   },
   {
     id: "ACO2",
@@ -1622,7 +1729,8 @@ export var VOCABS: Vocab[] = [
         name: "Frazione molare di anidride carbonica nell atmosfera"
       }
     ],
-    measurementUnit: "ppm"
+    measurementUnit: "ppm",
+	measurementType: "M"
   },
   {
     id: "PCO2",
@@ -1637,7 +1745,8 @@ export var VOCABS: Vocab[] = [
         name: "Anidride carbonica nell'acqua"
       }
     ],
-    measurementUnit: "ppm"
+    measurementUnit: "ppm",
+	measurementType: "O"
   },
   {
     id: "CPWC",
@@ -1652,7 +1761,8 @@ export var VOCABS: Vocab[] = [
         name: "Concentrazione di clorofilla-a"
       }
     ],
-    measurementUnit: "µg/l"
+    measurementUnit: "µg/l",
+	measurementType: "O"
   },
   {
     id: "RELH",
@@ -1667,7 +1777,8 @@ export var VOCABS: Vocab[] = [
         name: "Umidità relativa media"
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "M"
   },
   {
     id: "WDIR",
@@ -1682,7 +1793,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione del vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "WSPD",
@@ -1697,7 +1809,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità del vento media"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "DRYT",
@@ -1712,7 +1825,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'aria"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "M"
   },
   {
     id: "ATMS",
@@ -1727,7 +1841,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione atmosferica"
       }
     ],
-    measurementUnit: "hPa"
+    measurementUnit: "hPa",
+	measurementType: "M"
   },
   {
     id: "GSPD",
@@ -1742,7 +1857,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità della raffica di vento"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "GDIR",
@@ -1757,7 +1873,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione della raffica di vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "PHPH",
@@ -1772,7 +1889,8 @@ export var VOCABS: Vocab[] = [
         name: "pH"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "DOXY",
@@ -1787,7 +1905,8 @@ export var VOCABS: Vocab[] = [
         name: "Ossigeno"
       }
     ],
-    measurementUnit: "ml/l"
+    measurementUnit: "ml/l",
+	measurementType: "O"
   },
   {
     id: "TEMP",
@@ -1802,7 +1921,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "PSAL",
@@ -1817,7 +1937,8 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "TUR4",
@@ -1832,7 +1953,8 @@ export var VOCABS: Vocab[] = [
         name: "Torbidità"
       }
     ],
-    measurementUnit: "NTU"
+    measurementUnit: "NTU",
+	measurementType: "O"
   },
   {
     id: "RELH",
@@ -1847,7 +1969,8 @@ export var VOCABS: Vocab[] = [
         name: ""
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "O"
   },
   {
     id: "WDIR",
@@ -1862,7 +1985,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione del vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "WSPD",
@@ -1877,7 +2001,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità del vento media"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "DRYT",
@@ -1892,7 +2017,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'aria"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "M"
   },
   {
     id: "ATMS",
@@ -1907,7 +2033,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione atmosferica"
       }
     ],
-    measurementUnit: "hPa"
+    measurementUnit: "hPa",
+	measurementType: "M"
   },
   {
     id: "GSPD",
@@ -1922,7 +2049,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità della raffica di vento"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "GDIR",
@@ -1937,7 +2065,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione della raffica di vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "PHPH",
@@ -1952,7 +2081,8 @@ export var VOCABS: Vocab[] = [
         name: "pH"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "DOXY",
@@ -1967,7 +2097,8 @@ export var VOCABS: Vocab[] = [
         name: "Ossigeno"
       }
     ],
-    measurementUnit: "ml/l"
+    measurementUnit: "ml/l",
+	measurementType: "O"
   },
   {
     id: "TEMP",
@@ -1982,7 +2113,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "PSAL",
@@ -1997,7 +2129,8 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: ""
+    measurementUnit: "",
+	measurementType: "O"
   },
   {
     id: "TUR4",
@@ -2012,7 +2145,8 @@ export var VOCABS: Vocab[] = [
         name: "Torbidità"
       }
     ],
-    measurementUnit: "NTU"
+    measurementUnit: "NTU",
+	measurementType: "O"
   },
   {
     id: "RELH",
@@ -2027,7 +2161,8 @@ export var VOCABS: Vocab[] = [
         name: ""
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "M"
   },
   {
     id: "WDIR",
@@ -2042,7 +2177,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione del vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "WSPD",
@@ -2057,7 +2193,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità del vento media"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "DRYT",
@@ -2072,7 +2209,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'aria"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "M"
   },
   {
     id: "ATMS",
@@ -2087,7 +2225,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione atmosferica"
       }
     ],
-    measurementUnit: "hPa"
+    measurementUnit: "hPa",
+	measurementType: "M"
   },
   {
     id: "RELH",
@@ -2102,7 +2241,8 @@ export var VOCABS: Vocab[] = [
         name: "Umidità relativa media"
       }
     ],
-    measurementUnit: "%"
+    measurementUnit: "%",
+	measurementType: "M"
   },
   {
     id: "GSPD",
@@ -2117,7 +2257,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità della raffica di vento"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "M"
   },
   {
     id: "GDIR",
@@ -2132,7 +2273,8 @@ export var VOCABS: Vocab[] = [
         name: "Direzione della raffica di vento"
       }
     ],
-    measurementUnit: "°"
+    measurementUnit: "°",
+	measurementType: "M"
   },
   {
     id: "SVEL",
@@ -2147,7 +2289,8 @@ export var VOCABS: Vocab[] = [
         name: "Velocità del suono nell'acqua"
       }
     ],
-    measurementUnit: "m/s"
+    measurementUnit: "m/s",
+	measurementType: "O"
   },
   {
     id: "PRES",
@@ -2162,7 +2305,8 @@ export var VOCABS: Vocab[] = [
         name: "Pressione del mare"
       }
     ],
-    measurementUnit: "dbar"
+    measurementUnit: "dbar",
+	measurementType: "O"
   },
   {
     id: "TEMP",
@@ -2177,7 +2321,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "TEMP",
@@ -2192,7 +2337,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "RVFL",
@@ -2207,7 +2353,8 @@ export var VOCABS: Vocab[] = [
         name: "Portata del fiume"
       }
     ],
-    measurementUnit: "m³/s"
+    measurementUnit: "m³/s",
+	measurementType: "O"
   },
   {
     id: "TEMP",
@@ -2222,7 +2369,8 @@ export var VOCABS: Vocab[] = [
         name: "Temperatura dell'acqua"
       }
     ],
-    measurementUnit: "°C"
+    measurementUnit: "°C",
+	measurementType: "O"
   },
   {
     id: "ASLV",
@@ -2237,6 +2385,7 @@ export var VOCABS: Vocab[] = [
         name: "Livello osservato del mare"
       }
     ],
-    measurementUnit: "m"
+    measurementUnit: "m",
+	measurementType: "O"
   }
 ];
