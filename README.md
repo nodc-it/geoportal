@@ -1,5 +1,9 @@
 # Geoportal
 
+<p align="center">
+  <img src="./docs/images/geoportal-screenshot.jpg" alt="Geoportal Screenshot" width="800">
+</p>
+
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
