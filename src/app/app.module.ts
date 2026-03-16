@@ -32,7 +32,7 @@ import { DataTableComponent } from './detail-dialog/data-table/data-table.compon
 import { InfoComponent } from './detail-dialog/info/info.component';
 import { EmodnetDialogComponent } from './emodnet-dialog/emodnet-dialog.component';
 import { EmodnetInfoComponent } from './emodnet-dialog/emodnet-info/emodnet-info.component';
-import { MatLegacyTooltipModule } from '@angular/material/legacy-tooltip';
+import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 
 @NgModule({
   declarations: [
