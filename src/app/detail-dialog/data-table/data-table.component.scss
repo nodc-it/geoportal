@@ -1,9 +1,19 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto; 
+}
+
 .mat-row {
   height: auto;
 }
 
 .mat-cell {
   padding: 8px 8px 8px 0;
+}
+
+.type_cell {
+  justify-content: center;
+  text-align: center;
 }
 
 .position_message
@@ -31,7 +41,27 @@
   text-align: center;
 }
 
+
 .table_centered
 {
 	margin: 0 auto;
 }
+
+.paginator-container {
+  display: flex; /* Attiva Flexbox */
+  justify-content: space-between; /* Spazia gli elementi */
+  align-items: center; /* Allinea verticalmente al centro */
+  width: 100%;
+}
+
+.left-element {
+  /* Stili opzionali per l'elemento a sinistra */
+  font-family: "Roboto Mono", monospace;
+  font-size: 80%;
+  padding: 16px;
+}
+
+.right-paginator {
+  margin-left: auto; /* Forza il paginator a destra */
+}
+

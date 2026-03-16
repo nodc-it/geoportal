@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { MatLegacyRadioChange as MatRadioChange } from '@angular/material/legacy-radio';
-import { MatLegacySlideToggleChange as MatSlideToggleChange } from '@angular/material/legacy-slide-toggle';
+import { MatRadioChange } from '@angular/material/radio';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import BaseLayer from 'ol/layer/Base';
 import { LayersService } from '../services/layers.service';
 import { ErddapService } from 'src/app/services/erddap.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-layer-switcher',
@@ -14,9 +15,27 @@ export class LayerSwitcherComponent {
   layers: BaseLayer[];
   isCollapsed: boolean = false;
 
-  constructor(service: LayersService, public erdappService: ErddapService) {
+  constructor(service: LayersService, public erdappService: ErddapService, private breakpointObserver: BreakpointObserver) {
     this.layers = service.layers;
   }
+	
+	ngOnInit(): void 
+	{
+		// On ngOnInit we detect device used trough breakpointObserver library
+		this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).subscribe(result =>
+		{
+			// LayerSwitcherComponent collapsing based on user device 
+			
+			if(!result.matches)
+				// desktop view case, LayerSwitcherComponent panel visible 
+				this.isCollapsed = false;
+
+			else
+				// handset tablet view case, LayerSwitcherComponent panel collapsed
+				this.isCollapsed = true;
+		});
+	} // end ngOnInit    
+	
 
   onChange(event: MatSlideToggleChange, index: number): void {
     this.layers[index].setVisible(event.checked);

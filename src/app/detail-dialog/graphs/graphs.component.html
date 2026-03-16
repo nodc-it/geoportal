@@ -13,31 +13,56 @@
 </div>
 <mat-card [class]="userDevice[0]" *ngIf="timeseriesLoaded | async">
   <mat-card-content [class]="userDevice[1]">
-    <section class="param-section" *ngFor="let timeseries of timeseries; let i = index">
-      <span>
-        <mat-checkbox
-          class="param-margin"
-          [checked]="allSelected(timeseries)"
-          [indeterminate]="someSelected(timeseries)"
-          (change)="selectAll($event.checked, timeseries); updateChart()"
-        >
-          {{ this.vocabService.getMeasurementName(this.data.get('name'), timeseries.parameter.name) }}
-        </mat-checkbox>
-        <ng-container
-          *ngIf="
-            timeseries.series.length == 1 && timeseries.series[0].depth !== undefined && timeseries.series[0].depth > 0
-          "
-          >{{ timeseries.series[0].depth }}m</ng-container
-        >
-      </span>
-      <span [hidden]="timeseries.series.length <= 1">
-        <ul>
-          <li *ngFor="let series of timeseries.series">
-            <mat-checkbox [(ngModel)]="series.selected" (change)="updateChart()"> {{ series.depth }}m </mat-checkbox>
-          </li>
-        </ul>
-      </span>
-    </section>
+	<table>
+		<thead>
+			<tr>
+				<th>PARAMETER / TYPE (Meteorological - Oceanographic)</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<section class="param-section" *ngFor="let timeseries of timeseries; let i = index">
+				<span>
+					<tr>
+						<td>
+							<mat-checkbox
+							  class="param-margin"
+							  [checked]="allSelected(timeseries)"
+							  [indeterminate]="someSelected(timeseries)"
+							  (change)="selectAll($event.checked, timeseries); updateChart()"
+							>
+							  {{ this.vocabService.getMeasurementName(this.data.get('name'), timeseries.parameter.name) }}
+							</mat-checkbox>
+					
+							<ng-container 
+							  *ngIf="
+								timeseries.series.length == 1 && timeseries.series[0].depth !== undefined && timeseries.series[0].depth > 0
+							  "
+							  >{{ timeseries.series[0].depth }}m&nbsp;
+							</ng-container>
+						</td>
+						<td>
+							<ng-container>
+								<span 
+									[matTooltip] = "getToolTipText(this.vocabService.getMeasurementType(this.data.get('name'), timeseries.parameter.name))" 
+									matTooltipPosition="right">
+								&nbsp;{{ this.vocabService.getMeasurementType(this.data.get('name'), timeseries.parameter.name)}}&nbsp;
+								</span>
+							</ng-container>
+						</td>
+					</tr>
+					
+				</span>
+				<span [hidden]="timeseries.series.length <= 1" >
+					<ul>
+					  <li *ngFor="let series of timeseries.series">
+						<mat-checkbox [(ngModel)]="series.selected" (change)="updateChart()"> {{ series.depth }}m </mat-checkbox>
+					  </li>
+					</ul>
+				</span>
+			</section>
+		</tbody>
+	</table>
   </mat-card-content>
 </mat-card>
 

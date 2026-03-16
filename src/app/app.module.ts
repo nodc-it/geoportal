@@ -6,25 +6,25 @@ import { OlMapComponent } from './ol-map/ol-map.component';
 import { LayerSwitcherComponent } from './layer-switcher/layer-switcher.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
-import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
-import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AttributionsDialogComponent } from './attributions-dialog/attributions-dialog.component';
 import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GraphsComponent } from './detail-dialog/graphs/graphs.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
-import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
-import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule} from '@angular/material/legacy-progress-spinner';
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { CacheInterceptor } from './interceptors/cache.interceptor';
 import { CacheService } from './services/cache.service';
@@ -32,6 +32,7 @@ import { DataTableComponent } from './detail-dialog/data-table/data-table.compon
 import { InfoComponent } from './detail-dialog/info/info.component';
 import { EmodnetDialogComponent } from './emodnet-dialog/emodnet-dialog.component';
 import { EmodnetInfoComponent } from './emodnet-dialog/emodnet-info/emodnet-info.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { EmodnetInfoComponent } from './emodnet-dialog/emodnet-info/emodnet-info
 	MatProgressSpinnerModule,
     MatCheckboxModule,
     FormsModule,
+	MatTooltipModule,
   ],
   providers: [CacheService, { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }],
   bootstrap: [AppComponent],

@@ -5,17 +5,12 @@
       "properties": {
         "name": "DWRG1",
         "dialog_par": [
-          "VZMX",
-          "VTMX",
-          "VH110",
-          "VT110",
-          "VAVH",
-          "VAVT",
-          "VTPK",
+		  "VZMX",
+		  "VAVT",
+		  "VAVH",
+		  "VTMX",
           "VPED",
-          "VPSP",
-          "VTZA",
-          "VHM0"
+          "VPSP"
         ]
       }
     },
@@ -23,17 +18,12 @@
       "properties": {
         "name": "DWRG2",
         "dialog_par": [
-          "VZMX",
-          "VTMX",
-          "VH110",
-          "VT110",
-          "VAVH",
-          "VAVT",
-          "VTPK",
+		  "VZMX",
+		  "VAVT",
+		  "VAVH",
+		  "VTMX",
           "VPED",
-          "VPSP",
-          "VTZA",
-          "VHM0"
+          "VPSP"
         ]
       }
     },
@@ -41,17 +31,12 @@
       "properties": {
         "name": "DWRG3",
         "dialog_par": [
-          "VZMX",
-          "VTMX",
-          "VH110",
-          "VT110",
+		  "VZMX",
+		  "VAVT",
 		  "VAVH",
-          "VAVT",
-          "VTPK",
+		  "VTMX",
           "VPED",
-          "VPSP",
-          "VTZA",
-          "VHM0"
+          "VPSP"
         ]
       }
     },
@@ -88,31 +73,31 @@
       "properties": {
         "name": "MAMBO1",
         "dialog_par": [
-          "WDIR",
-          "WSPD",
-          "DRYT",
-          "ATMS",
-          "GSPD",
-          "GDIR",
-          "PHPH_1",
-          "PHPH_3",
-		  "PHPH_4",
-		  "PHPH_5",
-          "DOXY_1",
-          "DOXY_2",
-          "DOXY_3",
-          "TEMP_1",
-          "TEMP_3",
-          "TEMP_4",
-          "PSAL_1",
-          "PSAL_2",
-          "PSAL_3",
-          "TUR4",
-          "VSRW",
-          "ACO2",
-          "PCO2",
-          "CPWC",
-          "RELH"
+			"WSPD",
+			"WDIR",
+			"DRYT",
+			"RELH",
+			"ATMS",
+			"ACO2",
+			"GSPD",
+			"GDIR",
+			"TEMP_1",
+			"PSAL_1",
+			"DOXY_1",
+			"PHPH_5",
+			"PHPH_1",
+			"PCO2",
+			"TEMP_3",
+			"PSAL_2",
+			"DOXY_2",
+			"PHPH_3",
+			"CPWC",
+			"TUR4",
+			"VSRW",
+			"TEMP_4",
+			"PSAL_3",
+			"DOXY_3",
+			"PHPH_4"
         ]
       }
     },
@@ -175,8 +160,8 @@
       "properties": {
         "name": "CURRISO",
         "dialog_par": [
-          "TEMP",
-          "RVFL"
+			"RVFL",
+			"TEMP"
         ]
       }
     },
@@ -184,8 +169,9 @@
       "properties": {
         "name": "PIEZTAG",
         "dialog_par": [
-          "TEMP",
-          "ASLV"
+			"ASLV",
+			"TEMP"
+          
         ]
       }
     }
