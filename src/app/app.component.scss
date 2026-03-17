@@ -1,7 +1,17 @@
+.header {
+  align-items: center;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
   height: 40px;
   margin-right: 20px;
   margin-left: 10px;
+  display: block;
 }
 .toolbar-spacer {
   flex: 1 1 auto;
