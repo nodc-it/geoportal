@@ -1,6 +1,7 @@
 # Geoportal
 
 <p align="center">
+  <a href="https://www.ogs.it">
   <img src="./src/assets/20201221_OGS_logo_RGB_W_B.png" alt="OGS Logo" width="120" height="120" style="vertical-align:middle">
 </p>
 
