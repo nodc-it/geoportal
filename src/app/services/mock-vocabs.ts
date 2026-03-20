@@ -23,7 +23,7 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Maximum wave period"
+        name: "Maximum wave period (Tmax)"
       },
       {
         locale: "it",
@@ -199,7 +199,7 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Maximum wave period"
+        name: "Maximum wave period (Tmax)"
       },
       {
         locale: "it",
@@ -375,7 +375,7 @@ export var VOCABS: Vocab[] = [
     measurementName: [
       {
         locale: "en",
-        name: "Maximum wave period"
+        name: "Maximum wave period (Tmax)"
       },
       {
         locale: "it",

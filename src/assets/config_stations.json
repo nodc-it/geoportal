@@ -6,9 +6,9 @@
         "name": "DWRG1",
         "dialog_par": [
 		  "VZMX",
-		  "VAVT",
-		  "VAVH",
 		  "VTMX",
+		  "VAVH",
+		  "VAVT",
           "VPED",
           "VPSP"
         ]
@@ -19,9 +19,9 @@
         "name": "DWRG2",
         "dialog_par": [
 		  "VZMX",
-		  "VAVT",
-		  "VAVH",
 		  "VTMX",
+		  "VAVH",
+		  "VAVT",
           "VPED",
           "VPSP"
         ]
@@ -32,9 +32,9 @@
         "name": "DWRG3",
         "dialog_par": [
 		  "VZMX",
-		  "VAVT",
-		  "VAVH",
 		  "VTMX",
+		  "VAVH",
+		  "VAVT",
           "VPED",
           "VPSP"
         ]
