@@ -32,6 +32,13 @@ import { ErddapService } from 'src/app/services/erddap.service';
 export class LayersService {
   layers: BaseLayer[] = [];
   interactions: Interaction[] = defaults().getArray();
+  
+  // flag to signal a request for an update UTC view following a user selection
+  updateRadarViewParamsRequest = false;
+  
+  // flag to indicate an error loading tiles from WMS server
+  tileLoadingError = false;
+
 
   constructor(private http: HttpClient, private matDialog: MatDialog, private matEmodnetDialog: MatDialog, public erdappService: ErddapService) {
     let osm = new TileLayer({
@@ -115,12 +122,12 @@ export class LayersService {
 
     let radarArrows = new TileLayer({
       source: new TileWMS({
-        url: 'https://dsecho.ogs.it/thredds/wms/radar/NAdr-radar/aggregate.nc',
+        url: 'https://erddap.hfrnode.eu/ncWMS/wms',
         params: {
-          LAYERS: 'ewct:nsct-group',
+          LAYERS: 'HFR-NAdr-Total-Last4Months/EWCT:NSCT-group',
           TILED: true,
-		  STYLES: 'vector_arrows/seq-Blues',
-          COLORSCALERANGE: '0, 1.25',
+          STYLES: 'default-vector/x-Rainbow',
+		  COLORSCALERANGE: '0, 1.25',
           ABOVEMAXCOLOR: 'extend',
           BELOWMINCOLOR: 'extend',
         },
@@ -128,35 +135,65 @@ export class LayersService {
     });
 	radarArrows.set('name','radarArrows');
 	
-    fetch(radarArrows.getSource()!.getUrls()?.[0] + '?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0')
+	// internal flag to indicate WMS in progress loading operation
+	radarArrows.set('tileWMSloading',true);
+	
+	// "Tile load error" event handler.
+	// On tile load error:
+	// If there has been a request to update the view, 
+	// - the user is warned of the possible error coming from an unavailable date/time or from a failed tile loading;
+	// - member variable updateRadarViewParamsRequest, tileLoadingError and tileWMSloading are set
+	//		to specific values to reset request update, avoid UTC view update on rendercomplete, and make visible card radar parameters.
+	
+	(radarArrows.getSource() as TileWMS).on('tileloaderror', event=> {
+		if (this.updateRadarViewParamsRequest)
+		{
+			//console.log("Errore nel caricamento della tile:", event.tile);
+			alert("Date/Time view not available or Tile loading error.\r\rIf Date and Time are available, loading data operation could be incomplete.");
+			
+			this.updateRadarViewParamsRequest = false;
+			
+			this.tileLoadingError = true;
+			
+			radarArrows.set('tileWMSloading',false);
+		}
+	});
+	
+    fetch(radarArrows.getSource()!.getUrls()?.[0] + '?SERVICE=WMS&REQUEST=GetCapabilities&VERSION=1.3.0&DATASET=HFR-NAdr-Total-Last4Months')
       .then(function (response) {
         return response.text();
       })
       .then(function (text) {
         let result = new WMSCapabilities().read(text);
-        let times =
-          result.Capability.Layer.Layer[0].Layer[3].Layer[0].Dimension[0].values.split(
-            ','
-          ); /*.find(({Name}:any)=>Name === 'ewct:nsct-group')
-		  
-        /*.map((layer: any) => {
-          layer.filter((layer2: any)=> {
-
-          })
-        })    /*.filter((layer: any)=>{ return (typeof layer.Layer === undefined) })/*.Layer[3].Layer[0].Dimension*/
+		let times = result.Capability.Layer.Layer[0].Layer[8].Layer[0].Dimension[0].values.split(',');
 
         radar.set('times', times);
+		
+		let stringMaxTime = result.Capability.Layer.Layer[0].Layer[8].Layer[0].Dimension[0].default;
+		
+		let objectMaxTime = new Date(stringMaxTime);
+		
+		// Min and Max values in HTML select for Date and Time, in file ol-map.components.ts
+		
+		radar.set('minSelectableDate', times[0].substr(0,10));
+		
+		radar.set('minSelectableTime', times[0].substr(11,5));
+		
+		radar.set('maxSelectableDate', stringMaxTime.substr(0,10));
+		
+		radar.set('maxSelectableTime', stringMaxTime.substr(11,5));
+		
+		// Actual user UTC View in radar panel, in file ol-map.components.ts
 
-		// Set low and high time interval limit in object radar attribute
-		let stringInterval = (times[times.length - 1]).substr(0,49);
-		
-		let backSlashPos = stringInterval.indexOf('/');
-		
-		radar.set('timeIntervalLow', stringInterval.substr(0,10));
-		
-		radar.set('timeIntervalHigh', stringInterval.substr(backSlashPos+1,10));
+		radar.set('dateTimeActualView', objectMaxTime.toLocaleDateString('it-IT', 
+		{
+			timeZone: 'UTC',
+			hour12: false,
+			hour: 'numeric',
+			minute: '2-digit',
+		}
+		));
 
-        //console.log(times);
       });
     let radarPoints = new VectorLayer({
       source: new VectorSource({
@@ -189,7 +226,7 @@ export class LayersService {
       'legendUrl',
       (radarArrows.getSource() as TileWMS).getLegendUrl(undefined, {
         COLORBARONLY: true,
-		PALETTE: 'seq-Blues',
+		PALETTE: 'x-Rainbow',
         WIDTH: 25,
         HEIGHT: 150,
       })
@@ -460,14 +497,38 @@ export class LayersService {
 	
 	// -------------------------------------------------
 
-  getArgoTrejectory(type: string, id: number): Observable<Feature<Geometry>> {
-    let url = 'http://maosapi.ogs.it/v0.1/trajectory?' + 'type=' + type + '&id=' + id;
-    return this.http.get(url).pipe(
-      map((result: any) => {
-        let feature = new GeoJSON({ featureProjection: 'EPSG:3857' }).readFeatures(result)[0];
-        feature.setId(id);
-        return feature;
-      })
-    );
-  }
-}
+	getArgoTrejectory(type: string, id: number): Observable<Feature<Geometry>> {
+		let url = 'http://maosapi.ogs.it/v0.1/trajectory?' + 'type=' + type + '&id=' + id;
+		return this.http.get(url).pipe(
+			map((result: any) => {
+			let feature = new GeoJSON({ featureProjection: 'EPSG:3857' }).readFeatures(result)[0];
+			feature.setId(id);
+			return feature;
+			})
+		);
+	}
+
+	// Function to set Radar Date and Time 
+	// in Radar panel, like chosen by user.
+	// Use updateParams native function in TileWMS.
+	// Input: date and time string
+  
+  	setLayerRadarDateTime(my_dateTime:string)
+	{
+		
+		// - Pointer to layer named "Radar"
+		let radarObjPtr = this.layers.find (item=>item.get('name') == "Radar");
+
+		// - Pointer to layer named "RadarArrows"
+		let radarArrowsObjPtr = (radarObjPtr!.get('layers').getArray()).find ((item:any)=>item.get('name') == "radarArrows");
+		
+		this.tileLoadingError = false;
+		
+		(radarArrowsObjPtr.getSource() as TileWMS).updateParams(
+		{
+			TIME: my_dateTime,
+		});
+	  
+	} // end function	  
+  
+} // end class

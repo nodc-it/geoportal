@@ -11,7 +11,6 @@ import TileWMS from 'ol/source/TileWMS';
 import { ActivatedRoute } from '@angular/router';
 import { urlInfoInterface, DeviceParameters } from 'src/app/app.misc'; //
 
-
 @Component({
   selector: 'app-ol-map',
   templateUrl: './ol-map.component.html',
@@ -22,11 +21,30 @@ export class OlMapComponent implements OnInit {
 
   constructor(public erdappService: ErddapService, public layersService: LayersService, 
 				private matDialog: MatDialog, private route: ActivatedRoute){}
+		
 
   openAttributionsDialog() {
     this.matDialog.open(AttributionsDialogComponent);
+	
+	
   }
   
+	timeSlots:string[] = [];
+	selectedTime:string = '';
+	selectedDate:string = '';
+	
+	generateTimeSlots() {
+		for (let hour = 0; hour < 24; hour++) {
+		  this.timeSlots.push(this.formatTime(hour, 0));
+		  this.timeSlots.push(this.formatTime(hour, 30));
+		}
+	}
+
+	private formatTime(hour: number, minute: number): string {
+		const h = hour.toString().padStart(2, '0');
+		const m = minute.toString().padStart(2, '0');
+		return `${h}:${m}`;
+	}	
   
   // Pointers to some layers defined in layer.service
   // - Pointer to layer named "Radar"
@@ -43,6 +61,8 @@ export class OlMapComponent implements OnInit {
   
 
   ngOnInit(): void {
+	  
+	  this.generateTimeSlots();
 
 	// Function to verify presence of eventual url parameter trough "route" object.
 	// From observable eventually returned, we check:
@@ -173,6 +193,26 @@ export class OlMapComponent implements OnInit {
 	
 	this.map.on("rendercomplete", () =>
 	{
+		if (this.radarArrowsObjPtr.get('tileWMSloading'))
+		{
+			if ((this.selectedDate != "") && (this.selectedTime != "") && (this.layersService.tileLoadingError == false))
+			{
+				let objectMaxTime = new Date(this.selectedDate + "T" + this.selectedTime + ":00.000Z");
+				this.radarObjPtr!.set('dateTimeActualView', objectMaxTime.toLocaleDateString('it-IT', 
+					{
+						timeZone: 'UTC',
+						hour12: false,
+						hour: 'numeric',
+						minute: '2-digit',
+					}
+					));
+
+			} // end internal if
+			
+		} // end if
+				
+		this.radarArrowsObjPtr.set('tileWMSloading',false);
+		
 		if (this.samplingObjPtr!.get('selectableFirstTime') && this.samplingObjPtr!.getVisible())
 			this.samplingObjPtr!.set('selectableFirstTime', false);
 		
@@ -255,11 +295,18 @@ export class OlMapComponent implements OnInit {
 			
 			newColorScaleRange = String(lowLimit) + ','+ String(highLimit);
 		}
+
+		this.radarArrowsObjPtr.set('tileWMSloading',true);
+		
+		this.layersService.updateRadarViewParamsRequest = true;
+		
+		this.layersService.tileLoadingError = false;
 		
 		(this.radarArrowsObjPtr.getSource() as TileWMS).updateParams(
 		{
 			COLORSCALERANGE: newColorScaleRange,
 		});
+		
 		
 	} // end setSpeed
 	
@@ -311,5 +358,57 @@ export class OlMapComponent implements OnInit {
 		}
 		
 	} // end SetMapView	
+	
+	// Function to set Date and Time chosen by user
+	// in radar panel.
+	// Check if HTML select date and time are not null,
+	// then set layerservice member variable updateRadarViewParamsRequest, tileLoadingError, tileWMSloading
+	// and call layersService setLayerRadarDateTime member function,
+	// building date and time string with member variable selectedDate and selectedTime,
+	// linked at HTML select trough ngModel.
+	
+	setRadarDateTime()
+	{
+		if ((this.selectedDate.trim() == "") || (this.selectedTime.trim() == ""))
+			alert("Invalid Date or Time selected");
+		else
+		{
+			this.layersService.updateRadarViewParamsRequest = true;
+			
+			this.layersService.tileLoadingError = false;
+			
+			this.radarArrowsObjPtr.set('tileWMSloading',true);
+			
+			this.layersService.setLayerRadarDateTime(this.selectedDate + "T" + this.selectedTime);
+		}
+		
+	} //end setRadarDateTime()
+	
+	// Functions to set Oldest / Newest
+	// available date and time in 4 last months.
+	// Get min/max selectable Date and Time from layers Radar object
+	// and set ngModel member variables in HTML select.
+	// Call setRadarDateTime.
+
+	setOldestDateTime()
+	{
+		this.selectedDate = this.radarObjPtr!.get('minSelectableDate');
+		
+		this.selectedTime = this.radarObjPtr!.get('minSelectableTime');
+		
+		this.setRadarDateTime();
+		
+	} //end setOldestDateTime()
+
+	setNewestDateTime()
+	{
+		this.selectedDate = this.radarObjPtr!.get('maxSelectableDate');
+		
+		this.selectedTime = this.radarObjPtr!.get('maxSelectableTime');
+		
+		this.setRadarDateTime();
+		
+	} // end setNewestDateTime()
+
   
 } // end class
