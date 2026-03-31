@@ -96,3 +96,43 @@
   top: 400px;
   z-index: 2;
 }
+
+.button_position {
+	margin: 5px 5px 0px 0px;
+}
+
+
+/* Contenitore per allineare gli elementi */
+  .loader-container {
+    display: flex;
+    align-items: center; /* Allineamento verticale centrato */
+    gap: 12px;           /* Spazio tra testo e spinner */
+    font-family: sans-serif;
+  }
+
+  /* Testo a sinistra */
+  .loader-text {
+    font-size: 16px;
+    color: #333;
+  }
+
+
+.spinner {
+  /* Dimensioni dello spinner */
+  width: 20px;
+  height: 20px;
+  
+  /* Crea il cerchio con bordi di colore diverso */
+  border: 8px solid #f3f3f3; /* Grigio chiaro (fondo) */
+  border-top: 8px solid #3498db; /* Blu (parte rotante) */
+  border-radius: 50%; /* Rende il div un cerchio perfetto */
+  
+  /* Definizione dell'animazione */
+  animation: spin 1s linear infinite;
+}
+
+/* Regola per la rotazione */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
