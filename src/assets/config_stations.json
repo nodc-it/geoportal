@@ -158,6 +158,30 @@
     },
     {
       "properties": {
+        "name": "MALO1",
+        "dialog_par": [
+			"TEMP",
+			"PSAL",
+			"DOXY",
+			"CPWC",
+			"TUR4"
+        ]
+      }
+    },
+    {
+      "properties": {
+        "name": "MALO2",
+        "dialog_par": [
+			"TEMP",
+			"PSAL",
+			"DOXY",
+			"CPWC",
+			"TUR4"
+		]
+      }
+    },    
+	{
+      "properties": {
         "name": "CURRISO",
         "dialog_par": [
 			"RVFL",
