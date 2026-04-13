@@ -127,7 +127,7 @@ export class LayersService {
           LAYERS: 'HFR-NAdr-Total-Last4Months/EWCT:NSCT-group',
           TILED: true,
           STYLES: 'default-vector/x-Rainbow',
-		  COLORSCALERANGE: '0, 1.25',
+		  COLORSCALERANGE: '0, 0.5',
           ABOVEMAXCOLOR: 'extend',
           BELOWMINCOLOR: 'extend',
         },
@@ -232,7 +232,7 @@ export class LayersService {
       })
     );
 
-	radar.set('defaultLegendRange', [0, 1.25]);
+	radar.set('defaultLegendRange', [0, 0.5]);
 	radar.set('legendRange', radar.get('defaultLegendRange'));
     radar.set('legendUnit', 'm/s');
     radar.set('name', 'Radar');
