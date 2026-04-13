@@ -1185,7 +1185,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "PSU",
+    measurementUnit: "psu",
 	measurementType: "O"
   },
   {
@@ -1201,7 +1201,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "PSU",
+    measurementUnit: "psu",
 	measurementType: "O"
   },
   {
@@ -1649,7 +1649,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "PSU",
+    measurementUnit: "psu",
 	measurementType: "O"
   },
   {
@@ -1665,7 +1665,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "PSU",
+    measurementUnit: "psu",
 	measurementType: "O"
   },
   {
@@ -1681,7 +1681,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "PSU",
+    measurementUnit: "psu",
 	measurementType: "O"
   },
   {
@@ -1937,7 +1937,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "PSU",
+    measurementUnit: "psu",
 	measurementType: "O"
   },
   {
@@ -2129,7 +2129,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "PSU",
+    measurementUnit: "psu",
 	measurementType: "O"
   },
   {
@@ -2355,7 +2355,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "PSU",
+    measurementUnit: "psu",
 	measurementType: "O"
   },
 
@@ -2509,7 +2509,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "PSU",
+    measurementUnit: "psu",
 	measurementType: "O"
   },
   
