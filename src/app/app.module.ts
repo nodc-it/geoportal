@@ -34,6 +34,8 @@ import { EmodnetDialogComponent } from './emodnet-dialog/emodnet-dialog.componen
 import { EmodnetInfoComponent } from './emodnet-dialog/emodnet-info/emodnet-info.component';
 import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +72,7 @@ import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/le
     MatCheckboxModule,
     FormsModule,
 	MatTooltipModule,
+	DragDropModule
   ],
   providers: [CacheService, { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }],
   bootstrap: [AppComponent],

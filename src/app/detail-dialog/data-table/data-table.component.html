@@ -24,7 +24,7 @@
   <ng-container matColumnDef="measurement">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Measure</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.measurement + ' ' + this.vocabService.getMeasurementUnit(this.data.get('name'), element.parameter.name)}}
+      {{ element.measurement | number:'1.2-2'}} {{ ' ' + this.vocabService.getMeasurementUnit(this.data.get('name'), element.parameter.name)}}
     </td>
   </ng-container>
 

@@ -7,3 +7,7 @@
   opacity: 0.5;
   font-size: 75%;
 }
+
+[cdkDragHandle] {
+  cursor: move;
+}

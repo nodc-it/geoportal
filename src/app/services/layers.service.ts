@@ -276,7 +276,8 @@ export class LayersService {
 
     emodnetPointsSelect.on('select', e => {//
 		const emodnetDialogConfig = new MatDialogConfig();
-		emodnetDialogConfig.disableClose = false;
+		emodnetDialogConfig.disableClose = true;
+		emodnetDialogConfig.backdropClass = 'transparent-backdrop';
 		emodnetDialogConfig.data = e.selected[0]; //emodnetPoints features
 		emodnetDialogConfig.maxHeight = 600;
 		
@@ -319,7 +320,8 @@ export class LayersService {
     });
     stationsSelect.on('select', e => {
 		const dialogConfig = new MatDialogConfig();
-		dialogConfig.disableClose = false;
+		dialogConfig.disableClose = true;
+		dialogConfig.backdropClass = 'transparent-backdrop';
 		dialogConfig.data = e.selected[0]; //station features
 		dialogConfig.maxHeight = 600;
 		

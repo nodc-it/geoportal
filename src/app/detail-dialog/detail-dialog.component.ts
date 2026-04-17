@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild} from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, HostListener} from '@angular/core';
 import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
@@ -23,7 +23,12 @@ export class DetailDialogComponent{
 	
 	@ViewChild(GraphsComponent) myGraphsChild!:GraphsComponent;
 	
-	
+	// Listen keyup event on ESC (Escape)
+	@HostListener('window:keyup.esc')
+	onKeyUp()
+	{
+		this.dialogRef.close();
+	}
 	
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Collection<Feature<Geometry>>,
