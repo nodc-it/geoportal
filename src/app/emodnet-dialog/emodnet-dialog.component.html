@@ -1,9 +1,19 @@
 <button mat-icon-button mat-dialog-close class="close-button">
   <mat-icon>close</mat-icon>
 </button>
-<div matDialogTitle>
-  {{ this.dialogHeader }}
-  <i>{{ this.data.get('type_name') }}</i>
+
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" *ngIf="userDeviceType == 'd'">
+	<div matDialogTitle cdkDragHandle>
+	  {{ this.dialogHeader }}
+	  <i>{{ this.data.get('type_name') }}</i>
+	</div>
+</div>
+
+<div *ngIf="userDeviceType != 'd'">
+	<div matDialogTitle>
+	  {{ this.dialogHeader }}
+	  <i>{{ this.data.get('type_name') }}</i>
+	</div>
 </div>
 
 <mat-tab-group dynamicHeight>

@@ -10,3 +10,7 @@
 mat-progress-bar {
   padding-top: 3px;
 }
+
+[cdkDragHandle] {
+  cursor: move;
+}
