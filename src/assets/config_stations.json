@@ -180,6 +180,30 @@
 		]
       }
     },    
+    {
+      "properties": {
+        "name": "MALO3",
+        "dialog_par": [
+			"TEMP",
+			"PSAL",
+			"DOXY",
+			"CPWC",
+			"TUR4"
+		]
+      }
+    },    
+    {
+      "properties": {
+        "name": "MALO4",
+        "dialog_par": [
+			"TEMP",
+			"PSAL",
+			"DOXY",
+			"CPWC",
+			"TUR4"
+		]
+      }
+    },    	
 	{
       "properties": {
         "name": "CURRISO",
