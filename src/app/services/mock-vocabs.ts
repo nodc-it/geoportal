@@ -1185,7 +1185,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "psu",
+    measurementUnit: "PSU",
 	measurementType: "O"
   },
   {
@@ -1201,7 +1201,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "psu",
+    measurementUnit: "PSU",
 	measurementType: "O"
   },
   {
@@ -1649,7 +1649,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "psu",
+    measurementUnit: "PSU",
 	measurementType: "O"
   },
   {
@@ -1665,7 +1665,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "psu",
+    measurementUnit: "PSU",
 	measurementType: "O"
   },
   {
@@ -1681,7 +1681,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "psu",
+    measurementUnit: "PSU",
 	measurementType: "O"
   },
   {
@@ -1937,7 +1937,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "psu",
+    measurementUnit: "PSU",
 	measurementType: "O"
   },
   {
@@ -2129,7 +2129,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "psu",
+    measurementUnit: "PSU",
 	measurementType: "O"
   },
   {
@@ -2355,7 +2355,7 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "psu",
+    measurementUnit: "PSU",
 	measurementType: "O"
   },
 
@@ -2509,13 +2509,218 @@ export var VOCABS: Vocab[] = [
         name: "Salinità"
       }
     ],
-    measurementUnit: "psu",
+    measurementUnit: "PSU",
 	measurementType: "O"
   },
   
 {
     id: "CPWC",
     device: "MALO2",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Chlorophyll-a"
+      },
+      {
+        locale: "it",
+        name: "Concentrazione di clorofilla-a"
+      }
+    ],
+    measurementUnit: "mg/m³",
+	measurementType: "O"
+  },  
+
+  {
+    id: "PRES",
+    device: "MALO3",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Sea pressure"
+      },
+      {
+        locale: "it",
+        name: "Pressione del mare"
+      }
+    ],
+    measurementUnit: "dbar",
+	measurementType: "O"
+  },
+
+  {
+    id: "PSAL",
+    device: "MALO3",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Salinity"
+      },
+      {
+        locale: "it",
+        name: "Salinità"
+      }
+    ],
+    measurementUnit: "PSU",
+	measurementType: "O"
+  },
+
+  {
+    id: "DOXY",
+    device: "MALO3",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Oxygen"
+      },
+      {
+        locale: "it",
+        name: "Ossigeno"
+      }
+    ],
+    measurementUnit: "ml/l",
+	measurementType: "O"
+  },
+
+  {
+    id: "TUR4",
+    device: "MALO3",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Turbidity"
+      },
+      {
+        locale: "it",
+        name: "Torbidità"
+      }
+    ],
+    measurementUnit: "NTU",
+	measurementType: "O"
+  },
+
+  {
+    id: "TEMP",
+    device: "MALO3",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Water temperature"
+      },
+      {
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
+    ],
+    measurementUnit: "°C",
+	measurementType: "O"
+  },
+
+	{
+		id: "CPWC",
+		device: "MALO3",
+		measurementName: [
+		  {
+			locale: "en",
+			name: "Chlorophyll-a"
+		  },
+		  {
+			locale: "it",
+			name: "Concentrazione di clorofilla-a"
+		  }
+		],
+		measurementUnit: "mg/m³",
+		measurementType: "O"
+	},  
+
+{
+    id: "PRES",
+    device: "MALO4",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Sea pressure"
+      },
+      {
+        locale: "it",
+        name: "Pressione del mare"
+      }
+    ],
+    measurementUnit: "dbar",
+	measurementType: "O"
+  },
+
+  {
+    id: "DOXY",
+    device: "MALO4",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Oxygen"
+      },
+      {
+        locale: "it",
+        name: "Ossigeno"
+      }
+    ],
+    measurementUnit: "ml/l",
+	measurementType: "O"
+  },
+
+  {
+    id: "TUR4",
+    device: "MALO4",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Turbidity"
+      },
+      {
+        locale: "it",
+        name: "Torbidità"
+      }
+    ],
+    measurementUnit: "NTU",
+	measurementType: "O"
+  },
+
+
+  {
+    id: "TEMP",
+    device: "MALO4",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Water temperature"
+      },
+      {
+        locale: "it",
+        name: "Temperatura dell'acqua"
+      }
+    ],
+    measurementUnit: "°C",
+	measurementType: "O"
+  },   
+
+  {
+    id: "PSAL",
+    device: "MALO4",
+    measurementName: [
+      {
+        locale: "en",
+        name: "Salinity"
+      },
+      {
+        locale: "it",
+        name: "Salinità"
+      }
+    ],
+    measurementUnit: "PSU",
+	measurementType: "O"
+  },
+  
+{
+    id: "CPWC",
+    device: "MALO4",
     measurementName: [
       {
         locale: "en",
