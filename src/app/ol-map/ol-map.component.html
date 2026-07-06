@@ -18,12 +18,18 @@
 		<ng-container *ngIf="layer.get('name') == 'Sampling Stations'">
 
 		<mat-card *ngIf="(layer.getVisible() && layer.get('selectableFirstTime'))">
-			<p>Loading Sampling Stations,<br>please wait...</p>
+			<p>Loading Biogeochemical Stations,<br>please wait...</p>
 		</mat-card>
 		
 		</ng-container>
 		
 	</ng-container>
+
+	<!-- Loading message for metadata sensors -->
+	<mat-card *ngIf="isMetadataLoading">
+	<p>Loading data,<br>please wait...</p>
+	</mat-card>	
+	
 </div>
 
 
@@ -36,7 +42,7 @@
     <ng-container *ngIf="layer.get('legendUrl') != undefined">
       <mat-card class="legend-card" *ngIf="layer.getVisible()">
 	  
-		<div class="legend-unit">Radar data in last 4 months
+		<div class="legend-unit">Surface currents data<br>in last 4 months
 
 			<div id = "radarDataLoadingMsgSpinner" class="loader-container" *ngIf="radarArrowsObjPtr.get('tileWMSloading')">
 			  <span>Loading, please wait...</span>

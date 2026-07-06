@@ -12,7 +12,7 @@
     <div *ngFor="let layer of layers; let i = index">
       <ng-container *ngIf="!layer.get('base')">
         <mat-slide-toggle type="checkbox" [checked]="layer.getVisible()" (change)="onChange($event, i)">
-          {{ layer.get('name') }}
+          {{ layer.get('name_exposed') }}
 		  </mat-slide-toggle>
       </ng-container>
     </div>
@@ -21,8 +21,59 @@
 		<img src="assets/red_triangle.png">inactive real time station
 	</div>
   </mat-card-content>
+
+  <!-- Metadata (Data Comparison) menù container -->
+  <mat-card-actions class="custom-dropup-container" *ngIf="showMetadata">
+    <!-- Pulsante "Metadata" aggiornato con freccia a destra e contatore -->
+    <button 
+      id="menuTrigger"
+      type="button"
+      class="panel-btn-trigger"
+      aria-haspopup="true"
+      [attr.aria-expanded]="isDropupOpen"
+      (click)="toggleDropup()"
+      (keydown)="handleKeyDown($event)">
+      
+      <div class="trigger-label-container">
+        <span>Data comparison</span>
+        <span class="metadata-counter" *ngIf="selectedMetadata.size > 0">
+          ({{ selectedMetadata.size }})
+        </span>
+      </div>
+
+      <mat-icon class="trigger-arrow">chevron_right</mat-icon>
+    </button>
+
+    <!-- Invisible overlay to close the menu by clicking outside -->
+    <div *ngIf="isDropupOpen" class="dropup-overlay" (click)="closeDropup()"></div>
+
+	<ul 
+	*ngIf="isDropupOpen" 
+	class="dropup-menu" 
+	role="menu"
+	aria-labelledby="provaMenuTrigger"
+	(keydown)="handleKeyDown($event)">
+	<!-- Exclusive Metadata chosen -->
+		<li *ngFor="let item of dropupItems; let i = index" role="none">
+		<button
+		type="button"
+		class="dropup-item"
+		role="menuitem"
+		[tabindex]="focusedItemIndex === i ? 0 : -1"
+		(click)="selectItem(item)">
+		<div class="dropup-item-content">
+		<span>{{ item }}</span>
+		<mat-icon class="check-icon" *ngIf="selectedMetadata.has(item)">check</mat-icon>
+		</div>
+		</button>
+		</li>
+	</ul>
+
+  </mat-card-actions>
+
+  <!-- Base layers container -->
   <ng-container *ngIf="layers.filter(isBaseLayer).length > 1">
-    <mat-card-subtitle>Base layers</mat-card-subtitle>
+    <mat-card-subtitle style="padding: 0 16px;">Base layers</mat-card-subtitle>
     <mat-card-content>
       <mat-radio-group aria-label="Select a base layer" (change)="onChangeBaseLayer($event)">
         <ng-container *ngFor="let layer of layers; let i = index">
@@ -32,7 +83,7 @@
               [checked]="layer.getVisible()"
               value="{{ i }}"
               (change)="onChangeBaseLayer($event)"
-              >{{ layer.get('name') }}</mat-radio-button
+              >{{ layer.get('name_exposed') }}</mat-radio-button
             >
           </ng-container>
         </ng-container>

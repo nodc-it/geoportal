@@ -18,6 +18,30 @@ export abstract class DateFunctions {
 
 }
 
+// USED IN findMetadata function
+// ---------------------------------
+// Interface for file JSON GeoJSON typing
+export interface FeatureProperties {
+  name: string;
+  dialog_par: string[];
+}
+
+export interface Feature {
+  properties: FeatureProperties;
+  [key: string]: any; // for other properties like geometry, type, ecc.
+}
+
+export interface GeoJsonInput {
+  type: string;
+  features: Feature[];
+  [key: string]: any;
+}
+
+// Return value type: array of [string, string] pairs
+export type RespondingPair = [string, string];
+// ---------------------------------
+
+
 // Interface describing data stored
 // in config_map_view.json local file,
 // used to set map view in ol-map.component.ts.
@@ -95,6 +119,38 @@ export abstract class DeviceParameters
 		return myDeviceList;
 		
 	}
+
+	
+	// Function findMetadata
+	// Map the input parameters to their corresponding "name" values if present in "dialog_par".
+	// INPUT inputParams Array of strings to search for (es. ["TEMP", "WDIR",)
+	// RETURN Array of pairs ["name", "my_parameter"] or empty array if there are no matches
+
+	static findMetadata(inputParams: string[]): RespondingPair[]
+	{
+		const result: RespondingPair[] = [];
+
+		// Read configuration file from local server.
+		const configStationJsonFile = require('./../assets/config_stations.json');
+
+		// Iterates through each input string.
+		for (const my_parameter of inputParams)
+		{
+			// For each string, check all the JSON features.
+			for (const feature of configStationJsonFile.features)
+			{
+				const { name, dialog_par } = feature.properties;
+
+				// If my_parameter is included in the dialog_par array, store the pair.
+				if (dialog_par.includes(my_parameter))
+				{
+					result.push([name, my_parameter]);
+				}
+			}
+		}
+
+		return result;
+	}
 	
 	// Function to return UrlInfo from local file config_map_view.json
 	// where are stored information about set map view.
@@ -120,4 +176,11 @@ export abstract class DeviceParameters
 		
 	}
 }
+
+// -------------------------
+
+
+
+
+
 

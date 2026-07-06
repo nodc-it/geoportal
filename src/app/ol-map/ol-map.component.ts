@@ -1,5 +1,6 @@
 import { LayersService } from '../services/layers.service';
-import { rowStation, ErddapService } from 'src/app/services/erddap.service';
+import { rowStation, ErddapService, Parameter, DataType, Measurement } from 'src/app/services/erddap.service'; //
+import { VocabService } from 'src/app/services/vocab.service'; //
 import { Component, OnInit } from '@angular/core';
 import { View, Map } from 'ol';
 import Overlay from 'ol/Overlay';
@@ -9,7 +10,10 @@ import { easeOut } from 'ol/easing';
 import Layer from 'ol/layer/Layer';
 import TileWMS from 'ol/source/TileWMS';
 import { ActivatedRoute } from '@angular/router';
-import { urlInfoInterface, DeviceParameters } from 'src/app/app.misc'; //
+import { urlInfoInterface, DeviceParameters, DateFunctions } from 'src/app/app.misc'; //
+import { forkJoin, Observable, of } from 'rxjs'; //
+import { catchError, timeout } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-ol-map',
@@ -18,9 +22,331 @@ import { urlInfoInterface, DeviceParameters } from 'src/app/app.misc'; //
 })
 export class OlMapComponent implements OnInit {
 	map!: Map;
+	
+	// sei of Overlay for Data Comparison tooltip
+	private metadataOverlays: Overlay[] = [];
+	
+	// Maintains the highest z-index for tooltips brought to the foreground.
+	private maxTooltipZIndex = 100;
+	
+	isMetadataLoading: boolean = false;
 
-  constructor(public erdappService: ErddapService, public layersService: LayersService, 
+
+
+  constructor(public erdappService: ErddapService, public layersService: LayersService, private vocabService: VocabService,
 				private matDialog: MatDialog, private route: ActivatedRoute){}
+
+
+
+//--------------
+
+// Function to show Data comparison tooltip
+	
+showMetadataTooltips(metadataName: string): void
+{
+	this.hideMetadataTooltips();
+	if (!this.stationsObjPtr) return;
+	const source = (this.stationsObjPtr as any).getSource();
+	if (!source) return;
+
+	// Reads the sensor map from layer.service.
+	const sensorCodes = this.layersService.metadataSensorMapping[metadataName];
+
+	if (!sensorCodes) return;
+
+	// Find the list of compatible stations and their associated real sensors from the JSON.
+	// stationsWithSensor will be an array of pairs, e.g., [ ["MAMBO1", "TEMP_1"], ["MAMBO3", "TEMP"] ]
+	const stationsWithSensor = DeviceParameters.findMetadata(sensorCodes);
+
+	// We create a key-value map [StationName -> SpecificSensor] for quick lookup.
+
+	const stationSensorMap: { [stationName: string]: string } = {};
+	stationsWithSensor.forEach((pair: any) => {
+	  if (Array.isArray(pair) && pair.length >= 2) {
+		stationSensorMap[pair[0]] = pair[1];
+	  } else if (pair && pair.station && pair.sensor) { // Coverage for cases where an object is returned instead of an array.
+		stationSensorMap[pair.station] = pair.sensor;
+	  }
+	});
+
+
+	const stationsStatusList = this.erdappService.getAllStationStatus() || [];
+	const features = source.getFeatures();
+
+	// Structure for storing which sensor is used by each valid feature for the second cycle.
+	const validFeaturesForRequest: { feature: any; sensorCode: string }[] = [];
+	const requests: { [stationName: string]: Observable<any> } = {};
+	const timeStart = DateFunctions.daysAgoMidnightUTC(7);
+
+	features.forEach((feature: any) => {
+	  const stationName = feature.get('name');
+	  if (!stationName) return;
+
+	 // =========================================================================
+	 // TEMPORARY DEACTIVATION OF STATION E2M3A
+	 // Remove or comment out this if block to reactivate the station.
+	 // =========================================================================
+	 if (stationName === 'E2M3A') {
+	   return; // Skip the station and avoid creating the tooltip for any data.
+	 }
+	 // =========================================================================
+
+
+	  // Check if the station exists as a key in the object.
+	  if (!stationSensorMap.hasOwnProperty(stationName)) return;
+	  
+	  // Retrieve the specific sensor code from the object.
+	  const exactSensorCode = stationSensorMap[stationName];
+
+	  // CHECK 2: Is the station active?
+	  const stationStatusObj = stationsStatusList.find((s: any) => s.name === stationName);
+	  const isActive = stationStatusObj && stationStatusObj.status === '1';
+	  if (!isActive) return;
+
+	  validFeaturesForRequest.push({ feature, sensorCode: exactSensorCode });
+	  
+	  const parameter: Parameter = {
+		name: exactSensorCode,
+		type: DataType.TIME_SERIES
+	  };
+
+		// Retrieve requested data and make a 3 seconds timeout
+		// to give time loading data from all interested stations.
+	  requests[stationName] = this.erdappService.getLastMeasurements(stationName, parameter, timeStart).pipe(
+		timeout(3000),
+		catchError(err => {
+		  console.warn(`Stazione ${stationName} andata in timeout o fallita:`, err);
+		  return of({ timeoutError: true });
+		})
+	  );
+	});
+
+
+	if (Object.keys(requests).length === 0) return;
+
+	this.isMetadataLoading = true;
+
+	forkJoin(requests).subscribe({
+	next: (bulkResults: { [stationName: string]: any }) => {
+	  validFeaturesForRequest.forEach((item) => {
+		const stationName = item.feature.get('name');
+		const result = bulkResults[stationName];
+		
+		// We pass the correct station-specific sensor code to the rendering process.
+		this.renderSingleTooltip(item.feature, stationName, result, item.sensorCode, metadataName);
+	  });
+	  this.isMetadataLoading = false;
+	},
+	error: (err) => {
+	  console.error("Errore nel forkJoin dei metadati:", err);
+	  this.isMetadataLoading = false;
+	}
+	});
+	
+} // end function
+
+
+
+//-------------------
+
+// Function to render every single tooltip
+// following "data comaprison" menù choice.
+
+private renderSingleTooltip(feature: any, stationName: string, result: any, sensorCode: string, metadataName: string): void {
+  // If an overlay already exists for this station (e.g., a previous attempt that timed out), we remove it first.
+  this.removeOverlayForStation(stationName);
+
+  const localizedName = this.vocabService.getMeasurementName(stationName, sensorCode) || metadataName;
+  const unit = this.vocabService.getMeasurementUnit(stationName, sensorCode) || '';
+  
+  let formattedMeasure = 'Data not available';
+  let formattedDate = '-';
+  let formattedHour = '-';
+  let formattedDepth = '-';
+  let showReloadLink = false;
+
+  // Let's check if the response triggered our custom timeout.
+  if (result && result.timeoutError) {
+    formattedMeasure = '<span style="color: #c62828; font-weight: 500;">Wait expired</span>';
+    showReloadLink = true;
+  } else if (result && Array.isArray(result) && result.length > 0) {
+    const lastData = result[result.length - 1];
+    formattedMeasure = `${Number(lastData.measurement).toFixed(2)} ${unit}`;
+    if (lastData.timestamp) {
+      const measurementDate = new Date(lastData.timestamp);
+      formattedDate = measurementDate.toLocaleDateString('it-IT');
+      formattedHour = measurementDate.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+    }
+    if (lastData.depth !== undefined && lastData.depth !== null) {
+      formattedDepth = `${lastData.depth} m`;
+    }
+  }
+
+  const coordinate = feature.getGeometry().getCoordinates();
+  const element = document.createElement('div');
+  
+  // We assign an identifying attribute to the div so that it can be located during removal.
+  element.setAttribute('data-station', stationName);
+
+  let htmlContent = `
+    <strong>${stationName}</strong><br>
+    <span style="color: #003c88; font-weight: 500;">${localizedName}</span><br>
+    <div class="measure-container">${formattedMeasure}</div>
+    ${formattedDate}<br>
+    ${formattedHour}<br>
+    ${formattedDepth}
+  `;
+
+  // If the station has timed out, we post the clickable HTML link.
+  if (showReloadLink) {
+    htmlContent += `
+      <div style="margin-top: 6px; border-top: 1px dashed #ccc; padding-top: 4px; text-align: center;">
+        <a href="javascript:void(0);" class="reload-metadata-btn" 
+           style="color: #0056b3; text-decoration: underline; font-weight: bold; font-size: 11px;">
+           Click to reload
+        </a>
+      </div>
+    `;
+  }
+
+  element.innerHTML = htmlContent;
+
+  // --- GRAPHIC STYLE (Adapted to allow clicking) ---
+  element.style.position = 'absolute';
+  element.style.whiteSpace = 'nowrap';
+  element.style.backgroundColor = '#ffffff';
+  element.style.color = '#333333';
+  element.style.padding = '8px 12px';
+  element.style.borderRadius = '10px';
+  element.style.border = '1px solid #cccccc';
+  element.style.boxShadow = '0px 2px 6px rgba(0,0,0,0.2)';
+  element.style.fontFamily = 'Roboto, "Helvetica Neue", sans-serif';
+  element.style.fontSize = '12px';
+  element.style.lineHeight = '1.4';
+  
+  // NOTE: Removed the "pointerEvents = 'none'" line to allow clicking the link.
+
+  const overlay = new Overlay({
+    element: element,
+    position: coordinate,
+    positioning: 'center-left',
+    offset:[15,0],
+    stopEvent: true // Set to true so that the click on the link does not propagate to the map underneath.
+  });
+
+	// =========================================================================
+	// Bring the tooltip to the foreground on click.
+	// It targets the native .ol-overlay-container and assigns the z-index to it.
+	// =========================================================================
+	element.addEventListener('click', (e) => {
+	// Se l'utente ha cliccato sul link di reload, non interferiamo
+	const target = e.target as HTMLElement;
+	if (target.classList.contains('reload-metadata-btn')) {
+	 return;
+	}
+
+	// Let's trace back to the container div created by OpenLayers.
+	const overlayContainer = element.parentElement;
+	if (overlayContainer) {
+	 this.maxTooltipZIndex++;
+	 overlayContainer.style.zIndex = this.maxTooltipZIndex.toString();
+	}
+	});
+	// =========================================================================
+
+
+
+
+  // If the reload button is present, we attach the native click event to it.
+  if (showReloadLink) {
+    const btn = element.querySelector('.reload-metadata-btn');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.reloadSingleStationMetadata(feature, stationName, sensorCode, metadataName, element);
+      });
+    }
+  }
+
+  this.map.addOverlay(overlay);
+  this.metadataOverlays.push(overlay);
+}
+
+
+
+//-------------------
+
+private reloadSingleStationMetadata(feature: any, stationName: string, sensorCode: string, metadataName: string, tooltipElement: HTMLElement): void {
+  // We are temporarily replacing the measurement in the tooltip with a waiting message and a text-based spinner.
+  const measureContainer = tooltipElement.querySelector('.measure-container');
+  if (measureContainer) {
+    measureContainer.innerHTML = '<span style="color: #003c88;">Loading...</span>';
+  }
+  // We hide the reload link during the new call.
+  const reloadBtnContainer = tooltipElement.lastElementChild as HTMLElement;
+  if (reloadBtnContainer && reloadBtnContainer.tagName === 'DIV') {
+    reloadBtnContainer.style.display = 'none';
+  }
+
+  const parameter: Parameter = {
+    name: sensorCode,
+    type: DataType.TIME_SERIES
+  };
+  const timeStart = DateFunctions.daysAgoMidnightUTC(2);
+
+  // We execute the single, isolated ERDDAP call (without a 3-second timeout; we let the server respond at its own pace).
+  this.erdappService.getLastMeasurements(stationName, parameter, timeStart).pipe(
+    catchError(err => {
+      console.error(`Errore durante il reload singolo per ${stationName}:`, err);
+      return of({ timeoutError: true });
+    })
+  ).subscribe((result: any) => {
+    // We are redesigning the individual tooltip while updating the data on the map.
+    this.renderSingleTooltip(feature, stationName, result, sensorCode, metadataName);
+  });
+}
+
+
+
+//------------------
+
+
+// Helper method in the OlMapComponent class to clear individual overlays if they overlap.
+private removeOverlayForStation(stationName: string): void
+{
+	const overlaysToRemove = this.metadataOverlays.filter((overlay: any) => {
+		const element = overlay.getElement();
+		return element && element.getAttribute('data-station') === stationName;
+	});
+
+	overlaysToRemove.forEach((overlay: any) => {
+		this.map.removeOverlay(overlay);
+		const index = this.metadataOverlays.indexOf(overlay);
+		if (index > -1)
+		{
+			this.metadataOverlays.splice(index, 1);
+		}
+	});
+}
+
+	
+	
+	
+	//--------------
+
+	// Removes all generic overlays from the map.
+
+	hideMetadataTooltips(): void {
+
+	  this.metadataOverlays.forEach(overlay => {
+		this.map.removeOverlay(overlay);
+	  });
+	  this.metadataOverlays = [];
+	}
+
+
+				
 		
 
   openAttributionsDialog() {
@@ -63,6 +389,19 @@ export class OlMapComponent implements OnInit {
   ngOnInit(): void {
 	  
 	  this.generateTimeSlots();
+	  
+	// Ascolta il click dal menu a tendina per qualsiasi tipo di metadato
+	this.layersService.activeMetadata$.subscribe(metadataName => {
+	  if (metadataName) {
+		// Se c'è un metadato attivo (stringa), mostra i tooltip personalizzati
+		this.showMetadataTooltips(metadataName);
+	  } else {
+		// Se è null, nascondi tutto
+		this.hideMetadataTooltips();
+	  }
+	});
+
+	  
 
 	// Function to verify presence of eventual url parameter trough "route" object.
 	// From observable eventually returned, we check:
