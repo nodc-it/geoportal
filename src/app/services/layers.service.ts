@@ -25,6 +25,7 @@ import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig 
 import { DateFunctions } from '../app.misc';
 import Overlay from 'ol/Overlay';
 import { ErddapService } from 'src/app/services/erddap.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,27 @@ export class LayersService {
   
   // flag to indicate an error loading tiles from WMS server
   tileLoadingError = false;
+  
+	// Matrix indicating the coupling between the data to be displayed 
+	// and the related sensors present in the vocab
+	public readonly metadataSensorMapping: { [key: string]: string[] } = {
+	'Water temperature': ['TEMP', 'TEMP_1'],
+	'Oxygen': ['DOXY', 'DOXY_1'],
+	'Salinity': ['PSAL', 'PSAL_1', 'PSAL_2'],
+	'Significant wave height (Hs)': ['VAVH'],
+	'Significant wave period (Ts)': ['VAVT'],
+	'Wave principal direction at spectral peak': ['VPED']
+	};
+  
+	// member variable to monitor metadata (Data comparison) changes
+	private activeMetadataSubject = new BehaviorSubject<string | null>(null);
+	activeMetadata$ = this.activeMetadataSubject.asObservable();
+
+	// member function to update the reactive state by sending a new value to the BehaviorSubject
+	// Used in layer-switcher.component.ts to comunicate chosen metadata (what voice in "Data Comparison").
+	setActiveMetadata(metadataName: string | null): void {
+	  this.activeMetadataSubject.next(metadataName);
+	}
 
 
   constructor(private http: HttpClient, private matDialog: MatDialog, private matEmodnetDialog: MatDialog, public erdappService: ErddapService) {
@@ -45,6 +67,7 @@ export class LayersService {
       source: new OSM(),
     });
     osm.set('name', 'OpenStreetMap');
+	osm.set('name_exposed', 'OpenStreetMap');
     osm.set('base', true);
     this.layers.push(osm);
 
@@ -55,6 +78,7 @@ export class LayersService {
       }),
     });
     bathymetry.set('name', 'EMODnet Bathymetry');
+	bathymetry.set('name_exposed', 'EMODnet Bathymetry');
     bathymetry.set('base', true);
     bathymetry.setVisible(false);
     this.layers.push(bathymetry);
@@ -65,6 +89,7 @@ export class LayersService {
       }),
     });
     esri.set('name', 'ESRI imagery');
+	esri.set('name_exposed', 'ESRI imagery');
     esri.set('base', true);
     esri.setVisible(false);
     this.layers.push(esri);
@@ -98,6 +123,7 @@ export class LayersService {
       layers: [argoTrajectory, argoPoints],
     });
     argo.set('name', 'Argo');
+	argo.set('name_exposed', 'Argo');
 
     let argoSelect = new Select({
       layers: [argoPoints],
@@ -134,6 +160,7 @@ export class LayersService {
       }),
     });
 	radarArrows.set('name','radarArrows');
+	radarArrows.set('name_exposed','radarArrows');
 	
 	// internal flag to indicate WMS in progress loading operation
 	radarArrows.set('tileWMSloading',true);
@@ -218,6 +245,7 @@ export class LayersService {
 	
 	radarPoints.set('selectable', true);
 	radarPoints.set('name', 'radarPoints');
+	radarPoints.set('name_exposed', 'radarPoints');
 	
     let radar = new LayerGroup({
       layers: [radarArrows, radarPoints],
@@ -236,6 +264,7 @@ export class LayersService {
 	radar.set('legendRange', radar.get('defaultLegendRange'));
     radar.set('legendUnit', 'm/s');
     radar.set('name', 'Radar');
+	radar.set('name_exposed', 'Surface currents');
 	radar.setVisible(false);
     this.layers.push(radar);
 
@@ -260,6 +289,7 @@ export class LayersService {
 		style: this.styleByType,
     });
     emodnetPoints.set('name', 'Sampling Stations');
+	emodnetPoints.set('name_exposed', 'Biogeochemical Stations');
     emodnetPoints.set('selectable', true);
 	
 	// attribute that indicates whether the layer has not yet been made visible by the user.
@@ -311,6 +341,7 @@ export class LayersService {
       style: this.styleByType,//
     });
     stations.set('name', 'Real Time Stations');
+	stations.set('name_exposed', 'Real Time Stations');
     stations.set('selectable', true);
     this.layers.push(stations);
 
