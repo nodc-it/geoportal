@@ -384,6 +384,9 @@ private removeOverlayForStation(stationName: string): void
   
   // - Pointer to layer named "Sampling Stations"
   samplingObjPtr = this.layersService.layers.find (item=>item.get('name') == "Sampling Stations");
+
+  // - Pointer to layer named "Biodiversity stations"
+  BioDiversityObjPtr = this.layersService.layers.find (item=>item.get('name') == "Biodiversity stations");
   
 
   ngOnInit(): void {
@@ -497,6 +500,12 @@ private removeOverlayForStation(stationName: string): void
 					// but only if there is only one station or more than one at the specific point ("Single" or "Multiple")
 					tooltipDeviceText = "&nbsp;".repeat(3) + (((this.layersService.getEmodnetPtsSameCoord(deviceAtPixel.get('latitude'), deviceAtPixel.get('longitude'))).length > 1) ? "Multiple" : "Single");
 					break;
+
+				case 'sites':
+					// in this case the tooltip does not show the specific name of a station,
+					// but only if there is only one station or more than one at the specific point ("Single" or "Multiple")
+					tooltipDeviceText = "&nbsp;".repeat(3) + (((this.layersService.getBioPtsSameCoord(deviceAtPixel.get('latitude'), deviceAtPixel.get('longitude'))).length > 1) ? "Multiple" : "Single");
+					break;					
 				
 				default:
 					tooltipDeviceText = "&nbsp;".repeat(3) + deviceAtPixel.get('name');
@@ -554,6 +563,9 @@ private removeOverlayForStation(stationName: string): void
 		
 		if (this.samplingObjPtr!.get('selectableFirstTime') && this.samplingObjPtr!.getVisible())
 			this.samplingObjPtr!.set('selectableFirstTime', false);
+		
+		if (this.BioDiversityObjPtr!.get('selectableFirstTime') && this.BioDiversityObjPtr!.getVisible())
+			this.BioDiversityObjPtr!.set('selectableFirstTime', false);		
 		
 	})
 	

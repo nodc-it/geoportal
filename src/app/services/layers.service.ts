@@ -21,6 +21,7 @@ import Stroke from 'ol/style/Stroke';
 import { Interaction, defaults, Select } from 'ol/interaction';
 import { DetailDialogComponent } from '../detail-dialog/detail-dialog.component';
 import { EmodnetDialogComponent } from '../emodnet-dialog/emodnet-dialog.component'; //
+import { BiopointsDialogComponent } from '../biopoints-dialog/biopoints-dialog.component'; //
 import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { DateFunctions } from '../app.misc';
 import Overlay from 'ol/Overlay';
@@ -62,7 +63,7 @@ export class LayersService {
 	}
 
 
-  constructor(private http: HttpClient, private matDialog: MatDialog, private matEmodnetDialog: MatDialog, public erdappService: ErddapService) {
+  constructor(private http: HttpClient, private matDialog: MatDialog, private matEmodnetDialog: MatDialog, private matBiopointsDialog: MatDialog, public erdappService: ErddapService) {
     let osm = new TileLayer({
       source: new OSM(),
     });
@@ -319,6 +320,60 @@ export class LayersService {
 	});
 	this.interactions.push(emodnetPointsSelect);//
 	
+	// -----------------
+    let bioPoints = new VectorLayer({
+      source: new VectorSource({
+        url: function (extent) {
+          return (
+            'https://nodc.ogs.it/geoserver/Geoportal/ows' +
+            '?service=WFS' +
+            '&version=1.0.0' +
+            '&request=GetFeature' +
+			'&typeName=Geoportal:geoportal_bio' +
+            '&outputFormat=application/json&srsname=EPSG:3857&' +
+            'bbox=' +
+            extent.join(',') +
+            ',EPSG:3857'
+          );
+        },
+        strategy: bboxStrategy,
+        format: new GeoJSON(),
+      }),
+		style: this.styleByType,
+    });
+    bioPoints.set('name', 'Biodiversity stations');
+	bioPoints.set('name_exposed', 'Biodiversity Stations');
+    bioPoints.set('selectable', true);
+	
+	// attribute that indicates whether the layer has not yet been made visible by the user.
+	// Used to show / not show loading user message (view OlMapComponent HTML file)
+	bioPoints.set('selectableFirstTime', true);
+	
+	bioPoints.setVisible(false);
+    this.layers.push(bioPoints);
+	
+	let bioPointsSelect = new Select({//
+		layers: [bioPoints],
+		style: this.styleByType,
+	});
+
+    bioPointsSelect.on('select', e => {//
+		const bioPointsDialogConfig = new MatDialogConfig();
+		bioPointsDialogConfig.disableClose = true;
+		bioPointsDialogConfig.backdropClass = 'transparent-backdrop';
+		bioPointsDialogConfig.data = e.selected[0]; //bioPoints features
+		bioPointsDialogConfig.maxHeight = 600;
+		
+		const bioPointsModalDialog = this.matBiopointsDialog.open(BiopointsDialogComponent, bioPointsDialogConfig);
+		bioPointsModalDialog.afterClosed().subscribe(() => {
+		bioPointsSelect.getFeatures().clear();
+		});
+
+	});
+	this.interactions.push(bioPointsSelect);//	
+	
+	// -----------------
+	
 
     let stations = new VectorLayer({
       source: new VectorSource({
@@ -430,6 +485,40 @@ export class LayersService {
   
   
 	// -------------------------------------
+
+	// Function to return array of BioPoints (BioPoints Stations)
+	// having same geographic coordinates.
+	// Input paramters:
+	//	- selectedLat (number)
+	//	- selectedLon (number)
+	// Output:
+	//	- array of string array, structured like ['XXX', 'YYY', 'ZZZ', 'WWW'].
+	// Called in OlMap Component, biopoints-dialog Component and biopoints-info Component.ts to determine if and what stations have same coordinates.
+
+	getBioPtsSameCoord (selectedLat:number, selectedLon:number) : string[][]
+	{
+		let result:string[][] = [];
+		
+		let counterResult = 0;
+
+		// Pointer to Sampling Stations
+		let BioObjPtr = this.layers.find (item=>item.get('name') == "Biodiversity stations");
+
+		// Scan, as VectorSource object, on BioPoints Stations features
+		(BioObjPtr!.get("source") as VectorSource).forEachFeature(item=>
+			{
+                if ((item.get("latitude") == selectedLat) && (item.get("longitude") == selectedLon))
+					result[counterResult++] = [	item.get("title"),
+												item.get("startDate"),
+												item.get("endDate"),
+												item.get("locationID"),
+												item.get("alt_id")
+												];
+            });
+		return result;
+	} // end function	
+	
+	// -------------------------------------
   styleByType: StyleFunction = (feature: FeatureLike, resolution: number) => {
     switch (feature.get('type')) 
 	{
@@ -477,6 +566,13 @@ export class LayersService {
             scale: 0.5,
           }),
         });
+      case 'sites'://
+        return new Style({
+          image: new Icon({
+            src: 'assets/bio_marine_star.png',
+            scale: 0.5,
+          }),
+        });		
       default:
         return undefined;
     }
