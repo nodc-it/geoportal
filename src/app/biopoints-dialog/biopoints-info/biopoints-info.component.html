@@ -1,0 +1,43 @@
+<div>
+
+<mat-card>
+	<mat-card-content>
+		<table *ngFor="let item of this.arrayBioDiversityInfoStation" class="tg table_centered">
+			<tbody>
+				<tr>
+					<td class="tg-de2y">{{ this.displayedRows[0] }}</td>
+					<td class="tg-de2y">{{ item[0] }}</td>
+				</tr>
+				<tr>
+					<td class="tg-de2y">{{ this.displayedRows[1] }}</td>
+					<td class="tg-de2y">{{ item[1] }}</td>
+				</tr>
+				<tr>
+					<td class="tg-de2y">{{ this.displayedRows[2] }}</td>
+					<td class="tg-de2y">{{ item[2] }}</td>
+				</tr>
+				<tr>
+					<td class="tg-de2y">{{ this.displayedRows[3] }}</td>
+					<td class="tg-de2y">
+						<!-- If a link, show tag <a> -->
+						<a *ngIf="item[3] && item[3].startsWith('http'); else onlyText" href="{{ item[3] }}" target="_blank">
+						  {{ item[3] }}
+						</a>
+
+						<!-- If not a link, show normal text -->
+						<ng-template #onlyText>
+						  {{ item[3] }}
+						</ng-template>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-de2y">{{ this.displayedRows[4] }}</td>
+					<td class="tg-de2y"><a href = "{{ item[4] }}" target = "_blank">{{ item[4] }}</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</mat-card-content>
+	
+</mat-card>
+	
+</div>

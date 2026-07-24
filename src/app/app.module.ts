@@ -35,6 +35,8 @@ import { EmodnetInfoComponent } from './emodnet-dialog/emodnet-info/emodnet-info
 import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { BiopointsDialogComponent } from './biopoints-dialog/biopoints-dialog.component';
+import { BiopointsInfoComponent } from './biopoints-dialog/biopoints-info/biopoints-info.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     InfoComponent,
     EmodnetDialogComponent,
     EmodnetInfoComponent,
+    BiopointsDialogComponent,
+    BiopointsInfoComponent,
   ],
   imports: [
     BrowserModule,

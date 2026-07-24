@@ -24,6 +24,18 @@
 		</ng-container>
 		
 	</ng-container>
+	
+	<ng-container *ngFor="let layer of layersService.layers">
+		
+		<ng-container *ngIf="layer.get('name') == 'Biodiversity stations'">
+
+		<mat-card *ngIf="(layer.getVisible() && layer.get('selectableFirstTime'))">
+			<p>Loading Biodiversity Stations,<br>please wait...</p>
+		</mat-card>
+		
+		</ng-container>
+		
+	</ng-container>	
 
 	<!-- Loading message for metadata sensors -->
 	<mat-card *ngIf="isMetadataLoading">

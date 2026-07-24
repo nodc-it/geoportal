@@ -1,0 +1,13 @@
+.close-button {
+  float: right;
+  top: -24px;
+  right: -24px;
+}
+.mat-dialog-title i {
+  opacity: 0.5;
+  font-size: 75%;
+}
+
+[cdkDragHandle] {
+  cursor: move;
+}
