@@ -54,20 +54,32 @@ export class DataTableComponent implements OnInit {
 	  
 	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
 	
-    dialogParam.map((param: string, index: number) => {
-      this.loading++;
-      this.erdappService
-        .getLastMeasurements(
-          this.data.get('name'),
-          { name: param, type: DataType.TIME_SERIES },
-          DateFunctions.daysAgoMidnightUTC(7)
-        )
+	dialogParam.map((item: any, index: number) => {
+	  const paramName = typeof item === 'object' && item !== null ? item.param : item;
+	  const sensorId = typeof item === 'object' && item !== null ? item.sensor_id : undefined;
+
+	  this.loading++;
+	  this.erdappService
+		.getLastMeasurements(
+		  this.data.get('name'),
+		  { name: paramName, type: DataType.TIME_SERIES, sensor_id: sensorId },
+		  DateFunctions.daysAgoMidnightUTC(7)
+		)
         .subscribe(
           (response: Measurement[]) => {
             this.cardsMeasurement.data = this.cardsMeasurement.data.concat(response);
+			/*
             (this.cardsMeasurement.data as Measurement[]).sort(
               (a, b) => dialogParam.indexOf(a.parameter.name) - dialogParam.indexOf(b.parameter.name)
             );
+			*/
+
+			(this.cardsMeasurement.data as Measurement[]).sort((a, b) => {
+				const indexA = dialogParam.findIndex(item => (typeof item === 'object' && item !== null ? item.param : item) === a.parameter.name);
+				const indexB = dialogParam.findIndex(item => (typeof item === 'object' && item !== null ? item.param : item) === b.parameter.name);
+				return indexA - indexB;
+			});
+			
             this.cardsMeasurement._updateChangeSubscription();
           },
           (error: any) => {

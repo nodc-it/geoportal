@@ -8,6 +8,7 @@ import { DeviceParameters } from 'src/app/app.misc'; //
 export interface Parameter {
   name: string;
   type: DataType;
+  sensor_id?: string; // optional field to handle new standard EMSO
 }
 
 export enum DataType {
@@ -82,6 +83,11 @@ export class ErddapService {
       '!=NaN' +
       (depth !== undefined ? '&depth=' + depth : '') +
       '&orderBy("time")';
+	  
+		// If parameter must include a sensor_id, concatenate this to URL
+		if (parameter.sensor_id) {
+			url += '&sensor_id="' + parameter.sensor_id + '"';
+		}
 
     return this.http.get(url).pipe(
       map((result: any) => {
@@ -134,6 +140,11 @@ export class ErddapService {
           '&orderByMax("' +
           (axisResult !== undefined && axisResult.name === 'depth' ? 'depth,' : '') +
           'time")';
+		  
+			// If parameter must include a sensor_id, concatenate this to URL
+			if (parameter.sensor_id) {
+				url += '&sensor_id="' + parameter.sensor_id + '"';
+			}		  
 
         return this.http.get(url).pipe(
           map((result: any) => {

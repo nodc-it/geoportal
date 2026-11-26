@@ -1,3 +1,5 @@
+import configStationJsonFile from '../assets/config_stations.json';
+import configMapJsonFile from '../assets/config_map_view.json';
 
 export abstract class DateFunctions {
   static daysElapsed(timestamp: string): number {
@@ -15,7 +17,6 @@ export abstract class DateFunctions {
     date.setDate(date.getDate() - days);
     return date;
   }
-
 }
 
 // USED IN findMetadata function
@@ -59,128 +60,119 @@ export interface urlInfoInterface {
   zoomLevel: number;
 }
 
+
+export interface DataComparisonSensorRule {
+  stationName: string;
+  paramName: string;
+  sensorId: string;
+}
+
+
 // Class to implement local file access
 // to retrieve:
 // - device parameters management from config_stations.json;
 // - UrlInfo from config_map_view.json.
 
-export abstract class DeviceParameters
-{
+export abstract class DeviceParameters {
+  
+	// Returns the array of parameters exactly as they appear in the JSON (a mix of strings and objects)
+	// to allow consumers (table and charts) to read the `sensor_id`, if present.
 	
-	// Member function to retrieve 
-	// device sensor parameters shown in dialog for
-	// every station clicked on the map.
-	// The function download parameter's info
-	// from configuration file 'config_stations.json'
-	// in 'configuration' folder.
-	// INPUT PARAMETER: device name (string)
-	// RETURN VALUE: string array of parameters.
-	
-	static getSensorDialogPar (deviceName: string) : string[]
-	{
-		// Read configuration file from local server.
-		const configStationJsonFile = require('./../assets/config_stations.json');
+  static getSensorDialogPar(deviceName: string): any[] {
+    const station = configStationJsonFile.features.find((item: any) => item.properties.name === deviceName);
+    return station ? station.properties.dialog_par : [];
+  } // end function
 
-		// Return device name dialog parameters 
-		// after a loop on features array to search
-		// device name input parameter.
-		// Exit when correspondent dialog parameters
-		// are founded and takes corresponding properties dialog parameters.
-		
-		return configStationJsonFile.features.find((item:any)=>item.properties.name == deviceName).properties.dialog_par;
-		
-	}
+	// Returns the list of device names
+  static getDeviceList(): string[] {
+    let myDeviceList = [];
 
-	// Member function to retrieve 
-	// station (device) list
-	// from configuration file 'config_stations.json'
-	// in 'configuration' folder.
-	// INPUT PARAMETER: device name (string)
-	// RETURN VALUE: string array.
-
-	
-	static getDeviceList () : string []
-	{
-
-		// Read configuration file from local server.
-		const configStationJsonFile = require('./../assets/config_stations.json');
-
-		let myDeviceList = [];
-
-		// Loop on features array to search
-		// all device .
-		
-		for (let i = 0; i < (configStationJsonFile.features).length; i++)
-		{
-			myDeviceList.push(configStationJsonFile.features[i].properties.name);
-			
-		}
-		
-		return myDeviceList;
-		
-	}
-
-	
-	// Function findMetadata
-	// Map the input parameters to their corresponding "name" values if present in "dialog_par".
-	// INPUT inputParams Array of strings to search for (es. ["TEMP", "WDIR",)
-	// RETURN Array of pairs ["name", "my_parameter"] or empty array if there are no matches
-
-	static findMetadata(inputParams: string[]): RespondingPair[]
-	{
-		const result: RespondingPair[] = [];
-
-		// Read configuration file from local server.
-		const configStationJsonFile = require('./../assets/config_stations.json');
-
-		// Iterates through each input string.
-		for (const my_parameter of inputParams)
-		{
-			// For each string, check all the JSON features.
-			for (const feature of configStationJsonFile.features)
-			{
-				const { name, dialog_par } = feature.properties;
-
-				// If my_parameter is included in the dialog_par array, store the pair.
-				if (dialog_par.includes(my_parameter))
-				{
-					result.push([name, my_parameter]);
-				}
-			}
-		}
-
-		return result;
-	}
-	
-	// Function to return UrlInfo from local file config_map_view.json
-	// where are stored information about set map view.
-	// Takes in input 'msv', an URL parameter,
-	// load local configuration map file
-	// and return an object 'urlInfoInterface'
-	// setted with required fields.
-	// If mscCode is not in configuration file,
-	// return undefined.
-	// Function used in OlMapComponent ngOnInit.
-	
-	static getUrlInfo (msvCode:string):urlInfoInterface | any
-	{
-		// Read configuration map file from local server.
-		const configMapJsonFile = require('./../assets/config_map_view.json');
-		
-		return {
-			coordinateCenter: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.coordCenter,
-			radarYN: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.radarYesNo,
-			stationsYN: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.stationsYesNo,
-			zoomLevel: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.zoom,
-		  } as urlInfoInterface;
-		
-	}
-}
-
-// -------------------------
+    for (let i = 0; i < (configStationJsonFile.features).length; i++) {
+      myDeviceList.push(configStationJsonFile.features[i].properties.name);
+    }
+    return myDeviceList;
+  } // end function
+  
+  
+  static getComparisonSensorId(stationName: string, paramName: string): string | undefined {
+    const rules: DataComparisonSensorRule[] = configStationJsonFile.data_comparison_sensor_rules || [];
+    
+    const rule = rules.find(
+      r => r.stationName === stationName && r.paramName === paramName
+    );
+    return rule ? rule.sensorId : undefined;
+  }  // end function
 
 
+  static getMetadataSensorMapping(): { [key: string]: string[] } {
+    return configStationJsonFile.metadata_sensor_mapping || {};
+  } // end function
 
 
+	// Function to map input parameters (sensor's name to search for) 
+	// to their corresponding "name" values—the names of sea devices 
+	// if these are in "dialog_par".
+	// Return device-sensor pairs, provided that a given sensor is available on a specific device.
+	// This function is used for tooltips within the "Data Comparison" menu item.
 
 
+  static findMetadata(inputParams: string[]): RespondingPair[] {
+    const result: RespondingPair[] = [];
+
+    for (const my_parameter of inputParams) {
+      for (const feature of configStationJsonFile.features) {
+        const { name, dialog_par } = feature.properties;
+
+        for (const item of dialog_par) {
+          const paramName = typeof item === 'object' && item !== null ? item.param : item;
+
+          if (paramName === my_parameter) {
+
+            const requiredSensorId = DeviceParameters.getComparisonSensorId(name, paramName);
+
+            if (requiredSensorId !== undefined) {
+              // includes only object with the registered sensor_id
+              if (typeof item === 'object' && item.sensor_id === requiredSensorId) {
+                result.push([name, paramName]);
+              }
+              continue; 
+            }
+
+            // Standard flow for all devices without sensor_id specification
+            result.push([name, paramName]);
+          }
+        }
+      }
+    }
+
+    // remove duplicate
+    const uniquePairs = result.filter((pair, index, self) =>
+      index === self.findIndex((t) => t === pair)
+    );
+
+    return uniquePairs;
+  } // end function
+  
+  // Function to return UrlInfo from local file config_map_view.json
+  // where are stored information about set map view.
+  // Takes in input 'msv', an URL parameter,
+  // load local configuration map file
+  // and return an object 'urlInfoInterface'
+  // setted with required fields.
+  // If mscCode is not in configuration file,
+  // return undefined.
+  // Function used in OlMapComponent ngOnInit.
+  
+  static getUrlInfo (msvCode:string):urlInfoInterface | any
+  {
+    // Ora utilizza l'import statico configMapJsonFile dichiarato in cima
+    return {
+      coordinateCenter: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.coordCenter,
+      radarYN: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.radarYesNo,
+      stationsYN: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.stationsYesNo,
+      zoomLevel: configMapJsonFile.urlInfoList[Number(msvCode)].urlInfo.zoom,
+    } as urlInfoInterface;
+    
+  } // end function
+  
+} // end class

@@ -44,28 +44,21 @@
       "properties": {
         "name": "E2M3A",
         "dialog_par": [
-          "WDIR",
-          "WSPD",
-          "DRYT",
-          "ATMS",
-          "GSPD",
-          "GDIR",
-          "PHPH",
-          "DOX1_1",
-          "DOX1_2",
-          "PSAL_2",
-          "PSAL_3",
-          "RELH",
-          "CSLR",
-          "LWRD",
-          "PCO2_1",
-          "PCO2_2",
-          "CPWC",
-          "TUR4",
-          "CDOM",
-          "TEMP_1",
-          "TEMP_3",
-          "TEMP_4"
+			"WDIR",
+			"WSPD",
+			"DRYT",
+			"ATMS",
+			"GSPD",
+			"GDIR",
+			"PHPH",
+			"RELH",
+			"CSLR",
+			"LWRD",
+			"CPWC",
+			"TUR4",
+			"CDOM",
+			{ "param": "TEMP", "sensor_id": "SBE37O" },
+			{ "param": "TEMP", "sensor_id": "SBE16PLSO" }
         ]
       }
     },
@@ -130,9 +123,9 @@
           "ATMS",
           "GSPD",
           "GDIR",
-          "PHPH",
           "DOXY",
-          "TEMP",
+			{ "param": "TEMP", "sensor_id": "ADCP" },
+			{ "param": "TEMP", "sensor_id": "RBRCON3_01" },
           "PSAL",
           "TUR4",
           "RELH"
@@ -232,5 +225,18 @@
     "properties": {
       "name": "urn:ogc:def:crs:EPSG::4326"
     }
-  }
+  },
+	"data_comparison_sensor_rules": [
+		{ "stationName": "E2M3A", "paramName": "TEMP", "sensorId": "SBE37O" },
+		{ "stationName": "MAMBO3", "paramName": "TEMP", "sensorId": "RBRCON3_01" }
+	  ],
+	"metadata_sensor_mapping": {
+		"Water temperature": ["TEMP", "TEMP_1"],
+		"Oxygen": ["DOXY", "DOXY_1"],
+		"Salinity": ["PSAL", "PSAL_1", "PSAL_2"],
+		"Significant wave height (Hs)": ["VAVH"],
+		"Significant wave period (Ts)": ["VAVT"],
+		"Wave principal direction at spectral peak": ["VPED"]
+	  }
+  
 }
