@@ -11,8 +11,10 @@ import Layer from 'ol/layer/Layer';
 import TileWMS from 'ol/source/TileWMS';
 import { ActivatedRoute } from '@angular/router';
 import { urlInfoInterface, DeviceParameters, DateFunctions } from 'src/app/app.misc'; //
-import { forkJoin, Observable, of } from 'rxjs'; //
-import { catchError, timeout } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { forkJoin, Observable, TimeoutError, of, from } from 'rxjs'; // Aggiunto 'from'
+import { catchError, timeout, concatMap, delay, map } from 'rxjs/operators'; // Aggiunti 'concatMap', 'delay', 'map'
+
 
 
 @Component({
@@ -77,99 +79,140 @@ showMetadataTooltips(metadataName: string): void
 	const validFeaturesForRequest: { feature: any; sensorCode: string }[] = [];
 	const requests: { [stationName: string]: Observable<any> } = {};
 	const timeStart = DateFunctions.daysAgoMidnightUTC(7);
+	
+    features.forEach((feature: any) => {
+      const stationName = feature.get('name');
+      if (!stationName) return;
 
-	features.forEach((feature: any) => {
-	  const stationName = feature.get('name');
-	  if (!stationName) return;
+      if (!stationSensorMap.hasOwnProperty(stationName)) return;
+      
+      const exactSensorCode = stationSensorMap[stationName];
 
-	 // =========================================================================
-	 // TEMPORARY DEACTIVATION OF STATION E2M3A
-	 // Remove or comment out this if block to reactivate the station.
-	 // =========================================================================
-	 if (stationName === 'E2M3A') {
-	   return; // Skip the station and avoid creating the tooltip for any data.
-	 }
-	 // =========================================================================
+      const stationStatusObj = stationsStatusList.find((s: any) => s.name === stationName);
+      const isActive = stationStatusObj && stationStatusObj.status === '1';
+      if (!isActive) return;
 
+      validFeaturesForRequest.push({ feature, sensorCode: exactSensorCode });
+      
+	  // Dynamic retrieval trough static method of already imported class
+      const targetSensorId = DeviceParameters.getComparisonSensorId(stationName, exactSensorCode);
 
-	  // Check if the station exists as a key in the object.
-	  if (!stationSensorMap.hasOwnProperty(stationName)) return;
-	  
-	  // Retrieve the specific sensor code from the object.
-	  const exactSensorCode = stationSensorMap[stationName];
+      const parameter: Parameter = {
+        name: exactSensorCode,
+        type: DataType.TIME_SERIES,
+        sensor_id: targetSensorId // will be setted (es. 'SBE37O') or will be undefined for default
+      };
 
-	  // CHECK 2: Is the station active?
-	  const stationStatusObj = stationsStatusList.find((s: any) => s.name === stationName);
-	  const isActive = stationStatusObj && stationStatusObj.status === '1';
-	  if (!isActive) return;
-
-	  validFeaturesForRequest.push({ feature, sensorCode: exactSensorCode });
-	  
-	  const parameter: Parameter = {
-		name: exactSensorCode,
-		type: DataType.TIME_SERIES
-	  };
-
-		// Retrieve requested data and make a 3 seconds timeout
-		// to give time loading data from all interested stations.
-	  requests[stationName] = this.erdappService.getLastMeasurements(stationName, parameter, timeStart).pipe(
-		timeout(3000),
-		catchError(err => {
-		  console.warn(`Stazione ${stationName} andata in timeout o fallita:`, err);
+	
+	requests[stationName] = this.erdappService.getLastMeasurements(stationName, parameter, timeStart).pipe(
+	  timeout(8000),
+	  catchError((err: any) => {
+		console.warn(`Errore stazione ${stationName}:`, err);
+		
+		// 1. Timeout handling
+		if (err instanceof TimeoutError) {
 		  return of({ timeoutError: true });
-		})
-	  );
-	});
-
+		}
+		
+		// 2. HTTP errors handling (404, 500, ecc.)
+		if (err instanceof HttpErrorResponse) {
+		  if (err.status === 404) {
+			return of({ datasetNotFound: true });
+		  }
+		  if (err.status === 500) {
+			return of({ internalServerError: true });
+		  }
+		}
+		
+		// Fallback for other net service (e.g. server completely down / no connection)
+		return of({ connectionError: true });
+	  })
+	);
+	
+	  
+    });
 
 	if (Object.keys(requests).length === 0) return;
 
 	this.isMetadataLoading = true;
 
-	forkJoin(requests).subscribe({
-	next: (bulkResults: { [stationName: string]: any }) => {
-	  validFeaturesForRequest.forEach((item) => {
-		const stationName = item.feature.get('name');
-		const result = bulkResults[stationName];
-		
-		// We pass the correct station-specific sensor code to the rendering process.
-		this.renderSingleTooltip(item.feature, stationName, result, item.sensorCode, metadataName);
-	  });
-	  this.isMetadataLoading = false;
-	},
-	error: (err) => {
-	  console.error("Errore nel forkJoin dei metadati:", err);
-	  this.isMetadataLoading = false;
-	}
+	// Transform the `requests` object into an array of `[stationName, Observable]` pairs.
+	const requestEntries = Object.entries(requests);
+	const bulkResults: { [stationName: string]: any } = {};
+
+	// Process the requests in a queue (one after another), spaced out by a 200ms delay.
+	from(requestEntries).pipe(
+	  concatMap(([stationName, obs]) => 
+		obs.pipe(
+		  delay(200), // Ease the load on ERDDAP server by staggering the start of this request
+		  map(result => ({ stationName, result }))
+		)
+	  )
+	).subscribe({
+	  next: ({ stationName, result }) => {
+		// Accumulate the individual result into the global results dictionary.
+		bulkResults[stationName] = result;
+	  },
+	  complete: () => {
+		// Once the sequential queue has finished, we render the tooltips.
+		validFeaturesForRequest.forEach((item) => {
+		  const stationName = item.feature.get('name');
+		  const result = bulkResults[stationName];
+		  
+		  // Pass the correct sensor code, specific to the station, to the rendering process.
+		  this.renderSingleTooltip(item.feature, stationName, result, item.sensorCode, metadataName);
+		});
+		this.isMetadataLoading = false;
+	  },
+	  error: (err) => {
+		console.error("Errore nel flusso sequenziale dei metadati:", err);
+		this.isMetadataLoading = false;
+	  }
 	});
 	
-} // end function
+} // end function showMetadataTooltips
 
-
-
-//-------------------
-
-// Function to render every single tooltip
-// following "data comaprison" menù choice.
-
+  
 private renderSingleTooltip(feature: any, stationName: string, result: any, sensorCode: string, metadataName: string): void {
-  // If an overlay already exists for this station (e.g., a previous attempt that timed out), we remove it first.
   this.removeOverlayForStation(stationName);
 
   const localizedName = this.vocabService.getMeasurementName(stationName, sensorCode) || metadataName;
   const unit = this.vocabService.getMeasurementUnit(stationName, sensorCode) || '';
   
-  let formattedMeasure = 'Data not available';
+  let formattedMeasure = '';
   let formattedDate = '-';
   let formattedHour = '-';
   let formattedDepth = '-';
   let showReloadLink = false;
-
-  // Let's check if the response triggered our custom timeout.
+  
+	// --- Logic error handling ---
+	// Real server timeout
   if (result && result.timeoutError) {
-    formattedMeasure = '<span style="color: #c62828; font-weight: 500;">Wait expired</span>';
+    formattedMeasure = '<span style="color: #c62828; font-weight: 500;">Server busy. Click to retry</span>';
     showReloadLink = true;
+
+  } else if (result && result.datasetNotFound) {
+    // Case 404: Configuration error or dataset removed
+    formattedMeasure = '<span style="color: #b71c1c; font-weight: 500;">Dataset not found</span>';
+    showReloadLink = false;
+
+  } else if (result && result.internalServerError) {
+    // Case 500: crash ERDDAP server
+    formattedMeasure = '<span style="color: #b71c1c; font-weight: 500;">Internal server error</span>';
+    showReloadLink = true;
+
+  } else if (result && result.connectionError) {
+    // Case net Fallback: ERDDAP turned off or no internet connection
+    formattedMeasure = '<span style="color: #c62828; font-weight: 500;">Server offline</span>';
+    showReloadLink = true;
+
+  } else if (result && Array.isArray(result) && result.length === 0) {
+    // Case empty response: Success (200) but empty (alll data QC filtered or no read)
+    formattedMeasure = '<span style="color: #e65100; font-weight: 500;">Failed Quality Control (QC) or not data found</span>';
+    showReloadLink = false;
+
   } else if (result && Array.isArray(result) && result.length > 0) {
+    // Standard case: Data valid and available
     const lastData = result[result.length - 1];
     formattedMeasure = `${Number(lastData.measurement).toFixed(2)} ${unit}`;
     if (lastData.timestamp) {
@@ -180,7 +223,10 @@ private renderSingleTooltip(feature: any, stationName: string, result: any, sens
     if (lastData.depth !== undefined && lastData.depth !== null) {
       formattedDepth = `${lastData.depth} m`;
     }
+  } else {
+    formattedMeasure = '<span style="color: #757575;">Data not available</span>';
   }
+
 
   const coordinate = feature.getGeometry().getCoordinates();
   const element = document.createElement('div');
@@ -224,7 +270,7 @@ private renderSingleTooltip(feature: any, stationName: string, result: any, sens
   element.style.fontSize = '12px';
   element.style.lineHeight = '1.4';
   
-  // NOTE: Removed the "pointerEvents = 'none'" line to allow clicking the link.
+  
 
   const overlay = new Overlay({
     element: element,
@@ -239,7 +285,7 @@ private renderSingleTooltip(feature: any, stationName: string, result: any, sens
 	// It targets the native .ol-overlay-container and assigns the z-index to it.
 	// =========================================================================
 	element.addEventListener('click', (e) => {
-	// Se l'utente ha cliccato sul link di reload, non interferiamo
+
 	const target = e.target as HTMLElement;
 	if (target.classList.contains('reload-metadata-btn')) {
 	 return;
@@ -257,7 +303,7 @@ private renderSingleTooltip(feature: any, stationName: string, result: any, sens
 
 
 
-  // If the reload button is present, we attach the native click event to it.
+  // If there is the reload button, we attach the native click event to it.
   if (showReloadLink) {
     const btn = element.querySelector('.reload-metadata-btn');
     if (btn) {
@@ -278,35 +324,39 @@ private renderSingleTooltip(feature: any, stationName: string, result: any, sens
 //-------------------
 
 private reloadSingleStationMetadata(feature: any, stationName: string, sensorCode: string, metadataName: string, tooltipElement: HTMLElement): void {
-  // We are temporarily replacing the measurement in the tooltip with a waiting message and a text-based spinner.
+
+	// Waiting message 
   const measureContainer = tooltipElement.querySelector('.measure-container');
   if (measureContainer) {
     measureContainer.innerHTML = '<span style="color: #003c88;">Loading...</span>';
   }
-  // We hide the reload link during the new call.
+  // hide the reload link during the call
   const reloadBtnContainer = tooltipElement.lastElementChild as HTMLElement;
   if (reloadBtnContainer && reloadBtnContainer.tagName === 'DIV') {
     reloadBtnContainer.style.display = 'none';
   }
 
+  // Retrieve specific sensor_id for EMSO standard
+  const targetSensorId = DeviceParameters.getComparisonSensorId(stationName, sensorCode);
+
   const parameter: Parameter = {
     name: sensorCode,
-    type: DataType.TIME_SERIES
+    type: DataType.TIME_SERIES,
+    sensor_id: targetSensorId
   };
-  const timeStart = DateFunctions.daysAgoMidnightUTC(2);
+  const timeStart = DateFunctions.daysAgoMidnightUTC(7);
 
-  // We execute the single, isolated ERDDAP call (without a 3-second timeout; we let the server respond at its own pace).
+  // Eseguiamo la chiamata ERDDAP isolata
   this.erdappService.getLastMeasurements(stationName, parameter, timeStart).pipe(
     catchError(err => {
       console.error(`Errore durante il reload singolo per ${stationName}:`, err);
       return of({ timeoutError: true });
     })
   ).subscribe((result: any) => {
-    // We are redesigning the individual tooltip while updating the data on the map.
+    // Redraw single updated tooltip
     this.renderSingleTooltip(feature, stationName, result, sensorCode, metadataName);
   });
 }
-
 
 
 //------------------
@@ -329,8 +379,6 @@ private removeOverlayForStation(stationName: string): void
 		}
 	});
 }
-
-	
 	
 	
 	//--------------
@@ -344,9 +392,6 @@ private removeOverlayForStation(stationName: string): void
 	  });
 	  this.metadataOverlays = [];
 	}
-
-
-				
 		
 
   openAttributionsDialog() {
@@ -393,13 +438,13 @@ private removeOverlayForStation(stationName: string): void
 	  
 	  this.generateTimeSlots();
 	  
-	// Ascolta il click dal menu a tendina per qualsiasi tipo di metadato
+	// Listen click from Data comparison menu
 	this.layersService.activeMetadata$.subscribe(metadataName => {
 	  if (metadataName) {
-		// Se c'è un metadato attivo (stringa), mostra i tooltip personalizzati
+		// If there is a data selected, show tooltip
 		this.showMetadataTooltips(metadataName);
 	  } else {
-		// Se è null, nascondi tutto
+		// If null, all tooltip hidden
 		this.hideMetadataTooltips();
 	  }
 	});

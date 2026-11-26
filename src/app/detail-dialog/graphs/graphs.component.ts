@@ -211,26 +211,58 @@ export class GraphsComponent implements OnInit {
 	} // end resizeGraph
 
 
-  getTimeSeriesAvailable(dataset: string, timeStart: Date, timeEnd?: Date) {
-	let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
-    dialogParam.map((param: string) => {
+  
+getTimeSeriesAvailable(dataset: string, timeStart: Date, timeEnd?: Date) {
+    let dialogParam = (DeviceParameters.getSensorDialogPar(this.data.get('name')));
+
+    dialogParam.map((item: any) => {
+      const paramName = typeof item === 'object' && item !== null ? item.param : item;
+      const sensorId = typeof item === 'object' && item !== null ? item.sensor_id : undefined;
+      
+      // Estrae la profondità specificata nell'oggetto JSON (es. 2 o 10)
+      const configDepth = typeof item === 'object' && item !== null ? item.depth : undefined;
+
       this.loading++;
       this.erdappService
-        .getAxisLayers(dataset, { name: param, type: DataType.TIME_SERIES }, timeStart, timeEnd)
-        .subscribe(
+      .getAxisLayers(dataset, { name: paramName, type: DataType.TIME_SERIES, sensor_id: sensorId }, timeStart, timeEnd)
+      .subscribe(
           (response: number[] | undefined) => {
+            
+            let filteredSeries: { depth: number | undefined; selected: boolean }[] = [];
+            
+            if (response !== undefined) {
+              if (configDepth !== undefined) {
+
+				// If an explicit depth is specified in config_stations.json, show ONLY that flat row
+                // We convert both values to numbers to avoid type issues (string vs. number)				
+                filteredSeries = response
+                  .filter(d => Number(d) === Number(configDepth))
+                  .map(depth => ({ depth: depth, selected: false }));
+              } else {
+                // Standard behaviour: show ERDDAP depth
+                filteredSeries = response.map(depth => ({ depth: depth, selected: false }));
+              }
+            } else {
+              filteredSeries = [{ depth: undefined, selected: false }];
+            }
+			
+			// Safety fallback: if ERDDAP does not yet have data for that specific depth,
+            // we create the row anyway so as not to break the user interface			
+            if (filteredSeries.length === 0) {
+              filteredSeries = [{ depth: configDepth, selected: false }];
+            }
+
             this.timeseries = this.timeseries.concat({
-              parameter: { name: param, type: DataType.TIME_SERIES },
-              series:
-                response !== undefined
-                  ? response.map(depth => {
-                      return { depth: depth, selected: false };
-                    })
-                  : [{ depth: undefined, selected: false }],
+              parameter: { name: paramName, type: DataType.TIME_SERIES },
+              series: filteredSeries,
             });
-            this.timeseries.sort(
-              (a, b) => dialogParam.indexOf(a.parameter.name) - dialogParam.indexOf(b.parameter.name)
-            );
+
+            this.timeseries.sort((a, b) => {
+              const indexA = dialogParam.findIndex(item => (typeof item === 'object' && item !== null ? item.param : item) === a.parameter.name);
+              const indexB = dialogParam.findIndex(item => (typeof item === 'object' && item !== null ? item.param : item) === b.parameter.name);
+              return indexA - indexB;
+            });			
+            
             this.timeseriesLoaded = Promise.resolve(true);
           },
           (error: any) => {
@@ -242,7 +274,8 @@ export class GraphsComponent implements OnInit {
           }
         );
     });
-  }
+  } // end function  
+  
 
   addSeries(dataset: string, parameter: Parameter, depth: number | undefined, timeStart: Date, timeEnd?: Date) {
 	  

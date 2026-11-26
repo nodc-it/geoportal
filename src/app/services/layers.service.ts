@@ -23,7 +23,7 @@ import { DetailDialogComponent } from '../detail-dialog/detail-dialog.component'
 import { EmodnetDialogComponent } from '../emodnet-dialog/emodnet-dialog.component'; //
 import { BiopointsDialogComponent } from '../biopoints-dialog/biopoints-dialog.component'; //
 import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
-import { DateFunctions } from '../app.misc';
+import { DateFunctions, DeviceParameters } from '../app.misc';
 import Overlay from 'ol/Overlay';
 import { ErddapService } from 'src/app/services/erddap.service';
 import { BehaviorSubject } from 'rxjs';
@@ -41,16 +41,10 @@ export class LayersService {
   // flag to indicate an error loading tiles from WMS server
   tileLoadingError = false;
   
-	// Matrix indicating the coupling between the data to be displayed 
-	// and the related sensors present in the vocab
-	public readonly metadataSensorMapping: { [key: string]: string[] } = {
-	'Water temperature': ['TEMP', 'TEMP_1'],
-	'Oxygen': ['DOXY', 'DOXY_1'],
-	'Salinity': ['PSAL', 'PSAL_1', 'PSAL_2'],
-	'Significant wave height (Hs)': ['VAVH'],
-	'Significant wave period (Ts)': ['VAVT'],
-	'Wave principal direction at spectral peak': ['VPED']
-	};
+	// Read matrix indicating the coupling between the data to be displayed 
+	// and the related sensors in the vocab, dicrectly from config_stations.json
+	// trough app.misc function
+	public readonly metadataSensorMapping: { [key: string]: string[] } = DeviceParameters.getMetadataSensorMapping();
   
 	// member variable to monitor metadata (Data comparison) changes
 	private activeMetadataSubject = new BehaviorSubject<string | null>(null);

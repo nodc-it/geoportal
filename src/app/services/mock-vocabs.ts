@@ -548,6 +548,7 @@ export var VOCABS: Vocab[] = [
     measurementUnit: "m/s",
 	measurementType: "M"
   },
+  
   {
     id: "E2M3A",
     device: "",
@@ -660,6 +661,7 @@ export var VOCABS: Vocab[] = [
     measurementUnit: "°C",
 	measurementType: "O"
   },
+  
   {
     id: "CNDC",
     device: "",
@@ -1124,6 +1126,19 @@ export var VOCABS: Vocab[] = [
     measurementUnit: "°",
 	measurementType: "M"
   },
+  
+	{
+	  id: "TEMP",
+	  device: "E2M3A",
+	  measurementName: [
+		{ locale: "en", name: "Water temperature" },
+		{ locale: "it", name: "Temperatura dell'acqua" }
+	  ],
+	  measurementUnit: "°C",
+	  measurementType: "O"
+	},
+  
+  
   {
     id: "PHPH",
     device: "E2M3A",
